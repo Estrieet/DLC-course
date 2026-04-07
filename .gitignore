@@ -1,0 +1,4 @@
+# Ignore local files
+.DS_Store
+Thumbs.db
+workspace_probe.txt

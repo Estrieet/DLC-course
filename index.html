@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Literacy Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body class="page-home">
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">Digital Literacy</div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
+    </header>
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
+      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
+      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
+      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
+      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
+      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
+      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
+      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
+      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
+    </nav>
+    <main class="content-card fade-in">
+      <h1>Easy Digital Learning</h1>
+      <p class="lead">A calm website to help older adults and beginners learn computers, typing, email, and internet safety.</p>
+      <section class="home-actions">
+        <a href="lessons.html" class="button button-primary">Start Lessons</a>
+        <a href="typing.html" class="button button-secondary">Typing Practice</a>
+        <a href="progress.html" class="button button-secondary">View Progress</a>
+      </section>
+      <section class="home-cards">
+        <article class="info-card slide-up">
+          <h2>Simple Lessons</h2>
+          <p>Step-by-step guides with images, practice and easy tasks.</p>
+        </article>
+        <article class="info-card slide-up delay-1">
+          <h2>Typing Practice</h2>
+          <p>Timed typing tests with speed, accuracy, and friendly results.</p>
+        </article>
+        <article class="info-card slide-up delay-2">
+          <h2>Progress Tracking</h2>
+          <p>See your completed lessons and quizzes in one place.</p>
+        </article>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <p>Designed for older adults, beginners, and mobile users.</p>
+      <p>Works offline, with no installation needed.</p>
+    </footer>
+  </div>
+  <div class="popup-box" id="popupBox" aria-live="polite"></div>
+  <script src="js/main.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

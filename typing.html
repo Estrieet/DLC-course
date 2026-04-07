@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Practice | Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body class="page-typing">
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">Typing Practice</div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
+    </header>
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
+      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
+      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
+      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
+      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
+      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
+      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
+      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
+      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
+    </nav>
+    <main class="content-card fade-in">
+      <h1>Typing Practice</h1>
+      <p class="lead">A friendly typing exercise made for slow, careful practice.</p>
+      <section class="typing-box">
+        <p class="typing-prompt">Type this sentence slowly and clearly:</p>
+        <blockquote class="typing-sentence">The quick brown fox jumps over the lazy dog.</blockquote>
+        <textarea id="typingInput" class="typing-input" rows="4" placeholder="Type here..." aria-label="Typing input"></textarea>
+        <div class="typing-controls">
+          <button id="startTyping" class="button button-primary">Start</button>
+          <button id="checkTyping" class="button button-secondary">Check</button>
+        </div>
+        <div class="typing-results" id="typingResults" aria-live="polite"></div>
+      </section>
+      <section class="typing-info">
+        <p>When you finish, the page shows your speed, mistakes and accuracy.</p>
+        <a href="index.html" class="button button-secondary">Return to Home</a>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <p>Typing progress saves automatically.</p>
+    </footer>
+  </div>
+  <div class="popup-box" id="popupBox" aria-live="polite"></div>
+  <script src="js/main.js"></script>
+  <script src="js/typing.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

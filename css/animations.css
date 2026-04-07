@@ -1,0 +1,36 @@
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeInUp 0.9s ease forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: slideUp 0.9s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+.delay-5 { animation-delay: 0.75s; }
+.delay-6 { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.button:hover,
+.button:focus {
+  animation: pulse 1.2s ease infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
+  to { box-shadow: 0 18px 30px rgba(0,0,0,0.18); }
+}

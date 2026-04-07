@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher | Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body class="page-teacher">
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">Teacher Tools</div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
+    </header>
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
+      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
+      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
+      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
+      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
+      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
+      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
+      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
+      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
+    </nav>
+    <main class="content-card fade-in">
+      <h1>Teacher Controls</h1>
+      <p class="lead">A simple place for teachers to review student progress and support learning.</p>
+      <section class="teacher-panel">
+        <div class="teacher-item">
+          <h2>Class progress</h2>
+          <p>Review lesson completion and typing results for each student.</p>
+        </div>
+        <div class="teacher-item">
+          <h2>Quiz support</h2>
+          <p>See which quizzes are complete and help students with answers.</p>
+        </div>
+        <div class="teacher-item">
+          <h2>Practice reminders</h2>
+          <p>Encourage students to practice typing and go through lessons slowly.</p>
+        </div>
+      </section>
+      <a href="admin.html" class="button button-primary">Open Admin Dashboard</a>
+      <a href="index.html" class="button button-secondary">Return to Home</a>
+    </main>
+    <footer class="page-footer">
+      <p>Designed to help teachers keep learning gentle and clear.</p>
+    </footer>
+  </div>
+  <div class="popup-box" id="popupBox" aria-live="polite"></div>
+  <script src="js/main.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
