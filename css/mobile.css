@@ -1,24 +1,46 @@
-@media (max-width: 520px) {
-  .topbar, .content-card {
-    padding: 16px;
-  }
-  .brand {
-    font-size: 1.4rem;
-  }
-  h1 {
-    font-size: 1.7rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  .button {
-    font-size: 1.05rem;
-    padding: 16px;
-  }
-  .typing-input {
-    min-height: 140px;
-  }
-  .nav-bar {
-    gap: 8px;
-  }
+﻿/* ============================================================
+   mobile.css - Responsive layout for tablets and phones
+   ============================================================ */
+
+/* ── Tablet ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { transform: translateX(-100%); width: 260px; }
+  .sidebar.mobile-open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .main-content { margin-left: 0; }
+  .menu-toggle { display: flex; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .page-content { padding: 20px 20px 40px; }
+  .topbar { padding: 0 16px; }
+}
+
+/* ── Phone ───────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .grid-auto { grid-template-columns: 1fr; }
+  .page-title { font-size: 1.6rem; }
+  .btn-lg { padding: 14px 22px; font-size: 1rem; }
+  .page-content { padding: 16px 16px 36px; }
+  .card { padding: 18px; }
+  .typing-text { font-size: 1.05rem; padding: 18px; }
+  .stat-value { font-size: 2rem; }
+  .btn-group { flex-direction: column; }
+  .btn-group .btn { width: 100%; }
+  .toast-container { left: 12px; right: 12px; bottom: 16px; }
+  .toast { max-width: none; }
+  .progress-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .progress-pct { align-self: flex-end; }
+}
+
+/* ── Very Small Phones ───────────────────────────────────── */
+@media (max-width: 380px) {
+  .page-title { font-size: 1.4rem; }
+  .lesson-title { font-size: 0.95rem; }
+}
+
+/* ── Hero section (index.html landing) ──────────────────── */
+@media (max-width: 700px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .feature-grid { grid-template-columns: 1fr; }
 }

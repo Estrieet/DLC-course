@@ -1,36 +1,111 @@
-.fade-in {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: fadeInUp 0.9s ease forwards;
-}
+﻿/* ============================================================
+   animations.css - All CSS animations and transitions
+   ============================================================ */
 
-.slide-up {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: slideUp 0.9s ease forwards;
-}
-
-.delay-1 { animation-delay: 0.15s; }
-.delay-2 { animation-delay: 0.3s; }
-.delay-3 { animation-delay: 0.45s; }
-.delay-4 { animation-delay: 0.6s; }
-.delay-5 { animation-delay: 0.75s; }
-.delay-6 { animation-delay: 0.9s; }
-
+/* ── Keyframes ──────────────────────────────────────────── */
 @keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes slideUp {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.button:hover,
-.button:focus {
-  animation: pulse 1.2s ease infinite alternate;
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
-
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.5); }
+  60%  { transform: scale(1.08); }
+  80%  { transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes pulse {
-  from { box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
-  to { box-shadow: 0 18px 30px rgba(0,0,0,0.18); }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px var(--accent-glow); }
+  50%       { box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-glow); }
+}
+@keyframes correctFlash {
+  0%   { background: var(--success-bg); }
+  50%  { background: rgba(48,209,88,0.3); }
+  100% { background: var(--success-bg); }
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-8px); }
+  80%       { transform: translateX(8px); }
+}
+
+/* ── Animation Utility Classes ──────────────────────────── */
+.fade-in           { animation: fadeInUp 0.6s ease both; }
+.fade-in-down      { animation: fadeInDown 0.5s ease both; }
+.fade-in-left      { animation: fadeInLeft 0.5s ease both; }
+.fade-in-right     { animation: fadeInRight 0.5s ease both; }
+.scale-in          { animation: scaleIn 0.4s ease both; }
+.bounce-in         { animation: bounceIn 0.7s ease both; }
+.slide-down        { animation: slideDown 0.4s ease both; }
+.spin              { animation: spin 1s linear infinite; }
+.pulse             { animation: pulse 1.5s ease infinite; }
+
+.stagger-1  { animation-delay: 0.08s; }
+.stagger-2  { animation-delay: 0.16s; }
+.stagger-3  { animation-delay: 0.24s; }
+.stagger-4  { animation-delay: 0.32s; }
+.stagger-5  { animation-delay: 0.40s; }
+.stagger-6  { animation-delay: 0.48s; }
+.stagger-7  { animation-delay: 0.56s; }
+.stagger-8  { animation-delay: 0.64s; }
+
+/* ── Interaction Animations ─────────────────────────────── */
+.correct-flash { animation: correctFlash 0.5s ease; }
+.wrong-shake   { animation: wrongShake 0.4s ease; }
+.glow-accent   { animation: glow 2s ease infinite; }
+
+/* ── Skeleton Loading ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, var(--surface-strong) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Page Transition ─────────────────────────────────────── */
+.page-enter { animation: fadeInUp 0.5s ease both; }
+
+/* ── Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

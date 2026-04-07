@@ -1,7 +1,2 @@
-/* Dark mode styles are controlled by JS toggling the body class. */
-body.dark-mode .nav-link { background: #2a2d3f; }
-body.dark-mode .button-primary { background: #2563eb; }
-body.dark-mode .button-secondary { background: #22c55e; }
-body.dark-mode .button-danger { background: #f87171; }
-body.dark-mode .page-footer { color: #c1c1c8; }
-body.dark-mode .popup-box { background: rgba(255,255,255,0.12); color: #f5f5f5; }
+﻿/* css/darkmode.css - theme handled via data-theme in style.css */
+/* This file kept for backward compatibility */

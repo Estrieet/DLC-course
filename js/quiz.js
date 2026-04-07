@@ -1,82 +1,125 @@
-const quizQuestions = [
-  { question: 'What is a computer?', answers: ['A tool to help with work', 'A type of food', 'A song', 'A car'], correct: 0 },
-  { question: 'What does a mouse do?', answers: ['Moves the pointer', 'Prints paper', 'Stores files', 'Plays music'], correct: 0 },
-  { question: 'How do you open a program?', answers: ['Click its icon', 'Close the screen', 'Throw it away', 'Turn it off'], correct: 0 },
-  { question: 'What is email?', answers: ['A message you send online', 'A type of paper', 'A keyboard key', 'A printer mode'], correct: 0 },
-  { question: 'Why save files?', answers: ['So you can open them later', 'To delete them', 'To make them heavy', 'To print them'], correct: 0 },
-  { question: 'What is a password?', answers: ['A secret word', 'A type of mouse', 'A file folder', 'A printer'], correct: 0 },
-  { question: 'What is online safety?', answers: ['Being careful online', 'Typing fast', 'Printing documents', 'Playing games'], correct: 0 },
-  { question: 'How many answers are there for each question?', answers: ['Four', 'One', 'Two', 'Three'], correct: 0 },
-  { question: 'What is a browser?', answers: ['A program to view websites', 'A word processor', 'A camera', 'A printer'], correct: 0 },
-  { question: 'What does the save button do?', answers: ['Keeps your work', 'Deletes your work', 'Changes the screen', 'Plays music'], correct: 0 }
-];
+﻿/* js/quiz.js - Quiz page controller */
+let quizLesson = null;
+let selectedAnswers = [];
+let submitted = false;
 
-let quizIndex = 0;
-let quizScore = 0;
-const quizQuestion = document.getElementById('quizQuestion');
-const quizOptions = document.getElementById('quizOptions');
-const nextQuiz = document.getElementById('nextQuiz');
-const restartQuiz = document.getElementById('restartQuiz');
-const quizSummary = document.getElementById('quizSummary');
+document.addEventListener('DOMContentLoaded', () => {
+  const id = parseInt(getPageParam('id') || '1', 10);
+  quizLesson = LESSONS.find(l => l.id === id);
+  const p = loadProgress();
 
-function loadQuiz() {
-  const current = quizQuestions[quizIndex];
-  if (!current) return;
-  quizQuestion.textContent = `Question ${quizIndex + 1}: ${current.question}`;
-  quizOptions.innerHTML = current.answers.map((answer, index) => {
-    return `<button class="button button-secondary quiz-answer" data-index="${index}">${answer}</button>`;
-  }).join('');
-  quizSummary.innerHTML = '';
-  document.querySelectorAll('.quiz-answer').forEach((button) => {
-    button.addEventListener('click', () => selectAnswer(Number(button.dataset.index)));
-  });
-}
-
-function selectAnswer(answerIndex) {
-  const current = quizQuestions[quizIndex];
-  const isCorrect = answerIndex === current.correct;
-  if (isCorrect) {
-    quizScore += 1;
-    quizSummary.innerHTML = '<p class="correct">Correct! Good job.</p>';
-  } else {
-    quizSummary.innerHTML = '<p class="wrong">That is not correct. Try the next question.</p>';
+  if (!quizLesson) {
+    document.getElementById('quizRoot').innerHTML = '<p class="text-muted">Lesson not found.</p>';
+    buildTopBar('Quiz');
+    return;
   }
-  quizIndex += 1;
-  if (quizIndex >= quizQuestions.length) {
-    showQuizResults();
-  }
-}
 
-function showQuizResults() {
-  const percent = Math.round((quizScore / quizQuestions.length) * 100);
-  quizSummary.innerHTML = `
-    <div class="quiz-result-card slide-up">
-      <p><strong>Score:</strong> ${quizScore} of ${quizQuestions.length}</p>
-      <p><strong>Percent:</strong> ${percent}%</p>
-      <p>Well done for completing the quiz.</p>
-    </div>
-  `;
-  saveQuizProgress(quizScore, percent);
-}
+  buildTopBar('Quiz: ' + quizLesson.title);
+  document.title = 'Quiz: ' + quizLesson.title + ' | Digital Literacy';
 
-function saveQuizProgress(score, percent) {
-  const quizData = { score, percent, date: new Date().toLocaleDateString() };
-  localStorage.setItem('latestQuiz', JSON.stringify(quizData));
-  localStorage.setItem('quizzesCompleted', String(quizIndex));
-}
+  const previous = p.quizAnswers[id];
+  selectedAnswers = new Array(quizLesson.quiz.questions.length).fill(-1);
+  renderQuiz();
 
-function restart() {
-  quizIndex = 0;
-  quizScore = 0;
-  loadQuiz();
-}
-
-nextQuiz && nextQuiz.addEventListener('click', () => {
-  if (quizIndex < quizQuestions.length) {
-    loadQuiz();
-  }
+  document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+  document.getElementById('retryBtn').addEventListener('click', handleRetry);
 });
 
-restartQuiz && restartQuiz.addEventListener('click', restart);
+function renderQuiz() {
+  const root = document.getElementById('quizRoot');
+  if (!root || !quizLesson) return;
+  root.innerHTML = quizLesson.quiz.questions.map((q, qi) => `
+    <div class="card mb-4 fade-in stagger-${Math.min(qi+1,8)}" id="q-block-${qi}">
+      <div class="flex items-center justify-between mb-4">
+        <span class="label">Question ${qi + 1} of ${quizLesson.quiz.questions.length}</span>
+      </div>
+      <p style="font-size:1.1rem;font-weight:600;margin-bottom:18px">${q.question}</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${q.options.map((opt, oi) => `
+          <button class="quiz-option" id="opt-${qi}-${oi}" data-q="${qi}" data-o="${oi}" onclick="selectOption(${qi},${oi})" aria-pressed="false">
+            <span class="option-dot">${String.fromCharCode(65+oi)}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
 
-loadQuiz();
+function selectOption(qi, oi) {
+  if (submitted) return;
+  selectedAnswers[qi] = oi;
+  quizLesson.quiz.questions[qi].options.forEach((_, idx) => {
+    const btn = document.getElementById(`opt-${qi}-${idx}`);
+    btn.classList.toggle('selected', idx === oi);
+    btn.setAttribute('aria-pressed', String(idx === oi));
+  });
+  const answered = selectedAnswers.filter(a => a !== -1).length;
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) submitBtn.disabled = answered < quizLesson.quiz.questions.length;
+}
+
+function handleSubmit() {
+  if (submitted) return;
+  const allAnswered = selectedAnswers.every(a => a !== -1);
+  if (!allAnswered) { toast('Please answer all questions first.', 'error'); return; }
+
+  submitted = true;
+  let correct = 0;
+  quizLesson.quiz.questions.forEach((q, qi) => {
+    const chosen = selectedAnswers[qi];
+    const isCorrect = chosen === q.answer;
+    if (isCorrect) correct++;
+    q.options.forEach((_, oi) => {
+      const btn = document.getElementById(`opt-${qi}-${oi}`);
+      if (!btn) return;
+      if (oi === q.answer) {
+        btn.classList.add('correct');
+        btn.querySelector('.option-dot').textContent = '✓';
+      } else if (oi === chosen && !isCorrect) {
+        btn.classList.add('wrong');
+        btn.querySelector('.option-dot').textContent = '✗';
+        btn.closest('.card').classList.add('wrong-shake');
+      }
+      btn.style.pointerEvents = 'none';
+    });
+    if (isCorrect) document.getElementById(`q-block-${qi}`).classList.add('correct-flash');
+  });
+
+  const score = Math.round((correct / quizLesson.quiz.questions.length) * 100);
+  const newP = saveQuizResult(quizLesson.id, score, selectedAnswers);
+  showResult(score, correct, newP);
+}
+
+function showResult(score, correct, p) {
+  const total = quizLesson.quiz.questions.length;
+  const passed = score >= 70;
+  const nextLesson = LESSONS.find(l => l.id === quizLesson.id + 1);
+  const result = document.getElementById('quizResult');
+  if (!result) return;
+  result.innerHTML = `
+    <div class="card bounce-in" style="text-align:center;padding:36px;margin-top:24px;border-color:${passed?'rgba(48,209,88,0.3)':'rgba(255,69,58,0.3)'}">
+      <div style="font-size:5rem;font-weight:800;background:linear-gradient(135deg,${passed?'#30d158,#0a84ff':'#ff453a,#ff9f0a'});-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.04em">${score}%</div>
+      <p style="font-size:1.1rem;color:var(--text-2);margin-top:8px">${correct} of ${total} correct</p>
+      <p style="margin-top:12px;font-weight:600;color:${passed?'var(--success)':'var(--danger)'}">${passed?'Excellent! Next lesson unlocked 🎉':'Score 70% or above to unlock the next lesson.'}</p>
+    </div>
+    <div class="btn-group mt-4 fade-in">
+      <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+      <a href="lessons.html" class="btn btn-secondary">All Lessons</a>
+      ${passed && nextLesson ? `<a href="lesson.html?id=${nextLesson.id}" class="btn btn-primary">Next Lesson →</a>` : ''}
+    </div>
+  `;
+  result.classList.remove('hidden');
+  document.getElementById('submitBtn').classList.add('hidden');
+  document.getElementById('retryBtn').addEventListener('click', handleRetry);
+}
+
+function handleRetry() {
+  submitted = false;
+  selectedAnswers = new Array(quizLesson.quiz.questions.length).fill(-1);
+  document.getElementById('quizResult').classList.add('hidden');
+  document.getElementById('quizResult').innerHTML = '';
+  document.getElementById('submitBtn').classList.remove('hidden');
+  document.getElementById('submitBtn').disabled = true;
+  renderQuiz();
+}

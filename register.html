@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile – Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-content">
+      <header class="topbar" id="topbar"></header>
+      <main class="page-content">
+        <div class="card fade-in" style="max-width:480px;margin:0 auto">
+          <h2 class="section-title mb-6">Your Profile</h2>
+          <div class="mb-4">
+            <label class="text-muted" style="display:block;margin-bottom:8px;font-size:0.9rem">Your Name</label>
+            <input type="text" id="profileName" class="typing-input" placeholder="e.g. Margaret" />
+          </div>
+          <div class="mb-6">
+            <label class="text-muted" style="display:block;margin-bottom:8px;font-size:0.9rem">Start Date</label>
+            <input type="text" id="profileDate" class="typing-input" readonly />
+          </div>
+          <button class="btn btn-primary btn-full" onclick="saveProfile()">Save Profile</button>
+          <div id="profileMsg" class="mt-4 text-muted text-sm" style="min-height:24px"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/wasm.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      buildTopBar('Profile');
+      const p = loadProgress();
+      const nameEl = document.getElementById('profileName');
+      const dateEl = document.getElementById('profileDate');
+      if (nameEl) nameEl.value = p.profile.name || '';
+      if (dateEl) dateEl.value = p.profile.joinDate ? new Date(p.profile.joinDate).toLocaleDateString() : 'Not set';
+    });
+
+    function saveProfile() {
+      const p = loadProgress();
+      const name = document.getElementById('profileName').value.trim();
+      if (!name) { toast('Please enter your name', 'error'); return; }
+      p.profile.name = name;
+      if (!p.profile.joinDate) p.profile.joinDate = Date.now();
+      saveProgress(p);
+      document.getElementById('profileDate').value = new Date(p.profile.joinDate).toLocaleDateString();
+      const msg = document.getElementById('profileMsg');
+      if (msg) msg.textContent = 'Profile saved!';
+      toast('Profile saved!', 'success');
+    }
+  </script>
+</body>
+</html>

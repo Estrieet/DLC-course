@@ -1,52 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Settings | Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/darkmode.css">
-  <link rel="stylesheet" href="css/mobile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings – Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
 </head>
-<body class="page-settings">
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="brand">Settings</div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
-    </header>
-    <nav class="nav-bar" aria-label="Main navigation">
-      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
-      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
-      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
-      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
-      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
-      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
-      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
-      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
-      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
-    </nav>
-    <main class="content-card fade-in">
-      <h1>Settings</h1>
-      <p class="lead">Choose a theme and make the site easier to use.</p>
-      <section class="settings-card">
-        <div class="settings-row">
-          <label class="large-label" for="themeCheckbox">Dark mode</label>
-          <input type="checkbox" id="themeCheckbox" class="large-switch" aria-label="Dark mode toggle">
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-content">
+      <header class="topbar" id="topbar"></header>
+      <main class="page-content">
+        <div class="card fade-in" style="max-width:520px">
+          <h2 class="section-title mb-6">Settings</h2>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+            <div>
+              <div class="font-semibold">Dark Mode</div>
+              <div class="text-muted text-sm">Switch between dark and light theme</div>
+            </div>
+            <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()">Toggle</button>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
+            <div>
+              <div class="font-semibold">Font Size</div>
+              <div class="text-muted text-sm">Make text larger for easier reading</div>
+            </div>
+            <select id="fontSizeSel" class="typing-input" style="width:auto;padding:8px 12px" onchange="saveFontSize(this.value)">
+              <option value="16">Normal</option>
+              <option value="18">Large</option>
+              <option value="20">Extra Large</option>
+            </select>
+          </div>
+          <div style="padding:16px 0">
+            <div class="font-semibold mb-2">Reset Progress</div>
+            <div class="text-muted text-sm mb-3">This will erase all your lesson and quiz progress.</div>
+            <button class="btn btn-danger" onclick="if(confirm('Reset all progress?')){clearProgress();toast('Progress cleared','info');}">Reset All Progress</button>
+          </div>
         </div>
-        <div class="settings-row">
-          <p>Text size and spacing are already large for comfort.</p>
-        </div>
-      </section>
-      <a href="index.html" class="button button-secondary">Return to Home</a>
-    </main>
-    <footer class="page-footer">
-      <p>Settings are saved automatically in your browser.</p>
-    </footer>
+      </main>
+    </div>
   </div>
-  <div class="popup-box" id="popupBox" aria-live="polite"></div>
-  <script src="js/main.js"></script>
-  <script src="js/darkmode.js"></script>
-  <script src="js/animations.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/wasm.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      buildTopBar('Settings');
+      const sz = localStorage.getItem('dlc_fontSize') || '16';
+      document.getElementById('fontSizeSel').value = sz;
+      document.documentElement.style.fontSize = sz + 'px';
+    });
+    function saveFontSize(v) {
+      localStorage.setItem('dlc_fontSize', v);
+      document.documentElement.style.fontSize = v + 'px';
+      toast('Font size updated', 'success');
+    }
+  </script>
 </body>
 </html>

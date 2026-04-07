@@ -1,225 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lessons | Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/darkmode.css">
-  <link rel="stylesheet" href="css/mobile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lessons – Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
 </head>
-<body class="page-lessons">
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="brand">Lessons</div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
-    </header>
-    <nav class="nav-bar" aria-label="Main navigation">
-      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
-      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
-      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
-      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
-      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
-      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
-      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
-      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
-      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
-    </nav>
-    <main class="content-card fade-in">
-      <h1>Beginner Lessons</h1>
-      <p class="lead">Easy computer lessons with simple language and clear steps.</p>
-      <section class="lesson-list">
-        <article class="lesson-card slide-up">
-          <h2>Computer Basics</h2>
-          <p>Learn the parts of a computer, the screen, keyboard, and mouse.</p>
-          <ol>
-            <li>Look at the screen and keyboard.</li>
-            <li>Press the power button to start.</li>
-            <li>Move the mouse to see the pointer.</li>
-          </ol>
-          <p><strong>Practice:</strong> Move the mouse and click a button.</p>
-          <p><strong>Homework:</strong> Find the power button on your device.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="1">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-1">
-          <h2>Using a Mouse</h2>
-          <p>Move the mouse slowly. Click once to open.</p>
-          <ol>
-            <li>Rest your hand on the mouse.</li>
-            <li>Move the mouse to move the pointer.</li>
-            <li>Click the left button to select.</li>
-          </ol>
-          <p><strong>Practice:</strong> Click the button below.</p>
-          <button class="button button-secondary">Try clicking</button>
-          <p><strong>Homework:</strong> Practice clicking on items on the screen.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="2">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-2">
-          <h2>Using a Keyboard</h2>
-          <p>Use the keyboard to type letters, numbers, and short words.</p>
-          <ol>
-            <li>Place your hands on the keyboard.</li>
-            <li>Press the keys gently.</li>
-            <li>Type your name in a note app.</li>
-          </ol>
-          <p><strong>Practice:</strong> Type a short message.</p>
-          <p><strong>Homework:</strong> Write one sentence about your day.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="3">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-3">
-          <h2>Opening Programs</h2>
-          <p>Programs are apps you open on the computer.</p>
-          <ol>
-            <li>Find the program icon.</li>
-            <li>Click or tap it once.</li>
-            <li>Wait for the program to open.</li>
-          </ol>
-          <p><strong>Practice:</strong> Open your browser app.</p>
-          <p><strong>Homework:</strong> Try opening a second app.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="4">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-4">
-          <h2>Saving Files</h2>
-          <p>Save your work so it is still there later.</p>
-          <ol>
-            <li>Click Save or Save As.</li>
-            <li>Choose a simple name.</li>
-            <li>Press the save button.</li>
-          </ol>
-          <p><strong>Practice:</strong> Save a short note.</p>
-          <p><strong>Homework:</strong> Open the saved note again.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="5">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-5">
-          <h2>Internet Basics</h2>
-          <p>Use the internet to look up simple information and news.</p>
-          <ol>
-            <li>Open the browser app.</li>
-            <li>Type in a website address or search word.</li>
-            <li>Read the page slowly.</li>
-          </ol>
-          <p><strong>Practice:</strong> Search for a recipe or hobby.</p>
-          <p><strong>Homework:</strong> Find one new fact online.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="6">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-6">
-          <h2>Email Basics</h2>
-          <p>Email lets you send messages to friends and family.</p>
-          <ol>
-            <li>Open your email app.</li>
-            <li>Click Compose or New Email.</li>
-            <li>Type a simple note and send it.</li>
-          </ol>
-          <p><strong>Practice:</strong> Write a message to yourself.</p>
-          <p><strong>Homework:</strong> Read one email safely.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="7">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-7">
-          <h2>Online Safety</h2>
-          <p>Keep your information safe by being careful online.</p>
-          <ol>
-            <li>Only open emails from people you know.</li>
-            <li>Do not share passwords.</li>
-            <li>Look for locks in the browser address bar.</li>
-          </ol>
-          <p><strong>Practice:</strong> Check a website has a lock icon.</p>
-          <p><strong>Homework:</strong> Ask someone before sharing personal details.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="8">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-8">
-          <h2>Passwords</h2>
-          <p>Use a strong password to keep accounts safe.</p>
-          <ol>
-            <li>Choose a long phrase you can remember.</li>
-            <li>Do not share it with others.</li>
-            <li>Write it down in a safe place if needed.</li>
-          </ol>
-          <p><strong>Practice:</strong> Create a strong password idea.</p>
-          <p><strong>Homework:</strong> Change one weak password.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="9">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-9">
-          <h2>Viruses</h2>
-          <p>Computer viruses can slow your device and cause problems.</p>
-          <ol>
-            <li>Do not open unknown email attachments.</li>
-            <li>Do not click strange links.</li>
-            <li>Ask for help if you are unsure.</li>
-          </ol>
-          <p><strong>Practice:</strong> Look for unusual emails or popups.</p>
-          <p><strong>Homework:</strong> Talk with a friend or teacher before opening unknown files.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="10">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-10">
-          <h2>Printing</h2>
-          <p>Printing makes a paper copy of what is on the screen.</p>
-          <ol>
-            <li>Choose Print from the menu.</li>
-            <li>Select the printer.</li>
-            <li>Click Print.</li>
-          </ol>
-          <p><strong>Practice:</strong> Print a short note or image.</p>
-          <p><strong>Homework:</strong> Check the paper output is clear.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="11">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-11">
-          <h2>Using USB Drives</h2>
-          <p>USB drives store files you can move between devices.</p>
-          <ol>
-            <li>Plug the USB drive into the computer.</li>
-            <li>Open the file on the drive.</li>
-            <li>Save or copy files to the drive.</li>
-          </ol>
-          <p><strong>Practice:</strong> Save a picture or note to the USB drive.</p>
-          <p><strong>Homework:</strong> Remove the drive safely.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="12">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-12">
-          <h2>Mobile Phones</h2>
-          <p>Use a mobile phone to call, text, and access simple apps.</p>
-          <ol>
-            <li>Press the home button or swipe up.</li>
-            <li>Tap the app you need.</li>
-            <li>Use the keyboard on the screen to type.</li>
-          </ol>
-          <p><strong>Practice:</strong> Open a beginner app and explore.</p>
-          <p><strong>Homework:</strong> Send a short message to a friend.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="13">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-13">
-          <h2>Cloud Storage</h2>
-          <p>Cloud storage keeps files safe on the internet.</p>
-          <ol>
-            <li>Open a cloud storage app.</li>
-            <li>Upload a simple file.</li>
-            <li>Open the file again from the cloud.</li>
-          </ol>
-          <p><strong>Practice:</strong> Save one file to the cloud.</p>
-          <p><strong>Homework:</strong> Check the file from another device if possible.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="14">Mark complete</button>
-        </article>
-        <article class="lesson-card slide-up delay-14">
-          <h2>Troubleshooting</h2>
-          <p>If something does not work, stay calm and try simple steps.</p>
-          <ol>
-            <li>Close the app and open it again.</li>
-            <li>Check the power or cable connection.</li>
-            <li>Ask for help if it still does not work.</li>
-          </ol>
-          <p><strong>Practice:</strong> Restart a small app if it freezes.</p>
-          <p><strong>Homework:</strong> Write one step to try first when something stops working.</p>
-          <button class="button button-secondary complete-lesson" data-lesson-index="15">Mark complete</button>
-        </article>
-      </section>
-    </main>
-    <footer class="page-footer">
-      <p>Those are the first lessons. Come back anytime to learn more.</p>
-    </footer>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-content">
+      <header class="topbar" id="topbar"></header>
+      <main class="page-content">
+        <div class="card-header mb-4 fade-in">
+          <h2 class="section-title">All Lessons</h2>
+        </div>
+        <!-- Module filter -->
+        <div id="moduleFilters" class="btn-group mb-6 fade-in stagger-1">
+          <button class="btn btn-secondary module-filter active" data-module="All">All Lessons</button>
+        </div>
+
+        <!-- Lesson grid -->
+        <div class="grid-auto" id="lessonGrid"></div>
+      </main>
+    </div>
   </div>
-  <div class="popup-box" id="popupBox" aria-live="polite"></div>
-  <script src="js/main.js"></script>
-  <script src="js/darkmode.js"></script>
-  <script src="js/animations.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/wasm.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/lessons.js"></script>
 </body>
 </html>

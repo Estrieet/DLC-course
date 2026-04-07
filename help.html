@@ -1,55 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help | Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/darkmode.css">
-  <link rel="stylesheet" href="css/mobile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help – Digital Literacy</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
 </head>
-<body class="page-help">
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="brand">Help</div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">Dark mode</button>
-    </header>
-    <nav class="nav-bar" aria-label="Main navigation">
-      <a href="index.html" class="nav-link" data-popup="Welcome home.">Home</a>
-      <a href="lessons.html" class="nav-link" data-popup="Learn computer skills step by step.">Lessons</a>
-      <a href="typing.html" class="nav-link" data-popup="Practice typing and improve your speed.">Typing Practice</a>
-      <a href="quizzes.html" class="nav-link" data-popup="Take a simple quiz.">Quizzes</a>
-      <a href="progress.html" class="nav-link" data-popup="See how much you have finished.">Progress</a>
-      <a href="teacher.html" class="nav-link" data-popup="Teacher tools for class help.">Teacher</a>
-      <a href="admin.html" class="nav-link" data-popup="Manage users and results.">Admin</a>
-      <a href="help.html" class="nav-link" data-popup="Get help for the website.">Help</a>
-      <a href="settings.html" class="nav-link" data-popup="Change simple settings.">Settings</a>
-    </nav>
-    <main class="content-card fade-in">
-      <h1>Help and Support</h1>
-      <p class="lead">Clear instructions for using this website on phones, tablets, and computers.</p>
-      <section class="help-section">
-        <h2>How to use the website</h2>
-        <p>Tap one of the top buttons to open a page. Use the big green buttons for the main actions.</p>
-      </section>
-      <section class="help-section">
-        <h2>Navigating on a phone</h2>
-        <p>Scroll down slowly. Tap the large buttons and links. The page fits small screens automatically.</p>
-      </section>
-      <section class="help-section">
-        <h2>Getting help</h2>
-        <p>If a page does not load, refresh the browser. The website works offline once it has loaded.</p>
-      </section>
-      <a href="index.html" class="button button-secondary">Return to Home</a>
-    </main>
-    <footer class="page-footer">
-      <p>Simple support for older adults and beginners.</p>
-    </footer>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main-content">
+      <header class="topbar" id="topbar"></header>
+      <main class="page-content">
+        <h2 class="section-title mb-6 fade-in">Help &amp; FAQ</h2>
+
+        <div class="card mb-4 fade-in stagger-1">
+          <h3 class="font-semibold mb-2">How do I unlock lessons?</h3>
+          <p class="text-muted">Complete the quiz at the end of each lesson with a score of 70% or higher. This unlocks the next lesson automatically.</p>
+        </div>
+        <div class="card mb-4 fade-in stagger-2">
+          <h3 class="font-semibold mb-2">Is my progress saved?</h3>
+          <p class="text-muted">Yes — your progress is saved automatically in your browser using LocalStorage and IndexedDB. No account or internet required.</p>
+        </div>
+        <div class="card mb-4 fade-in stagger-3">
+          <h3 class="font-semibold mb-2">How does the typing game work?</h3>
+          <p class="text-muted">Click Start, then type the displayed text as accurately as possible. Your Words Per Minute (WPM) and accuracy are calculated using a WebAssembly module for speed.</p>
+        </div>
+        <div class="card mb-4 fade-in stagger-4">
+          <h3 class="font-semibold mb-2">Can I change the theme?</h3>
+          <p class="text-muted">Yes! Click the sun/moon icon in the top bar to switch between dark and light mode. Your preference is remembered.</p>
+        </div>
+        <div class="card mb-4 fade-in stagger-5">
+          <h3 class="font-semibold mb-2">What if I need to start over?</h3>
+          <p class="text-muted">Go to the Teacher page and click "Reset Student Progress", or ask your teacher to do it for you.</p>
+        </div>
+        <div class="card fade-in stagger-6">
+          <h3 class="font-semibold mb-2">What technologies does this use?</h3>
+          <p class="text-muted">HTML5, CSS3 (glassmorphism, animations), Vanilla JavaScript, WebAssembly (WASM, WAT source included), IndexedDB, LocalStorage, and SessionStorage — all without any external libraries or npm.</p>
+        </div>
+      </main>
+    </div>
   </div>
-  <div class="popup-box" id="popupBox" aria-live="polite"></div>
-  <script src="js/main.js"></script>
-  <script src="js/darkmode.js"></script>
-  <script src="js/animations.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/wasm.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
