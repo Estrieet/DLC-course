@@ -48,15 +48,15 @@
 
             <div class="grid-3" style="gap: 24px; margin-bottom: 48px;">
                 <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 3rem; font-weight: bold; color: var(--accent-color); margin-bottom: 8px;">0%</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--accent-color); margin-bottom: 8px;" id="courseProgressPercent">0%</div>
                     <div style="color: var(--text-secondary);">Course Progress</div>
                 </div>
                 <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 3rem; font-weight: bold; color: var(--success-color); margin-bottom: 8px;">0</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--success-color); margin-bottom: 8px;" id="lessonsCompletedCount">0</div>
                     <div style="color: var(--text-secondary);">Lessons Completed</div>
                 </div>
                 <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 3rem; font-weight: bold; color: var(--warning-color); margin-bottom: 8px;">0</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--warning-color); margin-bottom: 8px;" id="quizzesPassedCount">0</div>
                     <div style="color: var(--text-secondary);">Quizzes Passed</div>
                 </div>
             </div>
@@ -64,30 +64,15 @@
             <div class="card" style="margin-bottom: 24px;">
                 <h3 style="margin-bottom: 16px;">Overall Progress</h3>
                 <div class="progress-bar" style="margin-bottom: 8px;">
-                    <div class="progress-fill" style="width: 0%"></div>
+                    <div class="progress-fill" id="progressBarFill" style="width: 0%"></div>
                 </div>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">0 of 12 lessons completed</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;" id="progressText">0 of 12 lessons completed</p>
             </div>
 
             <div class="card">
                 <h3 style="margin-bottom: 24px;">Achievements</h3>
-                <div class="grid-4" style="gap: 16px;">
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
-                        <div style="font-size: 2rem;">🏆</div>
-                        <div style="font-size: 0.9rem; margin-top: 8px;">First Lesson</div>
-                    </div>
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
-                        <div style="font-size: 2rem;">⭐</div>
-                        <div style="font-size: 0.9rem; margin-top: 8px;">Perfect Quiz</div>
-                    </div>
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
-                        <div style="font-size: 2rem;">⚡</div>
-                        <div style="font-size: 0.9rem; margin-top: 8px;">Speed Demon</div>
-                    </div>
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
-                        <div style="font-size: 2rem;">🎓</div>
-                        <div style="font-size: 0.9rem; margin-top: 8px;">Graduate</div>
-                    </div>
+                <div class="grid-4" style="gap: 16px;" id="achievementsGrid">
+                    <!-- Achievements will be loaded here dynamically -->
                 </div>
             </div>
         </section>
@@ -105,7 +90,9 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/progress-page.js"></script>
 </body>
 </html>
