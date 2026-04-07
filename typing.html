@@ -59,7 +59,7 @@
                     <p id="timerDisplay" style="color: var(--text-secondary); font-weight: 600; margin: 0;">0s</p>
                 </div>
 
-                <div id="typingDisplay" style="margin-bottom: 24px; padding: 20px; background: var(--bg-secondary); border-radius: 12px; font-size: 1.1rem; line-height: 1.8; color: var(--text-primary); letter-spacing: 0.4px;"></div>
+                <div id="typingDisplay" style="margin-bottom: 24px; padding: 20px; background: var(--bg-secondary); border-radius: 12px; font-size: 1.1rem; line-height: 2; color: var(--text-primary); letter-spacing: 0.4px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; text-align: center;"></div>
 
                 <form style="margin-bottom: 24px;" onsubmit="return false;">
                     <input type="text" id="typingInput" placeholder="Click Start Practice, then type the text above..."
@@ -102,10 +102,10 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/db.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/db.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/wasm.js"></script>
     <script src="js/typing.js"></script>

@@ -50,10 +50,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newTheme = e.target.value;
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+                if (typeof dbSaveSetting === 'function') dbSaveSetting('theme', newTheme);
                 showToast(`Switched to ${newTheme} mode ✓`, 2000, 'success');
             }
         });
     });
+
+    // Handle text size selector
+    const textSizeSelect = document.getElementById('textSizeSelect');
+    if (textSizeSelect) {
+        // Load saved text size
+        const savedSize = localStorage.getItem('textSize') || '100';
+        textSizeSelect.value = savedSize;
+
+        textSizeSelect.addEventListener('change', function() {
+            const size = textSizeSelect.value;
+            document.documentElement.style.fontSize = size + '%';
+            localStorage.setItem('textSize', size);
+            if (typeof dbSaveSetting === 'function') dbSaveSetting('textSize', size);
+            showToast('Text size updated ✓', 2000, 'success');
+        });
+    }
 
     const exportBtn = document.getElementById('exportDataBtn');
     const viewBtn = document.getElementById('viewDataBtn');

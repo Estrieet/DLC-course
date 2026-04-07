@@ -1,36 +1,60 @@
 ﻿/* ========================================
-   DARK MODE TOGGLE - FIXED VERSION
+   DARK MODE + TEXT SIZE — persisted in IndexedDB
    ======================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    const html = document.documentElement;
+(function () {
+    // Apply saved theme instantly from localStorage (fast, avoids flash)
+    var savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
 
-    // Get saved theme or default to "light"
-    const savedTheme = localStorage.getItem("theme") || "light";
-    html.setAttribute("data-theme", savedTheme);
-    updateThemeIcon(savedTheme);
+    var savedSize = localStorage.getItem('textSize') || '100';
+    document.documentElement.style.fontSize = savedSize + '%';
+})();
 
-    // Theme toggle - FIXED: Single click works properly
+document.addEventListener("DOMContentLoaded", function () {
+    var html = document.documentElement;
+    var themeToggle = document.getElementById("themeToggle");
+    var themeIcon = document.getElementById("themeIcon");
+
+    // Sync from IndexedDB (authoritative source) and correct if needed
+    if (typeof dbGetSetting === 'function') {
+        dbGetSetting('theme').then(function (val) {
+            if (val) {
+                html.setAttribute('data-theme', val);
+                localStorage.setItem('theme', val);
+                updateThemeIcon(val);
+            }
+        }).catch(function () {});
+
+        dbGetSetting('textSize').then(function (val) {
+            if (val) {
+                html.style.fontSize = val + '%';
+                localStorage.setItem('textSize', val);
+            }
+        }).catch(function () {});
+    }
+
+    // Apply current theme icon
+    var currentTheme = html.getAttribute('data-theme') || 'light';
+    updateThemeIcon(currentTheme);
+
+    // Theme toggle button
     if (themeToggle) {
-        themeToggle.addEventListener("click", function(e) {
+        themeToggle.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            const currentTheme = html.getAttribute("data-theme");
-            const newTheme = currentTheme === "light" ? "dark" : "light";
-            
-            // Update DOM
+
+            var cur = html.getAttribute("data-theme");
+            var newTheme = cur === "light" ? "dark" : "light";
+
             html.setAttribute("data-theme", newTheme);
-            
-            // Update icon immediately
             updateThemeIcon(newTheme);
-            
-            // Save to localStorage
+
+            // Save to both localStorage and IndexedDB
             localStorage.setItem("theme", newTheme);
-            
-            console.log("Theme changed to:", newTheme);
+            if (typeof dbSaveSetting === 'function') {
+                dbSaveSetting('theme', newTheme);
+            }
         });
     }
 
