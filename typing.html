@@ -54,37 +54,25 @@
             </p>
 
             <div class="card" style="max-width: 800px; margin: 0 auto; padding: 32px;">
-                <div style="margin-bottom: 24px;padding: 20px; background: var(--bg-secondary); border-radius: 12px;">
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary); letter-spacing: 0.5px;">
-                        The quick brown fox jumps over the lazy dog. This is a typing practice exercise to help you improve your keyboard skills and accuracy. Take your time and focus on accuracy first, speed will come naturally.
-                    </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <p id="textCounter" style="color: var(--text-secondary); font-weight: 600; margin: 0;">Text 1 of 12</p>
+                    <p id="timerDisplay" style="color: var(--text-secondary); font-weight: 600; margin: 0;">0s</p>
                 </div>
 
-                <form style="margin-bottom: 24px;">
-                    <input type="text" id="typingInput" placeholder="Click here and start typing..." 
-                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 16px;">
-                    <input type="text" id="typingInput" placeholder="Compare your typing here..." 
-                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; background: var(--bg-secondary);" readonly>
+                <div id="typingDisplay" style="margin-bottom: 24px; padding: 20px; background: var(--bg-secondary); border-radius: 12px; font-size: 1.1rem; line-height: 1.8; color: var(--text-primary); letter-spacing: 0.4px;"></div>
+
+                <form style="margin-bottom: 24px;" onsubmit="return false;">
+                    <input type="text" id="typingInput" placeholder="Click Start Practice, then type the text above..."
+                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 16px;"
+                           autocomplete="off" spellcheck="false" disabled>
                 </form>
 
-                <div class="grid-3" style="gap: 16px; margin-bottom: 24px;">
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-color);">0</div>
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Words per Minute</div>
-                    </div>
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: var(--success-color);">0%</div>
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Accuracy</div>
-                    </div>
-                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-color);">0</div>
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Errors</div>
-                    </div>
-                </div>
+                <div id="statsPanel" class="hidden"></div>
 
-                <div style="flex: 1; display: flex; gap: 12px;">
-                    <button class="btn btn-primary" style="flex: 1;">Start Practice</button>
-                    <button class="btn btn-secondary" style="flex: 1;">Reset</button>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button id="typingStart" class="btn btn-primary" style="flex: 1; min-width: 160px;" type="button">Start Practice</button>
+                    <button id="typingReset" class="btn btn-secondary hidden" style="flex: 1; min-width: 160px;" type="button">Reset</button>
+                    <button id="typingNext" class="btn btn-secondary" style="flex: 1; min-width: 160px;" type="button">Next Text</button>
                 </div>
             </div>
 
@@ -116,5 +104,9 @@
     <script src="js/main.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/wasm.js"></script>
+    <script src="js/typing.js"></script>
 </body>
 </html>

@@ -10,7 +10,9 @@ let typingState = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  buildTopBar('Typing Practice');
+  if (typeof buildTopBar === 'function') {
+    buildTopBar('Typing Practice');
+  }
   loadText(0);
 
   const input = document.getElementById('typingInput');
@@ -140,7 +142,7 @@ function showTypingResults(wpm, accuracy, errors, seconds) {
           <div class="stat-label">Accuracy %</div>
         </div>
         <div class="stat-card fade-in stagger-3">
-          <div class="stat-value" style="color:var(--warning)" id="animErr">0</div>
+          <div class="stat-value" style="color:var(--warning-color)" id="animErr">0</div>
           <div class="stat-label">Errors</div>
         </div>
       </div>
@@ -152,12 +154,24 @@ function showTypingResults(wpm, accuracy, errors, seconds) {
     </div>
   `;
   setTimeout(() => {
-    animateValue(document.getElementById('animWPM'), 0, wpm, 1000);
-    animateValue(document.getElementById('animAcc'), 0, accuracy, 1000, '%');
-    animateValue(document.getElementById('animErr'), 0, errors, 800);
+    const animate = typeof animateValue === 'function' ? animateValue : animateValueFallback;
+    animate(document.getElementById('animWPM'), 0, wpm, 1000);
+    animate(document.getElementById('animAcc'), 0, accuracy, 1000, '%');
+    animate(document.getElementById('animErr'), 0, errors, 800);
   }, 300);
 }
 
+function animateValueFallback(el, from, to, duration = 1000, suffix = '') {
+  if (!el) return;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (to - from) * eased) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 function resetTyping() {
   clearInterval(timerInterval);
   loadText(typingState.textId);

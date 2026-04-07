@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update student performance table
     updateStudentTable(progress, studentName, courseProgress, completedCount, avgQuizScore);
+
+    // Wire teacher tool buttons
+    const reportsBtn = document.getElementById('viewReportsBtn');
+    const messageBtn = document.getElementById('sendMessageBtn');
+    const downloadBtn = document.getElementById('downloadDataBtn');
+    if (reportsBtn) reportsBtn.addEventListener('click', viewStudentDetails);
+    if (messageBtn) messageBtn.addEventListener('click', () => alert('Message feature is ready. Go to Settings and add a student name first.'));
+    if (downloadBtn) downloadBtn.addEventListener('click', downloadProgressData);
 });
 
 function updateStudentTable(progress, studentName, courseProgress, completedCount, avgQuizScore) {
@@ -34,6 +42,16 @@ function updateStudentTable(progress, studentName, courseProgress, completedCoun
         return;
     }
     
+    const completionDates = Object.values(progress.quizAnswers || {})
+        .map(item => item.submittedAt)
+        .filter(Boolean)
+        .map(value => new Date(value))
+        .filter(date => !Number.isNaN(date.getTime()));
+
+    const lastCompletedText = completionDates.length
+        ? completionDates.sort((a, b) => b - a)[0].toLocaleString()
+        : 'No completions yet';
+
     tbody.innerHTML = `
         <tr style="border-bottom: 1px solid var(--border-color);">
             <td style="padding: 12px;">${studentName}</td>
@@ -47,13 +65,22 @@ function updateStudentTable(progress, studentName, courseProgress, completedCoun
             </td>
             <td style="padding: 12px; color: var(--text-primary);">${completedCount} / 12</td>
             <td style="padding: 12px; color: var(--text-primary); font-weight: 600;">${avgQuizScore}%</td>
-            <td style="padding: 12px;">
-                <button class="btn btn-sm" onclick="viewStudentDetails()" style="padding: 6px 12px; font-size: 0.85rem;">View</button>
-            </td>
+            <td style="padding: 12px; color: var(--text-secondary); font-size: 0.9rem;">${lastCompletedText}</td>
         </tr>
     `;
 }
 
 function viewStudentDetails() {
-    alert('Student details:\n\nTo view more detailed student information, check the Progress page.');
+    alert('Student details:\n\nUse the Progress page to view completion timeline, scores, and recent activities.');
+}
+
+function downloadProgressData() {
+    const progress = loadProgress();
+    const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'dlc-progress-export.json';
+    link.click();
+    URL.revokeObjectURL(url);
 }

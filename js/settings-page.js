@@ -54,6 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    const exportBtn = document.getElementById('exportDataBtn');
+    const viewBtn = document.getElementById('viewDataBtn');
+    const clearBtn = document.getElementById('clearDataBtn');
+
+    if (exportBtn) exportBtn.addEventListener('click', exportProgressData);
+    if (viewBtn) viewBtn.addEventListener('click', viewDataStorage);
+    if (clearBtn) clearBtn.addEventListener('click', clearAllData);
 });
 
 function showToast(message, duration = 3000, type = 'info') {
@@ -77,4 +85,45 @@ function showToast(message, duration = 3000, type = 'info') {
     setTimeout(() => {
         toast.remove();
     }, duration);
+}
+
+function exportProgressData() {
+    const progress = loadProgress();
+    const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'dlc-progress-export.json';
+    link.click();
+    URL.revokeObjectURL(url);
+    showToast('Data exported successfully.', 2200, 'success');
+}
+
+function viewDataStorage() {
+    const progress = loadProgress();
+    const completed = progress.completedLessons.length;
+    const quizzes = Object.keys(progress.quizScores || {}).length;
+    const typingSessions = (progress.typingStats?.sessions || []).length;
+    const latestQuizDate = Object.values(progress.quizAnswers || {})
+        .map(item => item.submittedAt)
+        .filter(Boolean)
+        .sort()
+        .pop();
+
+    const info = [
+        `Completed lessons: ${completed}`,
+        `Quiz attempts: ${quizzes}`,
+        `Typing sessions: ${typingSessions}`,
+        `Last quiz completion: ${latestQuizDate ? new Date(latestQuizDate).toLocaleString() : 'N/A'}`
+    ].join('\n');
+
+    alert(info);
+}
+
+function clearAllData() {
+    const confirmed = confirm('This will erase all saved progress. Continue?');
+    if (!confirmed) return;
+    clearProgress();
+    showToast('All data cleared.', 2200, 'success');
+    setTimeout(() => window.location.reload(), 500);
 }

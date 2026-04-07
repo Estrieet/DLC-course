@@ -678,6 +678,51 @@ textarea {
     text-align: center;
 }
 
+.text-success {
+    color: var(--success-color);
+}
+
+.mt-6 {
+    margin-top: 2rem;
+}
+
+.stat-card {
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.typing-char {
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    border-radius: 3px;
+}
+
+.typing-char.current {
+    background: rgba(0, 113, 227, 0.18);
+}
+
+.typing-char.correct {
+    color: var(--success-color);
+}
+
+.typing-char.wrong {
+    color: var(--danger-color);
+    text-decoration: underline;
+}
+
 /* ========================================
    APP LAYOUT (SIDEBAR + CONTENT)
    ======================================== */

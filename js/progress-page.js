@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update achievements
     updateAchievements(progress);
+    updateRecentCompletions(progress);
 });
 
 function updateAchievements(progress) {
@@ -60,4 +61,47 @@ function updateAchievements(progress) {
             <div style="font-size: 0.75rem; margin-top: 4px; color: var(--text-secondary);">${ach.condition ? '✓ Unlocked' : 'Locked'}</div>
         </div>
     `).join('');
+}
+
+function updateRecentCompletions(progress) {
+    const container = document.getElementById('recentCompletions');
+    if (!container) return;
+
+    const quizCompletions = Object.entries(progress.quizAnswers || {}).map(([lessonId, data]) => {
+        const lessonNum = Number(lessonId);
+        const lessonName = typeof LESSONS !== 'undefined'
+            ? (LESSONS.find(l => l.id === lessonNum)?.title || `Lesson ${lessonNum}`)
+            : `Lesson ${lessonNum}`;
+        return {
+            type: 'Quiz',
+            title: lessonName,
+            score: data.score,
+            date: data.submittedAt ? new Date(data.submittedAt) : null
+        };
+    }).filter(item => item.date instanceof Date && !Number.isNaN(item.date.getTime()));
+
+    const typingCompletions = (progress.typingStats?.sessions || []).map((session) => ({
+        type: 'Typing',
+        title: `Typing Practice (${session.wpm} WPM, ${session.accuracy}% accuracy)`,
+        score: null,
+        date: session.date ? new Date(session.date) : null
+    })).filter(item => item.date instanceof Date && !Number.isNaN(item.date.getTime()));
+
+    const all = [...quizCompletions, ...typingCompletions]
+        .sort((a, b) => b.date - a.date)
+        .slice(0, 8);
+
+    if (all.length === 0) {
+        container.innerHTML = 'No completed activities yet.';
+        return;
+    }
+
+    container.innerHTML = all.map(item => {
+        const dateText = item.date.toLocaleString();
+        const scoreText = item.score !== null ? ` - Score: ${item.score}%` : '';
+        return `<div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+            <strong style="color: var(--text-primary);">${item.type}</strong>: ${item.title}${scoreText}
+            <div style="font-size: 0.85rem; color: var(--text-secondary);">Completed: ${dateText}</div>
+        </div>`;
+    }).join('');
 }
