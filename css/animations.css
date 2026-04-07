@@ -164,6 +164,72 @@
 }
 
 .bounce {
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.wiggle {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+/* ========================================
+   QUIZ ANIMATIONS
+   ======================================== */
+
+@keyframes correctFlash {
+    0% { background-color: var(--bg-secondary); }
+    50% { background-color: rgba(52, 199, 89, 0.2); }
+    100% { background-color: var(--bg-secondary); }
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.correct-flash {
+    animation: correctFlash 0.6s ease-in-out;
+}
+
+.wrong-shake {
+    animation: wrongShake 0.5s ease-in-out;
+}
+
+.slide-down {
+    animation: slideDown 0.3s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+.bounce {
     animation: bounce 1s ease-in-out infinite;
 }
 
