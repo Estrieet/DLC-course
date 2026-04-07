@@ -43,7 +43,7 @@ function renderTypingText(text) {
   const el = document.getElementById('typingDisplay');
   if (!el) return;
   el.innerHTML = text.split('').map((ch, i) =>
-    `<span class="typing-char" id="tc-${i}" data-char="${ch === '"' ? '&quot;' : ch}">${ch === ' ' ? '&nbsp;' : ch}</span>`
+    `<span class="typing-char" id="tc-${i}" data-char="${ch === '"' ? '&quot;' : ch}">${ch === ' ' ? ' ' : ch}</span>`
   ).join('');
 }
 

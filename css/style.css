@@ -83,7 +83,6 @@ body {
    ======================================== */
 
 .navbar {
-    background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -96,6 +95,15 @@ body {
 
 [data-theme="dark"] .navbar {
     background-color: rgba(29, 29, 31, 0.8);
+}
+
+[data-theme="dark"] .main-container,
+[data-theme="dark"] .footer,
+[data-theme="dark"] .hero-section,
+[data-theme="dark"] .features-section,
+[data-theme="dark"] .cta-section {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .nav-container {
@@ -721,8 +729,10 @@ textarea {
 }
 
 .typing-char {
+    display: inline;
     transition: background-color var(--transition-fast), color var(--transition-fast);
     border-radius: 3px;
+    white-space: pre-wrap;
 }
 
 .typing-char.current {
