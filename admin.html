@@ -52,27 +52,30 @@
             <div class="card" style="margin-bottom: 24px;">
                 <h3 style="margin-bottom: 24px;">Course Management</h3>
                 <div style="display: flex; gap: 12px; flex-direction: column;">
-                    <button class="btn btn-primary" style="width: 100%; padding: 16px;">📚 Manage Lessons</button>
-                    <button class="btn btn-primary" style="width: 100%; padding: 16px;">📝 Create New Lesson</button>
-                    <button class="btn btn-primary" style="width: 100%; padding: 16px;">📊 View Course Stats</button>
+                    <button id="manageLessonsBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📚 Manage Lessons</button>
+                    <button id="createLessonBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📝 Create New Lesson</button>
+                    <button id="viewStatsBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📊 View Course Stats</button>
                 </div>
             </div>
 
             <div class="card" style="margin-bottom: 24px;">
                 <h3 style="margin-bottom: 24px;">Data Management</h3>
                 <div style="display: flex; gap: 12px; flex-direction: column;">
-                    <button class="btn btn-secondary" style="width: 100%; padding: 16px;">💾 Export All Data</button>
-                    <button class="btn btn-secondary" style="width: 100%; padding: 16px;">📥 Import Data</button>
-                    <button class="btn btn-danger" style="width: 100%; padding: 16px;">🗑️ Clear All Data</button>
+                    <button id="exportAllBtn" class="btn btn-secondary" style="width: 100%; padding: 16px;">💾 Export All Data</button>
+                    <button id="importDataBtn" class="btn btn-secondary" style="width: 100%; padding: 16px;">📥 Import Data</button>
+                    <button id="clearAllBtn" class="btn btn-danger" style="width: 100%; padding: 16px;">🗑️ Clear All Data</button>
                 </div>
             </div>
+
+            <div id="statsOutput" class="hidden" style="max-width: 800px; margin: 0 auto 24px;"></div>
+            <div id="importSection" class="hidden" style="max-width: 800px; margin: 0 auto 24px;"></div>
 
             <div class="card" style="padding: 24px; background: var(--bg-secondary); border: 2px solid var(--warning-color);">
                 <h3 style="color: var(--warning-color); margin-bottom: 12px;">⚠️ Danger Zone</h3>
                 <p style="color: var(--text-secondary); margin-bottom: 16px;">
                     Be careful! These actions cannot be undone.
                 </p>
-                <button class="btn btn-danger" style="width: 100%; padding: 16px;">Reset All Student Progress</button>
+                <button id="resetProgressBtn" class="btn btn-danger" style="width: 100%; padding: 16px;">Reset All Student Progress</button>
             </div>
         </section>
     </main>
@@ -91,5 +94,9 @@
     <script src="js/main.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/admin-page.js"></script>
 </body>
 </html>
