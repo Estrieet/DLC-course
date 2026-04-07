@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -30,231 +29,44 @@
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-container">
-        <section class="lessons-section" style="padding: 48px 0;">
-            <h1 class="section-title">12 Essential Computer Lessons</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px; font-size: 1.1rem;">
-                Learn computer basics at your own pace with step-by-step lessons<br>
-                <small>Each lesson takes about 15-20 minutes to complete</small>
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">12 Essential Computer Lessons</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;max-width:600px;margin-left:auto;margin-right:auto;">
+                Learn computer basics at your own pace. Each lesson is clear and simple.
+                <br><span style="font-size:0.9rem;">Each lesson takes about 15–20 minutes to complete.</span>
             </p>
 
-            <div class="grid-3" style="gap: 24px;">
-                <!-- Lesson 1 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">What is a Computer?</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn about computer basics, parts, and capabilities</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Understand what computers are and their main components.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 15 min</span>
-                    </div>
-                    <a href="lesson.html?id=1" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 2 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Computer Hardware</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn CPU, RAM, hard drives, and other components</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Explore the physical parts that make up a computer.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 15 min</span>
-                    </div>
-                    <a href="lesson.html?id=2" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 3 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Computer Software</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn about programs, operating systems, and applications</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Understand what software is and how it works.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 15 min</span>
-                    </div>
-                    <a href="lesson.html?id=3" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 4 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Turning On & Off a Computer</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn how to safely start up and shut down your computer</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Safely start and stop your computer the right way.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 15 min</span>
-                    </div>
-                    <a href="lesson.html?id=4" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 5 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Using the Mouse</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Master clicking, double-clicking, and scrolling techniques</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Learn to control your computer with the mouse.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=5" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 6 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Using the Keyboard</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn typing, keyboard shortcuts, and special keys</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Master typing and keyboard skills for your computer.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=6" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 7 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Files & Folders</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Organize and manage your files and folders on your computer</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Understand how to organize and find your files.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=7" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 8 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">The Desktop & Icons</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn about desktop shortcuts and how to use them</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Navigate and use your computer's desktop.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 15 min</span>
-                    </div>
-                    <a href="lesson.html?id=8" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 9 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">What is the Internet?</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Discover how the internet works and its uses</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Introduction to the internet and how it connects people.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=9" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 10 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Using a Web Browser</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn how to browse the web and visit websites safely</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Browse the web and find information online.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=10" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 11 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Searching the Internet</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Master search engines and find information quickly</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Learn effective ways to search for information online.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=11" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 12 -->
-                <div class="card fade-in-up" style="cursor: pointer; transition: all 0.3s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                        <h3 style="color: var(--text-primary);">Email Basics</h3>
-                        <div class="info-icon" title="Lesson info">ⓘ
-                            <div class="tooltip">Learn to send, receive, and manage emails</div>
-                        </div>
-                    </div>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">Send and receive emails to stay in touch with others.</p>
-                    <div class="flex gap-2" style="margin-bottom: 16px;">
-                        <span class="badge badge-primary">Intermediate</span>
-                        <span class="badge badge-success">⏱ 20 min</span>
-                    </div>
-                    <a href="lesson.html?id=12" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Start Lesson</a>
-                </div>
+            <!-- Module filter buttons -->
+            <div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;justify-content:center;margin-bottom:var(--spacing-2xl);" class="fade-in">
+                <button class="btn btn-primary" id="filterAll" onclick="filterLessons('all')">All Lessons</button>
+                <button class="btn btn-secondary" id="filterBasics" onclick="filterLessons('Computer Basics')">Computer Basics</button>
+                <button class="btn btn-secondary" id="filterInternet" onclick="filterLessons('Internet Basics')">Internet Basics</button>
+                <button class="btn btn-secondary" id="filterComm" onclick="filterLessons('Communication')">Communication</button>
             </div>
+
+            <div id="lessonsGrid" class="grid-3" style="gap: var(--spacing-lg);"></div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>
@@ -267,5 +79,67 @@
     <script src="js/db.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        var currentFilter = 'all';
+
+        var moduleIcons = {
+            'Computer Basics': '💻',
+            'Internet Basics': '🌐',
+            'Communication': '📧'
+        };
+
+        var levelLabels = { 1: 'Beginner', 2: 'Intermediate' };
+        var levelColors = { 1: 'badge-green', 2: 'badge-blue' };
+        var durations = ['15 min','15 min','15 min','15 min','20 min','20 min','20 min','15 min','20 min','20 min','20 min','20 min'];
+
+        function renderLessons(filter) {
+            var progress = (typeof loadProgress === 'function') ? loadProgress() : { completedLessons: [], quizScores: {}, unlockedLessons: [1] };
+            var grid = document.getElementById('lessonsGrid');
+            if (!grid) return;
+            var filtered = filter === 'all' ? LESSONS : LESSONS.filter(function(l){ return l.module === filter; });
+            grid.innerHTML = filtered.map(function(lesson, i) {
+                var isCompleted = progress.completedLessons && progress.completedLessons.includes(lesson.id);
+                var isUnlocked = !progress.unlockedLessons || progress.unlockedLessons.includes(lesson.id);
+                var quizScore = progress.quizScores && progress.quizScores[lesson.id];
+                var icon = moduleIcons[lesson.module] || '📖';
+                return '<div class="card fade-in-up" style="position:relative;">' +
+                    '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">' +
+                        '<div>' +
+                            '<span style="font-size:1.5rem;">' + icon + '</span>' +
+                            '<span style="font-weight:600;color:var(--text-secondary);font-size:0.82rem;margin-left:6px;">#' + lesson.id + '</span>' +
+                        '</div>' +
+                        '<div class="info-icon" title="About this lesson">ⓘ' +
+                            '<span class="tooltip">' + lesson.summary[0] + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<h3 style="color:var(--text-primary);margin-bottom:8px;font-size:1rem;letter-spacing:-0.01em;">' + lesson.title + '</h3>' +
+                    '<p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:16px;line-height:1.5;">' + lesson.summary[0].substring(0,80) + '…</p>' +
+                    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">' +
+                        '<span class="badge ' + (levelColors[lesson.level]||'badge-blue') + '">' + (levelLabels[lesson.level]||'') + '</span>' +
+                        '<span class="badge badge-green">⏱ ' + (durations[lesson.id-1]||'15 min') + '</span>' +
+                        (isCompleted ? '<span class="badge badge-success">✓ Done</span>' : '') +
+                        (quizScore !== undefined ? '<span class="badge badge-warning">Quiz: ' + quizScore + '%</span>' : '') +
+                    '</div>' +
+                    (isUnlocked
+                        ? '<a href="lesson.html?id=' + lesson.id + '" class="btn btn-primary btn-full">Start Lesson</a>'
+                        : '<button class="btn btn-secondary btn-full" disabled title="Complete the previous lesson first">🔒 Locked</button>'
+                    ) +
+                '</div>';
+            }).join('');
+        }
+
+        function filterLessons(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('[id^=filter]').forEach(function(b){ b.className = 'btn btn-secondary'; });
+            var activeMap = {all:'filterAll','Computer Basics':'filterBasics','Internet Basics':'filterInternet','Communication':'filterComm'};
+            var activeEl = document.getElementById(activeMap[filter]);
+            if (activeEl) activeEl.className = 'btn btn-primary';
+            renderLessons(filter);
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){ renderLessons('all'); });
+    </script>
 </body>
 </html>

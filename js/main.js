@@ -1,11 +1,12 @@
-﻿/* ========================================
+/* ========================================
    MAIN.JS - GENERAL FUNCTIONALITY
    ======================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     initializeMobileMenu();
     initializeDropdowns();
     initializeNavigation();
+    initializeRipple();
 });
 
 /* ========================================
@@ -13,23 +14,29 @@ document.addEventListener("DOMContentLoaded", function() {
    ======================================== */
 
 function initializeMobileMenu() {
-    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-    const navMenu = document.getElementById("navMenu");
-
+    var mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    var navMenu = document.getElementById("navMenu");
     if (!mobileMenuToggle || !navMenu) return;
 
-    mobileMenuToggle.addEventListener("click", function() {
+    mobileMenuToggle.addEventListener("click", function () {
         mobileMenuToggle.classList.toggle("active");
         navMenu.classList.toggle("active");
     });
 
-    // Close menu when link is clicked
-    const navLinks = navMenu.querySelectorAll(".nav-link:not(.dropdown-btn)");
-    navLinks.forEach(link => {
-        link.addEventListener("click", function() {
+    // Close menu on nav link click
+    navMenu.querySelectorAll(".nav-link:not(.dropdown-btn)").forEach(function (link) {
+        link.addEventListener("click", function () {
             mobileMenuToggle.classList.remove("active");
             navMenu.classList.remove("active");
         });
+    });
+
+    // Close on outside click
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest("#navMenu") && !e.target.closest("#mobileMenuToggle")) {
+            mobileMenuToggle.classList.remove("active");
+            navMenu.classList.remove("active");
+        }
     });
 }
 
@@ -38,50 +45,60 @@ function initializeMobileMenu() {
    ======================================== */
 
 function initializeDropdowns() {
-    const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+    var dropdownBtns = document.querySelectorAll(".dropdown-btn");
 
-    dropdownBtns.forEach(btn => {
-        btn.addEventListener("click", function(e) {
+    dropdownBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-
-            const parent = btn.closest(".nav-dropdown");
+            var parent = btn.closest(".nav-dropdown");
             if (!parent) return;
 
             // Close other dropdowns
-            document.querySelectorAll(".nav-dropdown").forEach(d => {
+            document.querySelectorAll(".nav-dropdown").forEach(function (d) {
                 if (d !== parent) d.classList.remove("active");
             });
 
-            // Toggle current dropdown
             parent.classList.toggle("active");
         });
     });
 
     // Close dropdowns when clicking outside
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
         if (!e.target.closest(".nav-dropdown")) {
-            document.querySelectorAll(".nav-dropdown").forEach(d => {
+            document.querySelectorAll(".nav-dropdown").forEach(function (d) {
                 d.classList.remove("active");
             });
+        }
+    });
+
+    // Keyboard: close dropdown on Escape
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            document.querySelectorAll(".nav-dropdown").forEach(function (d) {
+                d.classList.remove("active");
+            });
+            var navMenu = document.getElementById("navMenu");
+            var toggle = document.getElementById("mobileMenuToggle");
+            if (navMenu) navMenu.classList.remove("active");
+            if (toggle) toggle.classList.remove("active");
         }
     });
 }
 
 /* ========================================
-   NAVIGATION ACTIVE LINK
+   ACTIVE NAVIGATION LINK
    ======================================== */
 
 function initializeNavigation() {
-    const currentLocation = location.pathname.split("/").pop() || "index.html";
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    navLinks.forEach(link => {
-        if (!link.classList.contains("dropdown-btn")) {
+    var currentPage = location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".nav-link, .dropdown-item").forEach(function (link) {
+        if (link.classList.contains("dropdown-btn")) return;
+        var href = link.getAttribute("href");
+        if (href === currentPage) {
+            link.classList.add("active");
+        } else {
             link.classList.remove("active");
-            if (link.getAttribute("href") === currentLocation) {
-                link.classList.add("active");
-            }
         }
     });
 }
@@ -90,108 +107,84 @@ function initializeNavigation() {
    SMOOTH SCROLL
    ======================================== */
 
-document.addEventListener("click", function(e) {
-    const link = e.target.closest("a[href^='#']");
+document.addEventListener("click", function (e) {
+    var link = e.target.closest("a[href^='#']");
     if (!link) return;
-
-    const target = document.querySelector(link.getAttribute("href"));
+    var target = document.querySelector(link.getAttribute("href"));
     if (!target) return;
-
     e.preventDefault();
-    target.scrollIntoView({ behavior: "smooth" });
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 /* ========================================
-   LOCAL STORAGE UTILITIES
+   RIPPLE EFFECT ON BUTTONS
    ======================================== */
 
-const StorageManager = {
-    set(key, value) {
-        try {
-            localStorage.setItem(key, JSON.stringify(value));
-            return true;
-        } catch (e) {
-            console.error("Failed to save to localStorage:", e);
-            return false;
-        }
-    },
+function initializeRipple() {
+    document.addEventListener("click", function (e) {
+        var btn = e.target.closest(".btn");
+        if (!btn) return;
+        var circle = document.createElement("span");
+        var diameter = Math.max(btn.clientWidth, btn.clientHeight);
+        var radius = diameter / 2;
+        var rect = btn.getBoundingClientRect();
+        circle.style.cssText = "position:absolute;border-radius:50%;transform:scale(0);animation:ripple 0.5s linear;background:rgba(255,255,255,0.3);width:" + diameter + "px;height:" + diameter + "px;top:" + (e.clientY - rect.top - radius) + "px;left:" + (e.clientX - rect.left - radius) + "px;pointer-events:none";
+        btn.style.position = "relative";
+        btn.style.overflow = "hidden";
+        btn.appendChild(circle);
+        setTimeout(function () { circle.remove(); }, 600);
+    });
+}
 
-    get(key, defaultValue = null) {
+/* ========================================
+   STORAGE UTILITIES
+   ======================================== */
+
+var StorageManager = {
+    set: function (key, value) {
+        try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+        catch (e) { return false; }
+    },
+    get: function (key, defaultValue) {
+        if (defaultValue === undefined) defaultValue = null;
         try {
-            const item = localStorage.getItem(key);
+            var item = localStorage.getItem(key);
             return item ? JSON.parse(item) : defaultValue;
-        } catch (e) {
-            console.error("Failed to read from localStorage:", e);
-            return defaultValue;
-        }
+        } catch (e) { return defaultValue; }
     },
-
-    remove(key) {
-        try {
-            localStorage.removeItem(key);
-            return true;
-        } catch (e) {
-            console.error("Failed to remove from localStorage:", e);
-            return false;
-        }
+    remove: function (key) {
+        try { localStorage.removeItem(key); return true; }
+        catch (e) { return false; }
     },
-
-    clear() {
-        try {
-            localStorage.clear();
-            return true;
-        } catch (e) {
-            console.error("Failed to clear localStorage:", e);
-            return false;
-        }
+    clear: function () {
+        try { localStorage.clear(); return true; }
+        catch (e) { return false; }
     }
 };
 
 /* ========================================
-   ACCESSIBILITY
+   KEYBOARD ACCESSIBILITY
    ======================================== */
 
-// Keyboard navigation for buttons
-document.addEventListener("keydown", function(e) {
-    if (e.key === "Enter" || e.key === " ") {
-        if (e.target.tagName === "BUTTON" || e.target.classList.contains("btn")) {
-            e.target.click();
-        }
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.tagName === "BUTTON") {
+        e.target.click();
     }
 });
 
 /* ========================================
-   LOADING INDICATOR
+   WINDOW RESIZE
    ======================================== */
 
-function showLoadingIndicator() {
-    const loader = document.createElement("div");
-    loader.id = "loadingIndicator";
-    loader.classList.add("loading-spinner");
-    loader.innerHTML = `<div class="spin"></div>`;
-    document.body.appendChild(loader);
-}
-
-function hideLoadingIndicator() {
-    const loader = document.getElementById("loadingIndicator");
-    if (loader) loader.remove();
-}
-
-/* ========================================
-   WINDOW RESIZE HANDLER
-   ======================================== */
-
-let resizeTimer;
-window.addEventListener("resize", function() {
+var resizeTimer;
+window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-        // Reset mobile menu on resize
-        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-        const navMenu = document.getElementById("navMenu");
-        
-        if (mobileMenuToggle && navMenu && window.innerWidth > 768) {
-            mobileMenuToggle.classList.remove("active");
-            navMenu.classList.remove("active");
+    resizeTimer = setTimeout(function () {
+        if (window.innerWidth > 768) {
+            var toggle = document.getElementById("mobileMenuToggle");
+            var menu = document.getElementById("navMenu");
+            if (toggle) toggle.classList.remove("active");
+            if (menu) menu.classList.remove("active");
         }
-    }, 250);
+    }, 200);
 });

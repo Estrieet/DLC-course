@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -29,14 +29,15 @@
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item active">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -44,84 +45,89 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: 48px 0;">
-            <h1 class="section-title">Settings</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
-                Customize your learning experience
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">Settings</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+                Customise your learning experience
             </p>
 
-            <div style="max-width: 600px; margin: 0 auto;">
-                <!-- User Profile -->
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="margin-bottom: 24px;">👤 Profile</h3>
-                    <form>
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Name</label>
-                        <input type="text" id="userName" placeholder="Enter your name" style="margin-bottom: 24px;">
-                        
-                        <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Email (Optional)</label>
-                        <input type="email" id="userEmail" placeholder="your.email@example.com" style="margin-bottom: 24px;">
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Profile</button>
+            <div style="max-width:600px;margin:0 auto;">
+                <!-- Profile -->
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-xl);">👤 Your Profile</h3>
+                    <form id="profileForm">
+                        <label>Your Name</label>
+                        <input type="text" id="userName" placeholder="e.g. Margaret or John">
+                        <label>Email Address (Optional)</label>
+                        <input type="email" id="userEmail" placeholder="your.email@example.com">
+                        <button type="submit" class="btn btn-primary btn-full">Save Profile</button>
                     </form>
                 </div>
 
                 <!-- Appearance -->
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="margin-bottom: 24px;">🎨 Appearance</h3>
-                    <div style="margin-bottom: 24px;">
-                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
-                            <input type="radio" name="theme" value="light" checked class="theme-radio">
-                            <span>☀️ Light Mode</span>
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-xl);">🎨 Appearance</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:var(--spacing-lg);font-size:0.9rem;">Choose how the website looks for you.</p>
+                    <div style="display:flex;flex-direction:column;gap:var(--spacing-md);margin-bottom:var(--spacing-xl);">
+                        <label style="display:flex;align-items:center;gap:var(--spacing-md);cursor:pointer;padding:var(--spacing-md);border-radius:var(--radius-md);border:1px solid var(--border-color);transition:all var(--transition-fast);" id="lightModeLabel">
+                            <input type="radio" name="theme" value="light" id="themeLight">
+                            <span style="font-size:1.1rem;">☀️</span>
+                            <div><strong>Light Mode</strong><br><span style="color:var(--text-secondary);font-size:0.85rem;">White background — easy to read in daytime</span></div>
                         </label>
-                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                            <input type="radio" name="theme" value="dark" class="theme-radio">
-                            <span>🌙 Dark Mode</span>
+                        <label style="display:flex;align-items:center;gap:var(--spacing-md);cursor:pointer;padding:var(--spacing-md);border-radius:var(--radius-md);border:1px solid var(--border-color);transition:all var(--transition-fast);" id="darkModeLabel">
+                            <input type="radio" name="theme" value="dark" id="themeDark">
+                            <span style="font-size:1.1rem;">🌙</span>
+                            <div><strong>Dark Mode</strong><br><span style="color:var(--text-secondary);font-size:0.85rem;">Dark background — easier on the eyes at night</span></div>
                         </label>
                     </div>
-
-                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Text Size</label>
-                    <select id="textSizeSelect" style="width: 100%; margin-bottom: 16px;">
-                        <option value="90">Small (90%)</option>
-                        <option value="100" selected>Normal (100%)</option>
-                        <option value="120">Large (120%)</option>
-                        <option value="150">Extra Large (150%)</option>
+                    <label>Text Size</label>
+                    <select id="textSizeSelect">
+                        <option value="90">Small (90%) — smaller text</option>
+                        <option value="100" selected>Normal (100%) — standard size</option>
+                        <option value="120">Large (120%) — bigger text</option>
+                        <option value="150">Extra Large (150%) — much bigger text</option>
                     </select>
+                    <p style="color:var(--text-secondary);font-size:0.85rem;margin-top:-8px;">The text size will change on all pages of this website.</p>
                 </div>
 
                 <!-- Notifications -->
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="margin-bottom: 24px;">🔔 Notifications</h3>
-                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
-                        <input type="checkbox" checked>
-                        <span>📧 Notify me when new lessons are available</span>
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
-                        <input type="checkbox" checked>
-                        <span>🏆 Notify me when I earn achievements</span>
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                        <input type="checkbox">
-                        <span>💬 Notify me of messages from my teacher</span>
-                    </label>
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-xl);">🔔 Notifications</h3>
+                    <div style="display:flex;flex-direction:column;gap:var(--spacing-lg);">
+                        <label style="display:flex;align-items:center;gap:var(--spacing-md);cursor:pointer;">
+                            <input type="checkbox" id="notifyLessons" checked style="width:18px;height:18px;margin-bottom:0;">
+                            <div><strong>New lessons available</strong><br><span style="color:var(--text-secondary);font-size:0.88rem;">Be notified when new lessons are added</span></div>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:var(--spacing-md);cursor:pointer;">
+                            <input type="checkbox" id="notifyAchievements" checked style="width:18px;height:18px;margin-bottom:0;">
+                            <div><strong>Achievement earned</strong><br><span style="color:var(--text-secondary);font-size:0.88rem;">Celebrate when you earn a badge!</span></div>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:var(--spacing-md);cursor:pointer;">
+                            <input type="checkbox" id="notifyMessages" style="width:18px;height:18px;margin-bottom:0;">
+                            <div><strong>Teacher messages</strong><br><span style="color:var(--text-secondary);font-size:0.88rem;">Get notified when your teacher sends a message</span></div>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Privacy & Data -->
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="margin-bottom: 24px;">🔒 Privacy & Data</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
-                        All your data is stored locally on your device. Nothing is sent to remote servers.
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-md);">🔒 Privacy &amp; Your Data</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:var(--spacing-lg);font-size:0.9rem;">
+                        All your data is stored on your own device. Nothing is sent to the internet. Your privacy is fully protected.
                     </p>
-                    <button class="btn btn-secondary" id="exportDataBtn" style="width: 100%; margin-bottom: 12px;">📥 Export My Data</button>
-                    <button class="btn btn-secondary" id="viewDataBtn" style="width: 100%;">📊 View Data Storage</button>
+                    <div style="display:flex;flex-direction:column;gap:var(--spacing-md);">
+                        <button class="btn btn-secondary btn-full" id="exportDataBtn">📥 Export My Data (Download as file)</button>
+                        <button class="btn btn-secondary btn-full" id="viewDataBtn">📊 View My Stored Data</button>
+                    </div>
                 </div>
 
                 <!-- Danger Zone -->
-                <div class="card fade-in-up" style="padding: 24px; background: var(--bg-secondary); border: 2px solid var(--danger-color);">
-                    <h3 style="color: var(--danger-color); margin-bottom: 12px;">⚠️ Danger Zone</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
-                        This action cannot be undone. All your progress will be lost.
+                <div class="card fade-in-up" style="border:2px solid var(--danger-color);background:var(--danger-light);">
+                    <h3 style="color:var(--danger-color);margin-bottom:var(--spacing-sm);">⚠️ Danger Zone</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:var(--spacing-lg);font-size:0.9rem;">
+                        <strong>Warning:</strong> This action cannot be undone. All your progress, quiz scores, and achievements will be permanently deleted.
                     </p>
-                    <button class="btn btn-danger" id="clearDataBtn" style="width: 100%;">🗑️ Clear All My Data</button>
+                    <button class="btn btn-danger btn-full" id="clearDataBtn">🗑️ Clear All My Data &amp; Start Over</button>
                 </div>
             </div>
         </section>
@@ -129,7 +135,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>

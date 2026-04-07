@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -29,14 +29,15 @@
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -44,44 +45,44 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: 48px 0;">
-            <h1 class="section-title">Teacher Dashboard</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
-                Monitor student progress and manage the course
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">Teacher Dashboard</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+                Monitor student progress and manage your course
             </p>
 
-            <div class="grid-3" style="gap: 24px; margin-bottom: 48px;">
-                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-color);" id="studentCountCard">0</div>
-                    <div style="color: var(--text-secondary);">Students</div>
+            <div class="grid-3 mb-6" style="gap:var(--spacing-lg);">
+                <div class="stat-card fade-in-up stagger-1">
+                    <div class="stat-value text-accent" id="studentCountCard">0</div>
+                    <div class="stat-label">Students</div>
                 </div>
-                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--success-color);" id="avgProgressCard">0%</div>
-                    <div style="color: var(--text-secondary);">Avg. Progress</div>
+                <div class="stat-card fade-in-up stagger-2">
+                    <div class="stat-value" style="color:var(--success-color);" id="avgProgressCard">0%</div>
+                    <div class="stat-label">Avg. Progress</div>
                 </div>
-                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
-                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--warning-color);" id="avgQuizScoreCard">0</div>
-                    <div style="color: var(--text-secondary);">Avg. Quiz Score</div>
+                <div class="stat-card fade-in-up stagger-3">
+                    <div class="stat-value" style="color:var(--warning-color);" id="avgQuizScoreCard">0</div>
+                    <div class="stat-label">Avg. Quiz Score</div>
                 </div>
             </div>
 
-            <div class="card" style="margin-bottom: 24px;">
-                <h3 style="margin-bottom: 24px;">Student Performance</h3>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; text-align: left;">
+            <div class="card mb-3 fade-in">
+                <h3 style="margin-bottom:var(--spacing-xl);">👥 Student Performance</h3>
+                <div style="overflow-x:auto;">
+                    <table>
                         <thead>
-                            <tr style="border-bottom: 2px solid var(--border-color);">
-                                <th style="padding: 12px;">Student Name</th>
-                                <th style="padding: 12px;">Progress</th>
-                                <th style="padding: 12px;">Lessons Done</th>
-                                <th style="padding: 12px;">Avg. Quiz Score</th>
-                                <th style="padding: 12px;">Last Completed</th>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Progress</th>
+                                <th>Lessons Done</th>
+                                <th>Avg. Quiz Score</th>
+                                <th>Last Activity</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td colspan="5" style="padding: 24px; text-align: center; color: var(--text-secondary);">
-                                    No students yet. Share your course with students to get started!
+                        <tbody id="studentTableBody">
+                            <tr>
+                                <td colspan="5" style="padding:var(--spacing-2xl);text-align:center;color:var(--text-secondary);">
+                                    No students yet. Share your course link with students to get started!
                                 </td>
                             </tr>
                         </tbody>
@@ -89,12 +90,12 @@
                 </div>
             </div>
 
-            <div class="card" style="padding: 24px; background: var(--bg-secondary);">
-                <h3 style="margin-bottom: 16px;">📋 Teacher Tools</h3>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                    <button class="btn btn-primary" id="viewReportsBtn">View Reports</button>
-                    <button class="btn btn-secondary" id="sendMessageBtn">Send Message</button>
-                    <button class="btn btn-secondary" id="downloadDataBtn">Download Data</button>
+            <div class="card fade-in" style="background:var(--bg-secondary);">
+                <h3 style="margin-bottom:var(--spacing-lg);">🛠️ Teacher Tools</h3>
+                <div style="display:flex;gap:var(--spacing-md);flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="viewReportsBtn">📊 View Reports</button>
+                    <button class="btn btn-secondary" id="sendMessageBtn">💬 Send Message</button>
+                    <button class="btn btn-secondary" id="downloadDataBtn">📥 Download Data</button>
                 </div>
             </div>
         </section>
@@ -102,7 +103,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>

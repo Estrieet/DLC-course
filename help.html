@@ -1,13 +1,65 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help & Support - Digital Literacy Course</title>
+    <title>Help &amp; Support - Digital Literacy Course</title>
     <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light');document.documentElement.style.fontSize=(localStorage.getItem('textSize')||'100')+'%';</script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/mobile.css">
+    <style>
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .faq-question {
+            width: 100%;
+            padding: var(--spacing-xl);
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            font-family: inherit;
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+        }
+        .faq-question:hover { color: var(--accent-color); }
+        .faq-chevron {
+            font-size: 0.8rem;
+            transition: transform var(--transition-fast);
+            flex-shrink: 0;
+            color: var(--text-secondary);
+        }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-answer {
+            display: none;
+            padding: 0 var(--spacing-xl) var(--spacing-xl);
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.98rem;
+        }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-answer ul { margin: var(--spacing-md) 0 0 var(--spacing-xl); display: flex; flex-direction: column; gap: 8px; }
+        .faq-answer li { line-height: 1.7; }
+        .help-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
@@ -29,14 +81,15 @@
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item active">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -44,68 +97,19 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: 48px 0;">
-            <h1 class="section-title">Help & Frequently Asked Questions</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
-                Get answers to common questions and learn how to use the course
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">Help &amp; Frequently Asked Questions</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+                Common questions and step-by-step answers. Click any question to read the answer.
             </p>
 
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">❓ How do I start learning?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        Click on "Lessons" in the navigation menu to see all available lessons. Start with Lesson 1 and complete each lesson at your own pace. You can take breaks anytime and come back later.
-                    </p>
-                </div>
-
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">💾 How is my progress saved?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        Your progress is automatically saved in your browser's local storage. This means your data stays on your device and no information is sent to any server.
-                    </p>
-                </div>
-
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">🌙 How do I switch between light and dark mode?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        Click the moon/sun icon (🌙/☀️) in the top navigation bar. Your preference will be saved automatically.
-                    </p>
-                </div>
-
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">⌨️ What is the typing practice for?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        The typing practice helps you improve your keyboard skills. It measures your typing speed (WPM - Words Per Minute) and accuracy. Regular practice will help you become faster and more accurate.
-                    </p>
-                </div>
-
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">📊 Where do I track my progress?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        Click on "Progress" in the navigation menu to see your overall course progress, completed lessons, quiz scores, and achievements.
-                    </p>
-                </div>
-
-                <div class="card fade-in-up" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">🏆 What are achievements?</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        Achievements are badges you earn by completing milestones in the course. Complete lessons, pass quizzes, and improve your typing skills to unlock all achievements!
-                    </p>
-                </div>
-
-                <div class="card fade-in-up">
-                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">❌ I need more help</h3>
-                    <p style="color: var(--text-secondary); line-height: 1.8;">
-                        If you can't find the answer you're looking for, please contact your teacher or instructor. They can provide personalized support.
-                    </p>
-                </div>
-            </div>
+            <div style="max-width:800px;margin:0 auto;" id="faqContainer"></div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>
@@ -118,5 +122,87 @@
     <script src="js/db.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script>
+        var faqs = [
+            {
+                q: "🚀 How do I start learning?",
+                a: "It is very easy! Click on <strong>Lessons</strong> in the menu at the top of the page. Then click on Lesson 1. Read through the lesson at your own pace. There is no rush. When you are finished, take the short quiz at the end. Then you can move on to Lesson 2!"
+            },
+            {
+                q: "💾 How is my progress saved?",
+                a: "Your progress is saved automatically in your browser. You do not need to do anything! When you come back to this website later, your lessons and quiz scores will still be there. <strong>Important:</strong> Your progress is saved on the device you are using. If you use a different device (a different computer or phone), your progress will not appear there."
+            },
+            {
+                q: "🌙 How do I change to dark mode (darker background)?",
+                a: "Click the moon icon (🌙) in the top right corner of any page. The screen will change to a dark background, which is easier on the eyes in low light. Click it again (now it shows a sun ☀️) to go back to the light background. Your choice will be remembered for next time."
+            },
+            {
+                q: "🔠 The text is too small. How do I make it bigger?",
+                a: "You can make the text bigger in two ways:<ul><li><strong>In your browser:</strong> Press <strong>Ctrl + +</strong> (the plus key while holding Ctrl) to zoom in. Press <strong>Ctrl + -</strong> to zoom out. Press <strong>Ctrl + 0</strong> to reset.</li><li><strong>In Settings:</strong> Go to Settings (More → Settings) and choose a larger text size from the dropdown menu. You can choose Normal, Large, or Extra Large.</li></ul>"
+            },
+            {
+                q: "⌨️ What is the typing practice for?",
+                a: "Typing practice helps you get comfortable with the keyboard. You type the text shown on screen and the computer measures your speed (how many words per minute — WPM) and accuracy (how many letters you typed correctly). Do not worry about speed at first — accuracy is more important. With regular practice, your speed will improve naturally."
+            },
+            {
+                q: "📝 How do the quizzes work?",
+                a: "Each quiz has 3 multiple-choice questions. Read each question carefully and click on the answer you think is correct. When you have answered all questions, click <strong>Submit Answers</strong>. The computer will show you which answers were right and wrong. <strong>You need to score 70% or more (2 out of 3 questions correct) to pass.</strong> If you do not pass, you can try the quiz again as many times as you like."
+            },
+            {
+                q: "🔓 Why is a lesson locked?",
+                a: "Lessons unlock one by one. To unlock the next lesson, you must:<ul><li>Finish reading the current lesson</li><li>Take and pass the quiz (70% or more)</li></ul>This makes sure you learn everything properly before moving on. If a lesson is locked, go back to the previous lesson and take the quiz."
+            },
+            {
+                q: "🏆 What are achievements?",
+                a: "Achievements are special badges you earn when you reach milestones. For example:<ul><li>🎉 <strong>First Steps</strong> — finish your very first lesson</li><li>🏆 <strong>Quiz Master</strong> — score 100% on any quiz</li><li>✨ <strong>Halfway There</strong> — complete 6 lessons</li><li>🎓 <strong>Course Complete</strong> — finish all 12 lessons</li><li>⚡ <strong>Speed Typer</strong> — reach 30 words per minute typing</li><li>⭐ <strong>Accuracy Star</strong> — type with 95% accuracy</li></ul>You can see all your achievements on the Progress page."
+            },
+            {
+                q: "📊 Where can I see all my progress?",
+                a: "Click <strong>Progress</strong> in the navigation menu at the top of any page. You will see your overall course progress as a percentage, how many lessons you have completed, how many quizzes you have passed, and all your achievements."
+            },
+            {
+                q: "🖥️ What devices can I use for this course?",
+                a: "This course works on:<ul><li><strong>Desktop computers</strong> (Windows or Mac)</li><li><strong>Laptops</strong></li><li><strong>Tablets</strong> (like iPad or Android tablets)</li><li><strong>Smartphones</strong> (though a larger screen is easier)</li></ul>A mouse and keyboard will make typing practice easier, but you can also use a touchscreen."
+            },
+            {
+                q: "🔒 Is my information private and safe?",
+                a: "Yes, completely! This course does not collect any personal information. It does not send anything to the internet. All your progress data is saved only on your own device. No one can see it. No account or email address is required."
+            },
+            {
+                q: "❌ Something is not working. What do I do?",
+                a: "Try these steps:<ul><li><strong>Refresh the page</strong> — press F5 on your keyboard or the ↺ button in the browser</li><li><strong>Try a different browser</strong> — if you are using Edge, try Chrome, or vice versa</li><li><strong>Clear browser cache</strong> — in your browser settings, clear cookies and cached data</li><li><strong>Ask your teacher or instructor</strong> for help — they can look at the problem with you in person</li></ul>"
+            },
+            {
+                q: "📱 Can I use this course on my phone?",
+                a: "Yes! The course works on smartphones. However, a larger screen (computer or tablet) is much easier for reading and for typing practice. If you are using a phone, turn it to the side (landscape mode) for a wider view."
+            },
+            {
+                q: "🔄 Can I restart the course?",
+                a: "Yes. Go to <strong>Settings</strong> (More → Settings) and scroll down to the Danger Zone section. Click <strong>Clear All My Data</strong>. This will erase all your progress and start you from the beginning. <strong>Warning:</strong> This cannot be undone, so only do this if you are sure."
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var container = document.getElementById('faqContainer');
+            faqs.forEach(function(faq, i) {
+                var item = document.createElement('div');
+                item.className = 'faq-item fade-in-up';
+                item.innerHTML = '<button class="faq-question">' +
+                    '<span>' + faq.q + '</span>' +
+                    '<span class="faq-chevron">▼</span>' +
+                    '</button>' +
+                    '<div class="faq-answer">' + faq.a + '</div>';
+                container.appendChild(item);
+
+                item.querySelector('.faq-question').addEventListener('click', function() {
+                    var isOpen = item.classList.contains('open');
+                    // Close all
+                    document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');});
+                    // Open this one if it was closed
+                    if (!isOpen) item.classList.add('open');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

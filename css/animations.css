@@ -1,162 +1,151 @@
-﻿/* ========================================
-   ANIMATIONS
+/* ========================================
+   KEYFRAME ANIMATIONS
    ======================================== */
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(32px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideOutRight {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(30px);
-    }
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(32px); }
 }
 
 @keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.88); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.98); }
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+    20%, 40%, 60%, 80% { transform: translateX(6px); }
 }
 
 @keyframes wiggle {
     0%, 100% { transform: rotate(0deg); }
-    10%, 30%, 50%, 70%, 90% { transform: rotate(-1deg); }
-    20%, 40%, 60%, 80% { transform: rotate(1deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+}
+
+@keyframes correctFlash {
+    0% { background-color: var(--bg-secondary); }
+    40% { background-color: rgba(52,199,89,0.2); }
+    100% { background-color: var(--bg-secondary); }
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-7px); }
+    40%, 80% { transform: translateX(7px); }
 }
 
 @keyframes slideDown {
-    from {
-        height: 0;
-        opacity: 0;
-    }
-    to {
-        height: auto;
-        opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-    from {
-        height: auto;
-        opacity: 1;
-    }
-    to {
-        height: 0;
-        opacity: 0;
-    }
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes ripple {
+    from { transform: scale(0); opacity: 0.6; }
+    to { transform: scale(3); opacity: 0; }
+}
+
+/* Dog animations */
+@keyframes dogFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes tailWag {
+    0% { transform: rotate(-18deg); }
+    100% { transform: rotate(22deg); }
+}
+
+@keyframes dogBlink {
+    0%, 88%, 100% { transform: scaleY(1); }
+    94% { transform: scaleY(0.08); }
+}
+
+@keyframes earWiggle {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
 }
 
 /* ========================================
-   ANIMATION CLASSES
+   ANIMATION UTILITY CLASSES
    ======================================== */
 
 .fade-in {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.5s ease-out both;
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .fade-in-down {
-    animation: fadeInDown 0.6s ease-out;
+    animation: fadeInDown 0.5s ease-out both;
+}
+
+.fade-in-scale {
+    animation: fadeInScale 0.4s ease-out both;
 }
 
 .slide-in-right {
-    animation: slideInRight 0.6s ease-out;
+    animation: slideInRight 0.5s ease-out both;
 }
 
 .slide-out-right {
-    animation: slideOutRight 0.6s ease-out;
+    animation: slideOutRight 0.5s ease-out both;
 }
 
 .scale-in {
-    animation: scaleIn 0.6s ease-out;
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .pulse {
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulse 2.5s ease-in-out infinite;
 }
 
 .spin {
@@ -164,7 +153,7 @@
 }
 
 .bounce {
-    animation: bounce 1.5s ease-in-out infinite;
+    animation: bounce 1.8s ease-in-out infinite;
 }
 
 .shake {
@@ -172,45 +161,7 @@
 }
 
 .wiggle {
-    animation: wiggle 0.5s ease-in-out;
-}
-
-/* ========================================
-   QUIZ ANIMATIONS
-   ======================================== */
-
-@keyframes correctFlash {
-    0% { background-color: var(--bg-secondary); }
-    50% { background-color: rgba(52, 199, 89, 0.2); }
-    100% { background-color: var(--bg-secondary); }
-}
-
-@keyframes wrongShake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+    animation: wiggle 0.4s ease-in-out;
 }
 
 .correct-flash {
@@ -229,29 +180,16 @@
     animation: slideUp 0.3s ease-out;
 }
 
-.bounce {
-    animation: bounce 1s ease-in-out infinite;
-}
-
-.shake {
-    animation: shake 0.5s ease-in-out;
-}
-
-.wiggle {
-    animation: wiggle 0.3s ease-in-out;
-}
-
-.slide-down {
-    animation: slideDown 0.3s ease-out;
-}
-
-.slide-up {
-    animation: slideUp 0.3s ease-out;
-}
-
-/* Stagger animations */
-.fade-in-up:nth-child(1) { animation-delay: 0.1s; }
-.fade-in-up:nth-child(2) { animation-delay: 0.2s; }
-.fade-in-up:nth-child(3) { animation-delay: 0.3s; }
-.fade-in-up:nth-child(4) { animation-delay: 0.4s; }
-.fade-in-up:nth-child(5) { animation-delay: 0.5s; }
+/* Stagger delays for nth-child */
+.fade-in-up:nth-child(1) { animation-delay: 0.06s; }
+.fade-in-up:nth-child(2) { animation-delay: 0.12s; }
+.fade-in-up:nth-child(3) { animation-delay: 0.18s; }
+.fade-in-up:nth-child(4) { animation-delay: 0.24s; }
+.fade-in-up:nth-child(5) { animation-delay: 0.30s; }
+.fade-in-up:nth-child(6) { animation-delay: 0.36s; }
+.fade-in-up:nth-child(7) { animation-delay: 0.42s; }
+.fade-in-up:nth-child(8) { animation-delay: 0.48s; }
+.fade-in-up:nth-child(9) { animation-delay: 0.54s; }
+.fade-in-up:nth-child(10) { animation-delay: 0.60s; }
+.fade-in-up:nth-child(11) { animation-delay: 0.66s; }
+.fade-in-up:nth-child(12) { animation-delay: 0.72s; }

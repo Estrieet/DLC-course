@@ -1,127 +1,168 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Literacy Course - Home</title>
+    <title>Digital Literacy Course - Learn Computers at Your Own Pace</title>
+    <meta name="description" content="A friendly, step-by-step computer course for beginners. Learn computer basics, internet safety, typing, and more.">
     <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light');document.documentElement.style.fontSize=(localStorage.getItem('textSize')||'100')+'%';</script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
                 <span class="logo-icon">📚</span>
                 <span class="logo-text">Digital Literacy</span>
             </div>
-            
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link active">Home</a>
                 <a href="lessons.html" class="nav-link">Lessons</a>
                 <a href="typing.html" class="nav-link">Typing</a>
                 <a href="quizzes.html" class="nav-link">Quizzes</a>
                 <a href="progress.html" class="nav-link">Progress</a>
-                
                 <div class="nav-dropdown">
-                    <button class="nav-link dropdown-btn">More 
-                        <span class="dropdown-icon">▼</span>
-                    </button>
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
                     <div class="dropdown-menu">
                         <a href="teacher.html" class="dropdown-item">Teacher</a>
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
-
             <div class="nav-actions">
-                <!-- Theme Toggle -->
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Switch between light and dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-container">
-        <!-- Hero Section -->
         <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Learn Computer Basics at Your Own Pace</h1>
-                <p class="hero-subtitle">A friendly, step-by-step course designed for everyone. From turning on a computer to staying safe online.</p>
+            <div class="hero-content fade-in-up">
+                <h1 class="hero-title">Learn Computers at<br>Your Own Pace</h1>
+                <p class="hero-subtitle">A friendly, step-by-step course designed for everyone. From turning on a computer to staying safe online. No experience needed!</p>
                 <div class="hero-buttons">
                     <a href="lessons.html" class="btn btn-primary btn-lg">Start Learning</a>
-                    <a href="help.html" class="btn btn-secondary btn-lg">Learn More</a>
+                    <a href="help.html" class="btn btn-secondary btn-lg">How It Works</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="floating-card">💻</div>
+            <div class="hero-image fade-in">
+                <div class="floating-card" aria-hidden="true">💻</div>
             </div>
         </section>
 
-        <!-- Features Section -->
         <section class="features-section">
-            <h2 class="section-title">What You'll Learn</h2>
+            <h2 class="section-title fade-in">What You Will Learn</h2>
             <div class="features-grid">
                 <a href="lessons.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">📖</div>
                     <h3>Step-by-Step Lessons</h3>
-                    <p>Learn at your own pace with clear, easy-to-follow lessons on computer basics.</p>
-                    <div class="info-icon" title="Click for more info">ⓘ
-                        <div class="tooltip">12 lessons covering everything from computer basics to internet safety</div>
+                    <p>12 clear and simple lessons. Learn at your own pace. Take as long as you need. No rush!</p>
+                    <div class="info-icon" title="About lessons">ⓘ
+                        <span class="tooltip">12 lessons covering everything from turning on a computer to sending emails. Each lesson takes about 15–20 minutes.</span>
                     </div>
                 </a>
-                <a href="typing.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;transition-delay: 0.1s;">
+                <a href="typing.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">⌨️</div>
                     <h3>Typing Practice</h3>
-                    <p>Improve your typing speed and accuracy with fun, interactive exercises.</p>
-                    <div class="info-icon" title="Click for more info">ⓘ
-                        <div class="tooltip">Real-time feedback on speed (WPM) and accuracy percentage</div>
+                    <p>Improve your typing speed and accuracy with interactive exercises. Start slowly and build up!</p>
+                    <div class="info-icon" title="About typing">ⓘ
+                        <span class="tooltip">Practice typing with real text. See your speed (WPM) and accuracy improve over time.</span>
                     </div>
                 </a>
-                <a href="quizzes.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;transition-delay: 0.2s;">
+                <a href="quizzes.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">📝</div>
-                    <h3>Quiz & Test</h3>
-                    <p>Test your knowledge with interactive quizzes after each lesson.</p>
-                    <div class="info-icon" title="Click for more info">ⓘ
-                        <div class="tooltip">Instant feedback and explanations for each answer</div>
+                    <h3>Quiz &amp; Test</h3>
+                    <p>Test what you have learned after each lesson. Get instant feedback to help you remember.</p>
+                    <div class="info-icon" title="About quizzes">ⓘ
+                        <span class="tooltip">Short 3-question quizzes after each lesson. Score 70% or more to unlock the next lesson!</span>
                     </div>
                 </a>
-                <a href="progress.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;transition-delay: 0.3s;">
+                <a href="progress.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">📊</div>
                     <h3>Track Progress</h3>
-                    <p>See your improvement with our progress tracker and achievement badges.</p>
-                    <div class="info-icon" title="Click for more info">ⓘ
-                        <div class="tooltip">All progress saved locally on your device, no account needed</div>
+                    <p>See how far you have come! Track your lessons, quiz scores, and earn achievement badges.</p>
+                    <div class="info-icon" title="About progress">ⓘ
+                        <span class="tooltip">All your progress is saved on your device. No account needed. Your data stays private.</span>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <h2>Ready to Get Started?</h2>
-            <p>Join thousands of learners improving their digital skills.</p>
-            <a href="lessons.html" class="btn btn-primary btn-lg">Explore Lessons</a>
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h2 class="section-title fade-in">Your 12 Lessons</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;" class="fade-in">Start with Lesson 1 and work through each lesson at your own comfortable pace.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--spacing-md);">
+                <a href="lesson.html?id=1" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">What is a Computer?</div>
+                </a>
+                <a href="lesson.html?id=2" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">2️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Computer Hardware</div>
+                </a>
+                <a href="lesson.html?id=3" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">3️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Computer Software</div>
+                </a>
+                <a href="lesson.html?id=4" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">4️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Turning On &amp; Off</div>
+                </a>
+                <a href="lesson.html?id=5" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">5️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Using the Mouse</div>
+                </a>
+                <a href="lesson.html?id=6" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">6️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Using the Keyboard</div>
+                </a>
+                <a href="lesson.html?id=7" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">7️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Files &amp; Folders</div>
+                </a>
+                <a href="lesson.html?id=8" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">8️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Desktop &amp; Icons</div>
+                </a>
+                <a href="lesson.html?id=9" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">9️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">What is the Internet?</div>
+                </a>
+                <a href="lesson.html?id=10" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">🔟</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Web Browser</div>
+                </a>
+                <a href="lesson.html?id=11" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣1️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Searching Online</div>
+                </a>
+                <a href="lesson.html?id=12" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
+                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣2️⃣</div>
+                    <div style="font-weight:600;font-size:0.9rem;">Email Basics</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="cta-section fade-in">
+            <h2>Ready to Begin?</h2>
+            <p>You can do this! Take one lesson at a time. There is no pressure and no time limit.</p>
+            <a href="lessons.html" class="btn btn-primary btn-lg">Start Lesson 1</a>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>

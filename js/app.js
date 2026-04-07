@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    app.js - Main application controller
    Sidebar, navigation, theme, mobile menu
    ============================================================ */
@@ -6,7 +6,7 @@
 const NAV_ITEMS = [
   { href: 'index.html',     label: 'Home',            icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' },
   { href: 'dashboard.html', label: 'Dashboard',       icon: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
-  { href: 'lessons.html',   label: 'Lessons',         icon: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 1-4 4v14a3 3 0 0 1 3-3h7z' },
+  { href: 'lessons.html',   label: 'Lessons',         icon: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z' },
   { href: 'typing.html',    label: 'Typing Practice', icon: 'M9 19c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-1c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v1zM21 10c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v1z' },
   { href: 'progress.html',  label: 'My Progress',     icon: 'M22 12h-4l-3 9L9 3l-3 9H2' },
   { href: 'teacher.html',   label: 'Teacher',         icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
@@ -14,8 +14,7 @@ const NAV_ITEMS = [
 ];
 
 function getCurrentPage() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  return path;
+  return window.location.pathname.split('/').pop() || 'index.html';
 }
 
 function buildSidebar() {
@@ -29,7 +28,7 @@ function buildSidebar() {
     </div>
     <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
       ${NAV_ITEMS.map(item => {
-        const isActive = currentPage === item.href || (item.href !== 'index.html' && currentPage.startsWith(item.href.replace('.html', '')));
+        const isActive = currentPage === item.href;
         return `<a href="${item.href}" class="nav-item${isActive ? ' active' : ''}" aria-current="${isActive ? 'page' : 'false'}">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="${item.icon}"/>
@@ -45,57 +44,61 @@ function buildSidebar() {
       </button>
     </div>
   `;
-  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-  applyTheme();
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+  applySidebarTheme();
 }
 
 function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('dlc_theme', isDark ? 'light' : 'dark');
-  applyTheme();
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  if (typeof dbSaveSetting === 'function') dbSaveSetting('theme', next);
+  applySidebarTheme();
 }
 
-function applyTheme() {
-  const saved = localStorage.getItem('dlc_theme') || 'dark';
+function applySidebarTheme() {
+  const saved = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
   const icon = document.getElementById('themeIcon');
   const label = document.getElementById('themeLabel');
-  if (icon) icon.textContent = saved === 'light' ? '☀️' : '🌙';
-  if (label) label.textContent = saved === 'light' ? 'Light Mode' : 'Dark Mode';
+  if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+  if (label) label.textContent = saved === 'dark' ? 'Light Mode' : 'Dark Mode';
 }
 
 function buildTopBar(title) {
   const topbar = document.getElementById('topbar');
   if (!topbar) return;
-  const p = loadProgress();
-  const name = p.profile.name || 'Learner';
+  const p = (typeof loadProgress === 'function') ? loadProgress() : { profile: { name: '' } };
+  const name = (p.profile && p.profile.name) ? p.profile.name : 'Learner';
   topbar.innerHTML = `
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <h1 class="topbar-title">${title}</h1>
     <div class="topbar-right">
-      <a href="progress.html" class="topbar-avatar" aria-label="View your progress">
+      <a href="progress.html" class="topbar-avatar" title="View progress">
         ${name.charAt(0).toUpperCase() || '?'}
       </a>
     </div>
   `;
-  document.getElementById('menuToggle').addEventListener('click', toggleMobileNav);
+  const menuToggle = document.getElementById('menuToggle');
+  if (menuToggle) menuToggle.addEventListener('click', toggleMobileNav);
 }
 
 function toggleMobileNav() {
   const sidebar = document.getElementById('sidebar');
   const toggle = document.getElementById('menuToggle');
   const overlay = document.getElementById('sidebarOverlay');
+  if (!sidebar) return;
   const isOpen = sidebar.classList.toggle('mobile-open');
-  toggle.setAttribute('aria-expanded', String(isOpen));
-  overlay && overlay.classList.toggle('visible', isOpen);
+  if (toggle) toggle.setAttribute('aria-expanded', String(isOpen));
+  if (overlay) overlay.classList.toggle('visible', isOpen);
 }
 
 function buildOverlay() {
-  const existing = document.getElementById('sidebarOverlay');
-  if (existing) return;
+  if (document.getElementById('sidebarOverlay')) return;
   const overlay = document.createElement('div');
   overlay.id = 'sidebarOverlay';
   overlay.className = 'sidebar-overlay';
@@ -115,14 +118,14 @@ function toast(message, type = 'info') {
   t.className = `toast toast-${type}`;
   t.textContent = message;
   container.appendChild(t);
-  requestAnimationFrame(() => t.classList.add('show'));
+  requestAnimationFrame(() => { requestAnimationFrame(() => t.classList.add('show')); });
   setTimeout(() => {
     t.classList.remove('show');
     setTimeout(() => t.remove(), 400);
-  }, 3000);
+  }, 3200);
 }
 
-function animateValue(el, from, to, duration = 1000, suffix = '') {
+function animateValue(el, from, to, duration = 900, suffix = '') {
   if (!el) return;
   const start = performance.now();
   function step(now) {
@@ -137,9 +140,7 @@ function animateValue(el, from, to, duration = 1000, suffix = '') {
 
 function animateProgressBar(bar, target, delay = 0) {
   if (!bar) return;
-  setTimeout(() => {
-    bar.style.width = target + '%';
-  }, delay);
+  setTimeout(() => { bar.style.width = target + '%'; }, delay);
 }
 
 function getPageParam(name) {
@@ -149,9 +150,9 @@ function getPageParam(name) {
 document.addEventListener('DOMContentLoaded', () => {
   buildSidebar();
   buildOverlay();
-  applyTheme();
+  applySidebarTheme();
 
   document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.style.animationDelay = (i * 0.08) + 's';
+    el.style.animationDelay = (i * 0.07) + 's';
   });
 });

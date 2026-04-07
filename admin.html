@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -29,14 +29,15 @@
                         <a href="admin.html" class="dropdown-item active">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -44,47 +45,48 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: 48px 0;">
-            <h1 class="section-title">⚙️ Admin Panel</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
-                Manage courses, lessons, and system settings
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">⚙️ Admin Panel</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+                Manage courses, lessons, and system data
             </p>
 
-            <div class="card" style="margin-bottom: 24px;">
-                <h3 style="margin-bottom: 24px;">Course Management</h3>
-                <div style="display: flex; gap: 12px; flex-direction: column;">
-                    <button id="manageLessonsBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📚 Manage Lessons</button>
-                    <button id="createLessonBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📝 Create New Lesson</button>
-                    <button id="viewStatsBtn" class="btn btn-primary" style="width: 100%; padding: 16px;">📊 View Course Stats</button>
+            <div style="max-width:700px;margin:0 auto;">
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-xl);">📚 Course Management</h3>
+                    <div style="display:flex;flex-direction:column;gap:var(--spacing-md);">
+                        <button id="manageLessonsBtn" class="btn btn-primary btn-full" style="padding:var(--spacing-lg);">📚 Manage Lessons</button>
+                        <button id="createLessonBtn" class="btn btn-primary btn-full" style="padding:var(--spacing-lg);">📝 Create New Lesson</button>
+                        <button id="viewStatsBtn" class="btn btn-primary btn-full" style="padding:var(--spacing-lg);">📊 View Course Statistics</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" style="margin-bottom: 24px;">
-                <h3 style="margin-bottom: 24px;">Data Management</h3>
-                <div style="display: flex; gap: 12px; flex-direction: column;">
-                    <button id="exportAllBtn" class="btn btn-secondary" style="width: 100%; padding: 16px;">💾 Export All Data</button>
-                    <button id="importDataBtn" class="btn btn-secondary" style="width: 100%; padding: 16px;">📥 Import Data</button>
-                    <button id="clearAllBtn" class="btn btn-danger" style="width: 100%; padding: 16px;">🗑️ Clear All Data</button>
+                <div class="card fade-in-up mb-3">
+                    <h3 style="margin-bottom:var(--spacing-xl);">💾 Data Management</h3>
+                    <div style="display:flex;flex-direction:column;gap:var(--spacing-md);">
+                        <button id="exportAllBtn" class="btn btn-secondary btn-full" style="padding:var(--spacing-lg);">💾 Export All Data</button>
+                        <button id="importDataBtn" class="btn btn-secondary btn-full" style="padding:var(--spacing-lg);">📥 Import Data</button>
+                    </div>
                 </div>
-            </div>
 
-            <div id="statsOutput" class="hidden" style="max-width: 800px; margin: 0 auto 24px;"></div>
-            <div id="importSection" class="hidden" style="max-width: 800px; margin: 0 auto 24px;"></div>
-            <div id="createLessonSection" class="hidden" style="max-width: 800px; margin: 0 auto 24px;"></div>
+                <div id="statsOutput" class="hidden mb-3"></div>
+                <div id="importSection" class="hidden mb-3"></div>
+                <div id="createLessonSection" class="hidden mb-3"></div>
 
-            <div class="card" style="padding: 24px; background: var(--bg-secondary); border: 2px solid var(--warning-color);">
-                <h3 style="color: var(--warning-color); margin-bottom: 12px;">⚠️ Danger Zone</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;">
-                    Be careful! These actions cannot be undone.
-                </p>
-                <button id="resetProgressBtn" class="btn btn-danger" style="width: 100%; padding: 16px;">Reset All Student Progress</button>
+                <div class="card fade-in-up" style="border:2px solid var(--warning-color);background:var(--warning-light);">
+                    <h3 style="color:var(--warning-color);margin-bottom:var(--spacing-sm);">⚠️ Danger Zone</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:var(--spacing-lg);font-size:0.9rem;">
+                        Be careful! These actions cannot be undone.
+                    </p>
+                    <button id="resetProgressBtn" class="btn btn-danger btn-full" style="padding:var(--spacing-lg);">🗑️ Reset All Student Progress</button>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>

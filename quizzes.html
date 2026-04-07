@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -29,14 +29,15 @@
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
                     </div>
                 </div>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="theme-icon" id="themeIcon">🌙</span>
                 </button>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -44,110 +45,19 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: 48px 0;">
-            <h1 class="section-title">Test Your Knowledge</h1>
-            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
-                Quizzes help reinforce what you've learned in each lesson
+        <section style="padding: var(--spacing-3xl) 0;">
+            <h1 class="section-title fade-in">Test Your Knowledge</h1>
+            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+                After each lesson, take the quiz to test what you have learned.
+                <br><span style="font-size:0.9rem;">Each quiz has 3 questions and takes about 5 minutes. Score 70% to pass!</span>
             </p>
-
-            <div class="grid-2" style="gap: 24px;">
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 1 - What is a Computer?</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Learn about computer basics, main parts, and what computers can do</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=1" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 2 - Computer Hardware</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Test your knowledge of CPU, RAM, hard drives, and other hardware components</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=2" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 3 - Computer Software</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Quiz about operating systems, applications, and how software works</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=3" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 4 - Turning On & Off</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Test your knowledge about safely starting, using, and shutting down computers</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=4" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 5 - Using the Mouse</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Learn about clicking, double-clicking, right-clicking, and using the scroll wheel</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=5" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 6 - Using the Keyboard</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Test keyboard skills including typing, special keys, and keyboard shortcuts</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=6" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-
-                <div class="card fade-in-up" style="padding: 24px;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                        <div>
-                            <h3 style="margin-bottom: 12px;">Quiz 7 - Files & Folders</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 16px;">3 questions • 5 minutes</p>
-                        </div>
-                        <div class="info-icon" title="Quiz details">ⓘ
-                            <div class="tooltip">Learn about organizing files, creating folders, and using File Explorer</div>
-                        </div>
-                    </div>
-                    <a href="quiz.html?id=7" class="btn btn-primary" style="width: 100%; text-decoration: none; display: block;">Take Quiz</a>
-                </div>
-            </div>
+            <div id="quizzesGrid" class="grid-2" style="gap:var(--spacing-lg);"></div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
             <div class="footer-links">
                 <a href="help.html">Help</a>
                 <a href="settings.html">Settings</a>
@@ -160,5 +70,42 @@
     <script src="js/db.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        var moduleIcons = { 'Computer Basics': '💻', 'Internet Basics': '🌐', 'Communication': '📧' };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var progress = (typeof loadProgress === 'function') ? loadProgress() : { quizScores: {}, completedLessons: [] };
+            var grid = document.getElementById('quizzesGrid');
+            if (!grid) return;
+
+            grid.innerHTML = LESSONS.map(function(lesson) {
+                var icon = moduleIcons[lesson.module] || '📝';
+                var score = progress.quizScores && progress.quizScores[lesson.id];
+                var passed = score !== undefined && score >= 70;
+                var scoreHtml = score !== undefined
+                    ? '<span class="badge ' + (passed ? 'badge-success' : 'badge-danger') + '">' + (passed ? '✓ ' : '✗ ') + score + '%</span>'
+                    : '<span class="badge badge-warning">Not taken</span>';
+
+                return '<div class="card fade-in-up" style="padding:var(--spacing-xl);">' +
+                    '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--spacing-md);">' +
+                        '<div>' +
+                            '<div style="font-size:1.8rem;margin-bottom:6px;">' + icon + '</div>' +
+                            '<h3 style="font-size:0.98rem;font-weight:600;color:var(--text-primary);">Quiz ' + lesson.id + ' — ' + lesson.title + '</h3>' +
+                            '<p style="color:var(--text-secondary);font-size:0.85rem;margin-top:4px;">3 questions &bull; 5 minutes</p>' +
+                        '</div>' +
+                        '<div class="info-icon" title="Quiz topic">ⓘ' +
+                            '<span class="tooltip">' + lesson.summary[0] + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div style="margin-bottom:var(--spacing-md);">' + scoreHtml + '</div>' +
+                    '<a href="quiz.html?id=' + lesson.id + '" class="btn btn-primary btn-full">' +
+                        (score !== undefined ? 'Retake Quiz' : 'Take Quiz') +
+                    '</a>' +
+                '</div>';
+            }).join('');
+        });
+    </script>
 </body>
 </html>
