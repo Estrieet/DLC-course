@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
   nextBtn && nextBtn.addEventListener('click', loadNextText);
   resetBtn && resetBtn.addEventListener('click', resetTyping);
   input && input.addEventListener('input', handleTyping);
+  input && input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') e.preventDefault();
+  });
 });
 
 function loadText(idx) {

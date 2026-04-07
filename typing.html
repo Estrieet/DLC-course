@@ -63,9 +63,10 @@
                 <div id="typingDisplay" style="margin-bottom: 24px; padding: 20px; background: var(--bg-secondary); border-radius: 12px; font-size: 1.1rem; line-height: 2; color: var(--text-primary); letter-spacing: 0.4px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; text-align: center;"></div>
 
                 <form style="margin-bottom: 24px;" onsubmit="return false;">
-                    <input type="text" id="typingInput" placeholder="Click Start Practice, then type the text above..."
-                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 16px;"
-                           autocomplete="off" spellcheck="false" disabled>
+                    <textarea id="typingInput" placeholder="Click Start Practice, then type the text above..."
+                           rows="4"
+                           style="width: 100%; padding: 12px 20px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1.1rem; line-height: 2; letter-spacing: 0.4px; text-align: center; margin-bottom: 16px; resize: none; font-family: inherit;"
+                           autocomplete="off" spellcheck="false" disabled></textarea>
                 </form>
 
                 <div id="statsPanel" class="hidden"></div>
