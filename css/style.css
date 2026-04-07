@@ -134,6 +134,7 @@ body {
     display: flex;
     gap: var(--spacing-lg);
     align-items: center;
+    flex-wrap: nowrap;
 }
 
 .nav-link {
