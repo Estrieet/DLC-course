@@ -1,74 +1,120 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Typing Practice – Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/mobile.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice - Digital Literacy Course</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-  <div class="app-layout">
-    <aside class="sidebar" id="sidebar"></aside>
-    <div class="main-content">
-      <header class="topbar" id="topbar"></header>
-      <main class="page-content">
-        <div class="card mb-4 fade-in">
-          <div class="card-header mb-4">
-            <h2 class="section-title">Typing Practice</h2>
-            <span class="badge" id="textCounter">Text 1 of 12</span>
-          </div>
-
-          <!-- Live stats bar -->
-          <div class="grid-3 mb-4" style="gap:12px">
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-value text-accent" id="timerDisplay">0s</div>
-              <div class="stat-label">Time</div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
             </div>
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-value text-success" id="liveWPM">—</div>
-              <div class="stat-label">WPM (live)</div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link active">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
+                    <div class="dropdown-menu">
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item">Help</a>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card" style="padding:12px">
-              <div class="stat-value" style="color:var(--warning)" id="liveErr">0</div>
-              <div class="stat-label">Errors</div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-          </div>
-
-          <!-- The text to type -->
-          <div class="typing-text" id="typingDisplay"></div>
-
-          <!-- Input -->
-          <input
-            type="text"
-            id="typingInput"
-            class="typing-input mt-4"
-            placeholder="Click 'Start' then type here…"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-            disabled
-          />
-
-          <!-- Buttons -->
-          <div class="btn-group mt-4">
-            <button class="btn btn-primary btn-lg" id="typingStart">▶ Start</button>
-            <button class="btn btn-secondary btn-lg hidden" id="typingReset">↺ Reset</button>
-          </div>
         </div>
+    </nav>
 
-        <!-- Results panel (shown after completion) -->
-        <div id="statsPanel" class="hidden"></div>
-      </main>
-    </div>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/wasm.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/typing.js"></script>
+    <!-- Main Content -->
+    <main class="main-container">
+        <section class="typing-section" style="padding: 48px 0;">
+            <h1 class="section-title">Typing Practice</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
+                Improve your typing speed and accuracy with fun, interactive exercises
+            </p>
+
+            <div class="card" style="max-width: 800px; margin: 0 auto; padding: 32px;">
+                <div style="margin-bottom: 24px;padding: 20px; background: var(--bg-secondary); border-radius: 12px;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary); letter-spacing: 0.5px;">
+                        The quick brown fox jumps over the lazy dog. This is a typing practice exercise to help you improve your keyboard skills and accuracy. Take your time and focus on accuracy first, speed will come naturally.
+                    </p>
+                </div>
+
+                <form style="margin-bottom: 24px;">
+                    <input type="text" id="typingInput" placeholder="Click here and start typing..." 
+                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; margin-bottom: 16px;">
+                    <input type="text" id="typingInput" placeholder="Compare your typing here..." 
+                           style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; font-size: 1rem; background: var(--bg-secondary);" readonly>
+                </form>
+
+                <div class="grid-3" style="gap: 16px; margin-bottom: 24px;">
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-color);">0</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Words per Minute</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--success-color);">0%</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Accuracy</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-color);">0</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Errors</div>
+                    </div>
+                </div>
+
+                <div style="flex: 1; display: flex; gap: 12px;">
+                    <button class="btn btn-primary" style="flex: 1;">Start Practice</button>
+                    <button class="btn btn-secondary" style="flex: 1;">Reset</button>
+                </div>
+            </div>
+
+            <div style="max-width: 800px; margin: 48px auto; padding: 24px; background: var(--bg-secondary); border-radius: 12px;">
+                <h3 style="margin-bottom: 12px;">💡 Tips for Better Typing:</h3>
+                <ul style="color: var(--text-secondary); line-height: 1.8; margin-left: 20px;">
+                    <li>Keep your hands on the home row (ASDF JKL;)</li>
+                    <li>Look at the text, not your keyboard</li>
+                    <li>Focus on accuracy first, speed comes later</li>
+                    <li>Practice regularly for best results</li>
+                    <li>Take breaks if your hands get tired</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>

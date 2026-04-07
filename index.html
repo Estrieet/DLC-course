@@ -1,93 +1,136 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Literacy Course</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/mobile.css" />
-  <style>
-    .landing { min-height:100vh; display:flex; flex-direction:column; background:var(--bg); }
-    .landing-nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:1px solid var(--border); }
-    .landing-logo { font-size:1.5rem; font-weight:700; color:var(--accent); }
-    .hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 24px 60px; }
-    .hero-badge { display:inline-block; background:rgba(10,132,255,0.15); color:var(--accent); border:1px solid rgba(10,132,255,0.3); border-radius:20px; padding:6px 18px; font-size:0.85rem; margin-bottom:28px; }
-    .hero h1 { font-size:clamp(2.2rem,6vw,4.5rem); font-weight:800; line-height:1.1; max-width:700px; margin-bottom:20px; }
-    .hero p { font-size:1.2rem; color:var(--text-muted); max-width:540px; margin-bottom:48px; line-height:1.6; }
-    .hero-actions { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
-    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; padding:60px 40px; max-width:1100px; margin:0 auto; width:100%; }
-    .feature-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:28px; text-align:center; backdrop-filter:var(--blur); transition:transform 0.2s,border-color 0.2s; }
-    .feature-card:hover { transform:translateY(-4px); border-color:var(--accent); }
-    .feature-icon { font-size:2.5rem; margin-bottom:16px; }
-    .feature-title { font-size:1.1rem; font-weight:700; margin-bottom:8px; }
-    .feature-desc { color:var(--text-muted); font-size:0.9rem; line-height:1.5; }
-    .landing-footer { text-align:center; padding:24px; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border); }
-    @media(max-width:600px) { .landing-nav{padding:16px 20px;} .features{padding:40px 20px;} }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Literacy Course - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-  <div class="landing">
-    <nav class="landing-nav">
-      <span class="landing-logo">💻 Digital Literacy</span>
-      <div style="display:flex;gap:12px;align-items:center">
-        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
-        <button class="btn btn-primary" onclick="document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');localStorage.setItem('dlc_theme',document.documentElement.getAttribute('data-theme'))">☀️ Theme</button>
-      </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More 
+                        <span class="dropdown-icon">▼</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item">Help</a>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle light/dark mode">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
     </nav>
 
-    <section class="hero">
-      <div class="hero-badge">For Beginners &amp; Seniors</div>
-      <h1>Learn Computers<br /><span style="color:var(--accent)">Step by Step</span></h1>
-      <p>A friendly, self-paced course to build your digital confidence — from turning on a computer to staying safe online.</p>
-      <div class="hero-actions">
-        <a href="dashboard.html" class="btn btn-primary btn-lg">Start Learning →</a>
-        <a href="lessons.html" class="btn btn-secondary btn-lg">Browse Lessons</a>
-      </div>
-    </section>
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Learn Computer Basics at Your Own Pace</h1>
+                <p class="hero-subtitle">A friendly, step-by-step course designed for everyone. From turning on a computer to staying safe online.</p>
+                <div class="hero-buttons">
+                    <a href="lessons.html" class="btn btn-primary btn-lg">Start Learning</a>
+                    <a href="help.html" class="btn btn-secondary btn-lg">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">💻</div>
+            </div>
+        </section>
 
-    <section class="features">
-      <div class="feature-card fade-in stagger-1">
-        <div class="feature-icon">📚</div>
-        <div class="feature-title">12 Lessons</div>
-        <div class="feature-desc">Carefully structured modules covering basics to internet skills and communication.</div>
-      </div>
-      <div class="feature-card fade-in stagger-2">
-        <div class="feature-icon">🧠</div>
-        <div class="feature-title">Interactive Quizzes</div>
-        <div class="feature-desc">Test your knowledge after each lesson. Score 70%+ to unlock the next one.</div>
-      </div>
-      <div class="feature-card fade-in stagger-3">
-        <div class="feature-icon">⌨️</div>
-        <div class="feature-title">Typing Practice</div>
-        <div class="feature-desc">Build keyboard skills with fun texts. We track your speed and accuracy in real time.</div>
-      </div>
-      <div class="feature-card fade-in stagger-4">
-        <div class="feature-icon">📊</div>
-        <div class="feature-title">Progress Tracking</div>
-        <div class="feature-desc">All your progress is saved locally — no account needed, no data sent anywhere.</div>
-      </div>
-      <div class="feature-card fade-in stagger-5">
-        <div class="feature-icon">🏆</div>
-        <div class="feature-title">Achievements</div>
-        <div class="feature-desc">Earn badges as you complete lessons, ace quizzes, and improve your typing speed.</div>
-      </div>
-      <div class="feature-card fade-in stagger-6">
-        <div class="feature-icon">👩‍🏫</div>
-        <div class="feature-title">Teacher Tools</div>
-        <div class="feature-desc">Teachers can monitor progress, unlock lessons, and guide students through the course.</div>
-      </div>
-    </section>
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">What You'll Learn</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">📖</div>
+                    <h3>Step-by-Step Lessons</h3>
+                    <p>Learn at your own pace with clear, easy-to-follow lessons on computer basics.</p>
+                    <div class="info-icon" title="Click for more info">ⓘ
+                        <div class="tooltip">12 lessons covering everything from computer basics to internet safety</div>
+                    </div>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Typing Practice</h3>
+                    <p>Improve your typing speed and accuracy with fun, interactive exercises.</p>
+                    <div class="info-icon" title="Click for more info">ⓘ
+                        <div class="tooltip">Real-time feedback on speed (WPM) and accuracy percentage</div>
+                    </div>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="feature-icon">📝</div>
+                    <h3>Quiz & Test</h3>
+                    <p>Test your knowledge with interactive quizzes after each lesson.</p>
+                    <div class="info-icon" title="Click for more info">ⓘ
+                        <div class="tooltip">Instant feedback and explanations for each answer</div>
+                    </div>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="feature-icon">📊</div>
+                    <h3>Track Progress</h3>
+                    <p>See your improvement with our progress tracker and achievement badges.</p>
+                    <div class="info-icon" title="Click for more info">ⓘ
+                        <div class="tooltip">All progress saved locally on your device, no account needed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer class="landing-footer">
-      &copy; 2025 Digital Literacy Course &mdash; Works offline, no tracking, no account required.
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of learners improving their digital skills.</p>
+            <a href="lessons.html" class="btn btn-primary btn-lg">Explore Lessons</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
     </footer>
-  </div>
-  <script>
-    (function(){
-      const t = localStorage.getItem('dlc_theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>

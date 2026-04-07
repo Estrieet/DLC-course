@@ -1,50 +1,169 @@
-# Digital Literacy Website
+﻿# Digital Literacy Course - Web Platform
 
-A complete elder-friendly digital literacy website built for GitHub Pages.
+A modern, elder-friendly digital literacy learning platform with a clean Apple-style design. Learn important computer and internet skills at your own pace.
 
-## What is included
+## ✨ Features
 
-- Home, Lessons, Typing Practice, Quizzes, Progress, Teacher, Admin, Help, and Settings pages
-- Large buttons, simple text, accessible design, and mobile-friendly layout
-- Local storage progress tracking and dark mode toggle
-- Admin dashboard for clearing data, exporting results, and viewing saved progress
-- Works offline after first page load and needs no server
+- **📚 Lesson System**: Progressive lessons designed to build foundational digital literacy skills
+- **⌨️ Typing Practice**: Improve your typing speed (WPM) and accuracy with interactive exercises
+- **🎯 Quizzes**: Test your knowledge with multiple-choice quizzes
+- **📊 Progress Tracking**: See your learning progress with statistics and achievements
+- **🌙 Dark/Light Mode**: Switch between themes for comfortable viewing any time
+- **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **🔒 Privacy First**: All data stored locally in your browser - nothing sent to servers
+- **♿ Accessible**: Designed with elder users in mind - large fonts, high contrast, clear navigation
 
-## How to upload to GitHub
+## 🚀 Getting Started
 
-1. Create a new repository on GitHub.
-2. Upload all files and folders from this project.
-3. Make sure the repository contains `index.html` at the top level.
+### Installation
 
-## How to enable GitHub Pages
+1. Download or clone this repository
+2. Open `index.html` in your web browser
+3. Start learning!
 
-1. Go to the repository Settings.
-2. Select `Pages` from the sidebar.
-3. Choose the `main` branch and `/ (root)` folder.
-4. Save and open the GitHub Pages URL.
+No server or installation required - this is a pure static website.
 
-## How to use the Admin Dashboard
+### Using with GitHub Pages
 
-1. Open `admin.html`.
-2. Use the large buttons to view progress, view quiz and typing results, clear data, or export data.
-3. The dashboard stores data in your browser and updates automatically.
+1. Fork this repository
+2. Enable GitHub Pages in repository settings (Settings > Pages)
+3. Select `main` branch as the source
+4. Your site will be available at `https://yourusername.github.io/DLC-course/`
 
-## How to reset progress
+## 📖 How to Use
 
-1. Open `progress.html`.
-2. Tap `Reset Progress`.
-3. You can also use `admin.html` and tap `Clear Data` to erase all saved progress.
+### Home Page
+- Start here to learn about the course
+- Click "Get Started" to begin Lesson 1
 
-## How to use the website on a phone
+### Lessons
+- Complete lessons in order
+- Each lesson covers important digital skills
+- Take breaks anytime and resume later
 
-- Open the site in a mobile browser.
-- Tap large buttons to move between pages.
-- Scroll down slowly to read the content.
-- The site resizes automatically for phones and tablets.
-- Dark mode works across all pages and remembers your choice.
+### Typing Practice
+- Improve your keyboard skills
+- See your typing speed (WPM) and accuracy
+- Practice regularly to improve
 
-## Notes
+### Quizzes
+- Test what you've learned
+- Answer multiple-choice questions
+- See your score immediately
 
-- No installation, Node.js, or backend is needed.
-- The site uses only HTML, CSS, and JavaScript.
-- Data is saved locally in your browser.
+### Progress
+- View overall course progress
+- See lessons completed and quizzes passed
+- Earn and collect achievements
+
+### Settings
+- Customize your experience
+- Save your name and email
+- Choose text size and theme
+- Export your data
+
+## 🛠️ Technology
+
+- **HTML5**: Semantic markup and structure
+- **CSS3**: Modern styling with CSS Variables for theming
+- **Vanilla JavaScript**: No frameworks or dependencies
+- **Local Storage**: Browser-based data persistence
+- **Emoji Icons**: Clean, universal symbols (no image dependencies)
+
+## 📂 Project Structure
+
+```
+DLC-course/
+├── index.html              # Landing page
+├── lessons.html            # Lesson listing
+├── typing.html             # Typing practice
+├── quizzes.html            # Quiz listing
+├── progress.html           # Progress tracking
+├── teacher.html            # Teacher dashboard
+├── admin.html              # Admin panel
+├── help.html               # Help & FAQ
+├── settings.html           # User settings
+├── css/
+│   ├── style.css          # Main styles & design system
+│   ├── animations.css     # Animation keyframes
+│   └── mobile.css         # Responsive breakpoints
+├── js/
+│   ├── main.js            # Navigation & core functions
+│   ├── darkmode.js        # Theme toggle
+│   └── animations.js      # Animation utilities
+├── assets/
+│   ├── images/            # Image files
+│   └── icons/             # Icon files
+├── README.md              # This file
+└── LICENSE                # MIT License
+```
+
+## 🎨 Design Features
+
+### Apple-Inspired Design
+- Clean, minimal interface with plenty of whitespace
+- Smooth animations and transitions
+- Glassmorphism effects (blur + transparency)
+- Consistent color scheme and typography
+
+### Light & Dark Mode
+- **Light Mode**: Bright, professional appearance
+- **Dark Mode**: Comfortable for low-light environments
+- Switch anytime with one click
+- Preference saved automatically
+
+### Responsive Design
+- **Desktop**: Full experience with all features visible
+- **Tablet**: Optimized layout for medium screens
+- **Mobile**: Touch-friendly interface with stacked layouts
+- **Large Text**: Supports accessibility settings
+
+## 💾 Data Storage
+
+All data is stored in your browser using **Local Storage**:
+- Theme preference (light/dark)
+- Your profile (name, email)
+- Learning progress
+- Quiz scores
+- Achievements
+
+**Privacy**: No data is ever sent to any server. Your information stays on your device.
+
+To clear all data: Go to Settings > Danger Zone > Clear All My Data
+
+## ♿ Accessibility
+
+This platform is designed with accessibility in mind:
+- High contrast between text and background
+- Large, readable fonts (especially in mobile view)
+- Keyboard navigation support
+- Respects `prefers-reduced-motion` setting
+- Simple, clear language
+
+## 🐛 Known Issues
+
+None currently! Please report issues on GitHub.
+
+## 📝 License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m ''Add some AmazingFeature''`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📧 Contact & Support
+
+Need help? Visit the Help & FAQ page or contact your instructor.
+
+---
+
+**Happy Learning! 🎓**
+
+Learn important digital skills at your own pace with the Digital Literacy Course.

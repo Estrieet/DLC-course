@@ -1,52 +1,120 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help – Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/mobile.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Digital Literacy Course</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-  <div class="app-layout">
-    <aside class="sidebar" id="sidebar"></aside>
-    <div class="main-content">
-      <header class="topbar" id="topbar"></header>
-      <main class="page-content">
-        <h2 class="section-title mb-6 fade-in">Help &amp; FAQ</h2>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
+                    <div class="dropdown-menu">
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item active">Help</a>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-        <div class="card mb-4 fade-in stagger-1">
-          <h3 class="font-semibold mb-2">How do I unlock lessons?</h3>
-          <p class="text-muted">Complete the quiz at the end of each lesson with a score of 70% or higher. This unlocks the next lesson automatically.</p>
+    <main class="main-container">
+        <section style="padding: 48px 0;">
+            <h1 class="section-title">Help & Frequently Asked Questions</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
+                Get answers to common questions and learn how to use the course
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">❓ How do I start learning?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Click on "Lessons" in the navigation menu to see all available lessons. Start with Lesson 1 and complete each lesson at your own pace. You can take breaks anytime and come back later.
+                    </p>
+                </div>
+
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">💾 How is my progress saved?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Your progress is automatically saved in your browser's local storage. This means your data stays on your device and no information is sent to any server.
+                    </p>
+                </div>
+
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">🌙 How do I switch between light and dark mode?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Click the moon/sun icon (🌙/☀️) in the top navigation bar. Your preference will be saved automatically.
+                    </p>
+                </div>
+
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">⌨️ What is the typing practice for?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        The typing practice helps you improve your keyboard skills. It measures your typing speed (WPM - Words Per Minute) and accuracy. Regular practice will help you become faster and more accurate.
+                    </p>
+                </div>
+
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">📊 Where do I track my progress?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Click on "Progress" in the navigation menu to see your overall course progress, completed lessons, quiz scores, and achievements.
+                    </p>
+                </div>
+
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">🏆 What are achievements?</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Achievements are badges you earn by completing milestones in the course. Complete lessons, pass quizzes, and improve your typing skills to unlock all achievements!
+                    </p>
+                </div>
+
+                <div class="card fade-in-up">
+                    <h3 style="color: var(--text-primary); margin-bottom: 12px;">❌ I need more help</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        If you can't find the answer you're looking for, please contact your teacher or instructor. They can provide personalized support.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="#">Privacy</a>
+            </div>
         </div>
-        <div class="card mb-4 fade-in stagger-2">
-          <h3 class="font-semibold mb-2">Is my progress saved?</h3>
-          <p class="text-muted">Yes — your progress is saved automatically in your browser using LocalStorage and IndexedDB. No account or internet required.</p>
-        </div>
-        <div class="card mb-4 fade-in stagger-3">
-          <h3 class="font-semibold mb-2">How does the typing game work?</h3>
-          <p class="text-muted">Click Start, then type the displayed text as accurately as possible. Your Words Per Minute (WPM) and accuracy are calculated using a WebAssembly module for speed.</p>
-        </div>
-        <div class="card mb-4 fade-in stagger-4">
-          <h3 class="font-semibold mb-2">Can I change the theme?</h3>
-          <p class="text-muted">Yes! Click the sun/moon icon in the top bar to switch between dark and light mode. Your preference is remembered.</p>
-        </div>
-        <div class="card mb-4 fade-in stagger-5">
-          <h3 class="font-semibold mb-2">What if I need to start over?</h3>
-          <p class="text-muted">Go to the Teacher page and click "Reset Student Progress", or ask your teacher to do it for you.</p>
-        </div>
-        <div class="card fade-in stagger-6">
-          <h3 class="font-semibold mb-2">What technologies does this use?</h3>
-          <p class="text-muted">HTML5, CSS3 (glassmorphism, animations), Vanilla JavaScript, WebAssembly (WASM, WAT source included), IndexedDB, LocalStorage, and SessionStorage — all without any external libraries or npm.</p>
-        </div>
-      </main>
-    </div>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/wasm.js"></script>
-  <script src="js/app.js"></script>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>

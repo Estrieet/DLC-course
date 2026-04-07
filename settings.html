@@ -1,65 +1,144 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings – Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/mobile.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Digital Literacy Course</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-  <div class="app-layout">
-    <aside class="sidebar" id="sidebar"></aside>
-    <div class="main-content">
-      <header class="topbar" id="topbar"></header>
-      <main class="page-content">
-        <div class="card fade-in" style="max-width:520px">
-          <h2 class="section-title mb-6">Settings</h2>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
-            <div>
-              <div class="font-semibold">Dark Mode</div>
-              <div class="text-muted text-sm">Switch between dark and light theme</div>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
             </div>
-            <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()">Toggle</button>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border)">
-            <div>
-              <div class="font-semibold">Font Size</div>
-              <div class="text-muted text-sm">Make text larger for easier reading</div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
+                    <div class="dropdown-menu">
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item">Help</a>
+                        <a href="settings.html" class="dropdown-item active">Settings</a>
+                    </div>
+                </div>
             </div>
-            <select id="fontSizeSel" class="typing-input" style="width:auto;padding:8px 12px" onchange="saveFontSize(this.value)">
-              <option value="16">Normal</option>
-              <option value="18">Large</option>
-              <option value="20">Extra Large</option>
-            </select>
-          </div>
-          <div style="padding:16px 0">
-            <div class="font-semibold mb-2">Reset Progress</div>
-            <div class="text-muted text-sm mb-3">This will erase all your lesson and quiz progress.</div>
-            <button class="btn btn-danger" onclick="if(confirm('Reset all progress?')){clearProgress();toast('Progress cleared','info');}">Reset All Progress</button>
-          </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-      </main>
-    </div>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/wasm.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      buildTopBar('Settings');
-      const sz = localStorage.getItem('dlc_fontSize') || '16';
-      document.getElementById('fontSizeSel').value = sz;
-      document.documentElement.style.fontSize = sz + 'px';
-    });
-    function saveFontSize(v) {
-      localStorage.setItem('dlc_fontSize', v);
-      document.documentElement.style.fontSize = v + 'px';
-      toast('Font size updated', 'success');
-    }
-  </script>
+    </nav>
+
+    <main class="main-container">
+        <section style="padding: 48px 0;">
+            <h1 class="section-title">Settings</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px;">
+                Customize your learning experience
+            </p>
+
+            <div style="max-width: 600px; margin: 0 auto;">
+                <!-- User Profile -->
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 24px;">👤 Profile</h3>
+                    <form>
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Name</label>
+                        <input type="text" id="userName" placeholder="Enter your name" style="margin-bottom: 24px;">
+                        
+                        <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Email (Optional)</label>
+                        <input type="email" id="userEmail" placeholder="your.email@example.com" style="margin-bottom: 24px;">
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Profile</button>
+                    </form>
+                </div>
+
+                <!-- Appearance -->
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 24px;">🎨 Appearance</h3>
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
+                            <input type="radio" name="theme" value="light" checked class="theme-radio">
+                            <span>☀️ Light Mode</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                            <input type="radio" name="theme" value="dark" class="theme-radio">
+                            <span>🌙 Dark Mode</span>
+                        </label>
+                    </div>
+
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Text Size</label>
+                    <select style="width: 100%; margin-bottom: 16px;">
+                        <option>Small (90%)</option>
+                        <option selected>Normal (100%)</option>
+                        <option>Large (120%)</option>
+                        <option>Extra Large (150%)</option>
+                    </select>
+                </div>
+
+                <!-- Notifications -->
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 24px;">🔔 Notifications</h3>
+                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
+                        <input type="checkbox" checked>
+                        <span>📧 Notify me when new lessons are available</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 16px;">
+                        <input type="checkbox" checked>
+                        <span>🏆 Notify me when I earn achievements</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                        <input type="checkbox">
+                        <span>💬 Notify me of messages from my teacher</span>
+                    </label>
+                </div>
+
+                <!-- Privacy & Data -->
+                <div class="card fade-in-up" style="margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 24px;">🔒 Privacy & Data</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
+                        All your data is stored locally on your device. Nothing is sent to remote servers.
+                    </p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-bottom: 12px;">📥 Export My Data</button>
+                    <button class="btn btn-secondary" style="width: 100%;">📊 View Data Storage</button>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="card fade-in-up" style="padding: 24px; background: var(--bg-secondary); border: 2px solid var(--danger-color);">
+                    <h3 style="color: var(--danger-color); margin-bottom: 12px;">⚠️ Danger Zone</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem;">
+                        This action cannot be undone. All your progress will be lost.
+                    </p>
+                    <button class="btn btn-danger" style="width: 100%;">🗑️ Clear All My Data</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>

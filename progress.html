@@ -1,28 +1,111 @@
 ﻿<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Progress – Digital Literacy</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/mobile.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress - Digital Literacy Course</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
-  <div class="app-layout">
-    <aside class="sidebar" id="sidebar"></aside>
-    <div class="main-content">
-      <header class="topbar" id="topbar"></header>
-      <main class="page-content">
-        <div id="progressRoot"></div>
-      </main>
-    </div>
-  </div>
-  <script src="js/data.js"></script>
-  <script src="js/db.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/wasm.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/progress.js"></script>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link active">Progress</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
+                    <div class="dropdown-menu">
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item">Help</a>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <section style="padding: 48px 0;">
+            <h1 class="section-title">Your Learning Progress</h1>
+
+            <div class="grid-3" style="gap: 24px; margin-bottom: 48px;">
+                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--accent-color); margin-bottom: 8px;">0%</div>
+                    <div style="color: var(--text-secondary);">Course Progress</div>
+                </div>
+                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--success-color); margin-bottom: 8px;">0</div>
+                    <div style="color: var(--text-secondary);">Lessons Completed</div>
+                </div>
+                <div class="card fade-in-up" style="text-align: center; padding: 32px;">
+                    <div style="font-size: 3rem; font-weight: bold; color: var(--warning-color); margin-bottom: 8px;">0</div>
+                    <div style="color: var(--text-secondary);">Quizzes Passed</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 24px;">
+                <h3 style="margin-bottom: 16px;">Overall Progress</h3>
+                <div class="progress-bar" style="margin-bottom: 8px;">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">0 of 12 lessons completed</p>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 24px;">Achievements</h3>
+                <div class="grid-4" style="gap: 16px;">
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
+                        <div style="font-size: 2rem;">🏆</div>
+                        <div style="font-size: 0.9rem; margin-top: 8px;">First Lesson</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
+                        <div style="font-size: 2rem;">⭐</div>
+                        <div style="font-size: 0.9rem; margin-top: 8px;">Perfect Quiz</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
+                        <div style="font-size: 2rem;">⚡</div>
+                        <div style="font-size: 0.9rem; margin-top: 8px;">Speed Demon</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; text-align: center; opacity: 0.5;">
+                        <div style="font-size: 2rem;">🎓</div>
+                        <div style="font-size: 0.9rem; margin-top: 8px;">Graduate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Learn at your own pace.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
