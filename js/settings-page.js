@@ -137,9 +137,29 @@ function viewDataStorage() {
 }
 
 function clearAllData() {
-    const confirmed = confirm('This will erase all saved progress. Continue?');
+    const confirmed = confirm(
+        'WARNING: This will permanently delete ALL data on this device:\n\n' +
+        '• All lesson progress and quiz scores\n' +
+        '• All messages (teacher and student)\n' +
+        '• Teacher name and grades\n' +
+        '• All settings and profile info\n\n' +
+        'This cannot be undone. Are you sure?'
+    );
     if (!confirmed) return;
-    clearProgress();
-    showToast('All data cleared.', 2200, 'success');
-    setTimeout(() => window.location.reload(), 500);
+
+    /* Clear every dlc_ key and idb_ fallback key */
+    const keysToRemove = Object.keys(localStorage).filter(function(k) {
+        return k.startsWith('dlc_') || k.startsWith('idb_');
+    });
+    keysToRemove.forEach(function(k) { localStorage.removeItem(k); });
+
+    /* Also clear theme/textSize preferences */
+    localStorage.removeItem('theme');
+    localStorage.removeItem('textSize');
+
+    /* Clear all IndexedDB stores */
+    if (typeof dbClear === 'function') dbClear().catch(function() {});
+
+    showToast('All data has been cleared.', 2500, 'success');
+    setTimeout(function() { window.location.reload(); }, 600);
 }

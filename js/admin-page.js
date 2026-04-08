@@ -124,10 +124,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var resetBtn = document.getElementById('resetProgressBtn');
     if (resetBtn) {
         resetBtn.addEventListener('click', function () {
-            if (!confirm('WARNING: This will permanently reset ALL student progress. Continue?')) return;
-            clearProgress();
-            showAdminToast('All student progress has been reset ✓', 2500, 'success');
-            setTimeout(function () { window.location.reload(); }, 600);
+            if (!confirm(
+                'WARNING: This will permanently delete ALL data:\n\n' +
+                '• Student progress and quiz scores\n' +
+                '• All messages (teacher and student)\n' +
+                '• Teacher grades and comments\n\n' +
+                'This cannot be undone. Continue?'
+            )) return;
+
+            /* Clear every dlc_ and idb_ localStorage key */
+            Object.keys(localStorage)
+                .filter(function(k) { return k.startsWith('dlc_') || k.startsWith('idb_'); })
+                .forEach(function(k) { localStorage.removeItem(k); });
+
+            /* Clear IndexedDB */
+            if (typeof dbClear === 'function') dbClear().catch(function() {});
+
+            showAdminToast('All data has been reset ✓', 2500, 'success');
+            setTimeout(function () { window.location.reload(); }, 700);
         });
     }
 });
