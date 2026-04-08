@@ -18,12 +18,37 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update student performance table
     updateStudentTable(progress, studentName, courseProgress, completedCount, avgQuizScore);
 
+    // Teacher name handling
+    const savedTeacherName = localStorage.getItem('dlc_teacher_name') || '';
+    const teacherNameInput = document.getElementById('teacherNameInput');
+    const saveTeacherBtn = document.getElementById('saveTeacherNameBtn');
+    const teacherNameMsg = document.getElementById('teacherNameMsg');
+    const teacherWelcome = document.getElementById('teacherWelcome');
+
+    if (teacherNameInput && savedTeacherName) {
+        teacherNameInput.value = savedTeacherName;
+    }
+    if (teacherWelcome && savedTeacherName) {
+        teacherWelcome.textContent = 'Welcome, ' + savedTeacherName + ' — Monitor student progress and manage your course';
+    }
+
+    if (saveTeacherBtn) {
+        saveTeacherBtn.addEventListener('click', function() {
+            var name = teacherNameInput.value.trim();
+            if (!name) {
+                if (teacherNameMsg) teacherNameMsg.textContent = 'Please enter your name.';
+                return;
+            }
+            localStorage.setItem('dlc_teacher_name', name);
+            if (teacherNameMsg) teacherNameMsg.textContent = '✓ Name saved: ' + name;
+            if (teacherWelcome) teacherWelcome.textContent = 'Welcome, ' + name + ' — Monitor student progress and manage your course';
+        });
+    }
+
     // Wire teacher tool buttons
     const reportsBtn = document.getElementById('viewReportsBtn');
-    const messageBtn = document.getElementById('sendMessageBtn');
     const downloadBtn = document.getElementById('downloadDataBtn');
     if (reportsBtn) reportsBtn.addEventListener('click', viewStudentDetails);
-    if (messageBtn) messageBtn.addEventListener('click', () => alert('Message feature is ready. Go to Settings and add a student name first.'));
     if (downloadBtn) downloadBtn.addEventListener('click', downloadProgressData);
 });
 

@@ -9,7 +9,9 @@ const NAV_ITEMS = [
   { href: 'lessons.html',   label: 'Lessons',         icon: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z' },
   { href: 'typing.html',    label: 'Typing Practice', icon: 'M9 19c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-1c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v1zM21 10c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h16c.55 0 1 .45 1 1v1z' },
   { href: 'progress.html',  label: 'My Progress',     icon: 'M22 12h-4l-3 9L9 3l-3 9H2' },
-  { href: 'teacher.html',   label: 'Teacher',         icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
+  { href: 'messages.html',  label: 'Messages',         icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' },
+  { href: 'answers.html',   label: 'Answers',          icon: 'M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11' },
+  { href: 'teacher.html',   label: 'Teacher',          icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
   { href: 'help.html',      label: 'Help',            icon: 'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-5h2v2h-2v-2zm2-1.645V14h-2v-1.5a1 1 0 0 1 1-1 1.5 1.5 0 1 0-1.471-1.794l-1.962-.393A3.5 3.5 0 1 1 13 13.355z' }
 ];
 

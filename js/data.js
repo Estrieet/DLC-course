@@ -83,7 +83,8 @@ const LESSONS = [
         { id: 1, question: "What is a computer?", options: ["A machine that helps you do many tasks", "A type of food", "A musical instrument"], answer: 0 },
         { id: 2, question: "Which of these is a part of a computer?", options: ["A cooking pot", "A keyboard", "A garden tool"], answer: 1 },
         { id: 3, question: "What does the screen do?", options: ["Makes noise", "Shows you everything — pictures and words", "Stores food"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t1", question: "In your own words, what is a computer and what can it do for you?", keyword: "machine" }
     }
   },
   {
@@ -170,7 +171,8 @@ const LESSONS = [
         { id: 1, question: "What is 'hardware'?", options: ["The physical parts you can touch and see", "Computer programs you cannot see", "The internet"], answer: 0 },
         { id: 2, question: "What is the CPU?", options: ["The computer's screen", "The computer's brain — it does the thinking", "The keyboard"], answer: 1 },
         { id: 3, question: "What does the hard drive do?", options: ["Shows pictures", "Stores your files and photos permanently", "Makes sounds"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t2", question: "Name three hardware parts of a computer and what each one does.", keyword: "keyboard" }
     }
   },
   {
@@ -255,7 +257,8 @@ const LESSONS = [
         { id: 1, question: "What is software?", options: ["Physical parts you can touch", "Programs and instructions that tell the computer what to do", "The computer's screen"], answer: 1 },
         { id: 2, question: "What is an operating system?", options: ["A type of game", "The main software that manages the whole computer", "A web browser"], answer: 1 },
         { id: 3, question: "Which of these is an operating system?", options: ["Microsoft Word", "Windows", "Google Chrome"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t3", question: "What is the difference between software and hardware? Give an example of each.", keyword: "software" }
     }
   },
   {
@@ -335,7 +338,8 @@ const LESSONS = [
         { id: 1, question: "How do you properly turn off a Windows computer?", options: ["Pull out the power cord", "Use the Start menu and click Shut Down", "Press any key on the keyboard"], answer: 1 },
         { id: 2, question: "What should you do if the computer freezes?", options: ["Throw water on it", "Wait 1-2 minutes, then hold the power button if needed", "Slam the keyboard"], answer: 1 },
         { id: 3, question: "Why is it important to shut down properly?", options: ["To save electricity only", "To protect your files and keep the computer healthy", "Because the computer likes it"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t4", question: "Describe the steps to properly turn off a Windows computer.", keyword: "shut down" }
     }
   },
   {
@@ -433,7 +437,8 @@ const LESSONS = [
         { id: 1, question: "Which mouse button do you use most often?", options: ["The right button", "The scroll wheel", "The left button"], answer: 2 },
         { id: 2, question: "What does double-clicking do?", options: ["Closes a program", "Opens programs and files", "Scrolls the page"], answer: 1 },
         { id: 3, question: "What does the scroll wheel help you do?", options: ["Move the cursor faster", "Scroll up and down through pages", "Make text bigger"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t5", question: "Explain the difference between a single click, double click, and right click.", keyword: "click" }
     }
   },
   {
@@ -549,7 +554,8 @@ const LESSONS = [
         { id: 1, question: "Which key adds a space between words?", options: ["Enter", "Spacebar", "Backspace"], answer: 1 },
         { id: 2, question: "What does pressing Ctrl + Z do?", options: ["Closes the program", "Undoes your last action (reverses a mistake)", "Saves your work"], answer: 1 },
         { id: 3, question: "What does the Backspace key do?", options: ["Adds spaces", "Deletes the letter before the cursor (to the left)", "Starts a new line"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t6", question: "Name three keyboard shortcuts and explain what each one does.", keyword: "Ctrl" }
     }
   },
   {
@@ -644,7 +650,8 @@ const LESSONS = [
         { id: 1, question: "What is a file on a computer?", options: ["A type of folder", "A digital item like a document, photo, or song", "A computer program"], answer: 1 },
         { id: 2, question: "What is a folder used for?", options: ["Storing electricity", "Organising files into groups", "Playing music"], answer: 1 },
         { id: 3, question: "Where do deleted files go first?", options: ["They disappear forever", "To the Recycle Bin where you can recover them", "To the Downloads folder"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t7", question: "How would you organise your computer files? Describe your folder structure.", keyword: "folder" }
     }
   },
   {
@@ -738,7 +745,8 @@ const LESSONS = [
         { id: 1, question: "What is the desktop?", options: ["A type of computer program", "The main screen you see after starting the computer", "The keyboard area"], answer: 1 },
         { id: 2, question: "How do you open a program from its icon?", options: ["Right-click on it", "Single-click once", "Double-click it"], answer: 2 },
         { id: 3, question: "What does the Start button (Windows logo) do?", options: ["Turns off the computer", "Opens a menu to find all programs and settings", "Opens the internet"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t8", question: "What is the desktop and what can you find on it? Describe in your own words.", keyword: "desktop" }
     }
   },
   {
@@ -829,7 +837,8 @@ const LESSONS = [
         { id: 1, question: "What is the internet?", options: ["A type of computer program", "A global network connecting billions of computers", "A computer mouse"], answer: 1 },
         { id: 2, question: "What is a URL?", options: ["A type of food", "A website address like www.google.com", "A computer part"], answer: 1 },
         { id: 3, question: "Which of these is a safe rule for the internet?", options: ["Share your bank details freely", "Never share personal details with strangers", "Always click on every link you see"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t9", question: "What are three things you can do on the internet? Why is internet safety important?", keyword: "internet" }
     }
   },
   {
@@ -925,7 +934,8 @@ const LESSONS = [
         { id: 1, question: "What is a web browser used for?", options: ["Playing music", "Visiting websites on the internet", "Writing documents"], answer: 1 },
         { id: 2, question: "Where do you type the website address?", options: ["In the title bar", "In the address bar", "In the search box on Google"], answer: 1 },
         { id: 3, question: "What does the Back button (←) do?", options: ["Goes to the next page", "Reloads the current page", "Takes you to the previous page you were on"], answer: 2 }
-      ]
+      ],
+      typingQuestion: { id: "t10", question: "Describe how to open a web browser and visit a website. What steps would you follow?", keyword: "browser" }
     }
   },
   {
@@ -1026,7 +1036,8 @@ const LESSONS = [
         { id: 1, question: "What is the most popular search engine?", options: ["Facebook", "Google", "YouTube"], answer: 1 },
         { id: 2, question: "What is the best way to search on Google?", options: ["Type very long sentences", "Type short keywords related to what you want", "Click random links"], answer: 1 },
         { id: 3, question: "Why should you check information from multiple sources?", options: ["To waste time", "Because not everything on the internet is true", "To find more pictures"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t11", question: "How would you search for a recipe online? Describe the steps from opening the browser to finding what you need.", keyword: "search" }
     }
   },
   {
@@ -1135,7 +1146,8 @@ const LESSONS = [
         { id: 1, question: "What does an email address look like?", options: ["www.google.com", "name@service.com (like john@gmail.com)", "A postal code like SW1A 1AA"], answer: 1 },
         { id: 2, question: "What should you type in the 'Subject' field?", options: ["The person's address", "A short title describing what your email is about", "Your password"], answer: 1 },
         { id: 3, question: "What should you NEVER share?", options: ["Your email address with family", "Your email password — keep it secret!", "The subject of your email"], answer: 1 }
-      ]
+      ],
+      typingQuestion: { id: "t12", question: "Write a short practice email to a friend. Include a greeting, your message, and a sign-off.", keyword: "email" }
     }
   }
 ];

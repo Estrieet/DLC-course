@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const completed = p.completedLessons.length;
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
+  // Show user name prominently
+  const userName = (p.profile && p.profile.name) ? p.profile.name : '';
+  const pageContent = document.querySelector('.page-content');
+  if (pageContent && userName) {
+    const nameEl = document.createElement('div');
+    nameEl.className = 'fade-in';
+    nameEl.style.cssText = 'text-align:center;margin-bottom:24px;';
+    nameEl.innerHTML = '<h2 style="font-size:1.8rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;">Welcome, ' + userName + '!</h2>' +
+      '<p style="color:var(--text-secondary);font-size:1rem;">Keep up the great work on your learning journey.</p>';
+    pageContent.insertBefore(nameEl, pageContent.firstChild);
+  }
+
   const pctEl = document.getElementById('completionPct');
   const fillEl = document.getElementById('completionBar');
   const metaEl = document.getElementById('completionMeta');

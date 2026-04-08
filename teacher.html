@@ -25,7 +25,9 @@
                 <div class="nav-dropdown">
                     <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
                     <div class="dropdown-menu">
+                        <a href="messages.html" class="dropdown-item">Messages</a>
                         <a href="teacher.html" class="dropdown-item active">Teacher</a>
+                        <a href="answers.html" class="dropdown-item">Answers</a>
                         <a href="admin.html" class="dropdown-item">Admin</a>
                         <a href="help.html" class="dropdown-item">Help</a>
                         <a href="settings.html" class="dropdown-item">Settings</a>
@@ -47,7 +49,7 @@
     <main class="main-container">
         <section style="padding: var(--spacing-3xl) 0;">
             <h1 class="section-title fade-in">Teacher Dashboard</h1>
-            <p class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
+            <p id="teacherWelcome" class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;">
                 Monitor student progress and manage your course
             </p>
 
@@ -92,9 +94,18 @@
 
             <div class="card fade-in" style="background:var(--bg-secondary);">
                 <h3 style="margin-bottom:var(--spacing-lg);">🛠️ Teacher Tools</h3>
+                <div style="margin-bottom:var(--spacing-lg);">
+                    <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:6px;">Your Teacher Name</label>
+                    <div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;">
+                        <input type="text" id="teacherNameInput" placeholder="Enter your full name" style="flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--border-color);border-radius:var(--radius-md);font-size:1rem;background:var(--bg-primary);color:var(--text-primary);">
+                        <button class="btn btn-primary" id="saveTeacherNameBtn">Save Name</button>
+                    </div>
+                    <p id="teacherNameMsg" style="font-size:0.85rem;color:var(--text-secondary);margin-top:6px;"></p>
+                </div>
                 <div style="display:flex;gap:var(--spacing-md);flex-wrap:wrap;">
                     <button class="btn btn-primary" id="viewReportsBtn">📊 View Reports</button>
-                    <button class="btn btn-secondary" id="sendMessageBtn">💬 Send Message</button>
+                    <a href="messages.html" class="btn btn-secondary">💬 Messages</a>
+                    <a href="answers.html" class="btn btn-secondary">📋 Student Answers</a>
                     <button class="btn btn-secondary" id="downloadDataBtn">📥 Download Data</button>
                 </div>
             </div>

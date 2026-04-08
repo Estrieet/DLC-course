@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Answers - Digital Literacy Course</title>
+    <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'light');document.documentElement.style.fontSize=(localStorage.getItem('textSize')||'100')+'%';</script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Digital Literacy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="lessons.html" class="nav-link">Lessons</a>
+                <a href="typing.html" class="nav-link">Typing</a>
+                <a href="quizzes.html" class="nav-link">Quizzes</a>
+                <a href="progress.html" class="nav-link">Progress</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link dropdown-btn">More <span class="dropdown-icon">▼</span></button>
+                    <div class="dropdown-menu">
+                        <a href="messages.html" class="dropdown-item">Messages</a>
+                        <a href="teacher.html" class="dropdown-item">Teacher</a>
+                        <a href="answers.html" class="dropdown-item active">Answers</a>
+                        <a href="admin.html" class="dropdown-item">Admin</a>
+                        <a href="help.html" class="dropdown-item">Help</a>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="privacy.html" class="dropdown-item">Privacy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <section style="padding: var(--spacing-3xl) 0; max-width: 900px; margin: 0 auto;">
+            <h1 class="section-title fade-in">📋 Student Answers</h1>
+            <p id="teacherNameDisplay" class="fade-in" style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-lg);font-size:1.05rem;"></p>
+            <p id="studentNameDisplay" class="fade-in" style="text-align:center;font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:var(--spacing-2xl);"></p>
+
+            <!-- Quiz Answers Section -->
+            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">📝 Quiz Answers</h2>
+            <div id="quizAnswersContainer" class="fade-in" style="display:flex;flex-direction:column;gap:var(--spacing-md);margin-bottom:var(--spacing-3xl);"></div>
+
+            <!-- Typing Results Section -->
+            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">⌨️ Typing Results</h2>
+            <div id="typingAnswersContainer" class="fade-in" style="display:flex;flex-direction:column;gap:var(--spacing-md);margin-bottom:var(--spacing-3xl);"></div>
+
+            <!-- Teacher Comments Section -->
+            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">💬 Add Teacher Comment</h2>
+            <div class="card fade-in" style="padding:var(--spacing-lg);margin-bottom:var(--spacing-2xl);">
+                <div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;margin-bottom:var(--spacing-md);">
+                    <select id="commentTarget" style="flex:1;min-width:200px;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-secondary);color:var(--text-primary);font-size:0.95rem;">
+                        <option value="">Select quiz or typing session...</option>
+                    </select>
+                </div>
+                <textarea id="commentInput" rows="3" placeholder="Write your comment here..." style="width:100%;padding:12px 14px;border:1px solid var(--border-color);border-radius:var(--radius-md);font-size:1rem;background:var(--bg-primary);color:var(--text-primary);resize:vertical;font-family:inherit;margin-bottom:var(--spacing-sm);"></textarea>
+                <div style="display:flex;justify-content:flex-end;">
+                    <button class="btn btn-primary" id="saveCommentBtn">Save Comment</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Digital Literacy Course. Created by Steve &amp; Jass.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="settings.html">Settings</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var progress = loadProgress();
+        var studentName = progress.profile.name || 'Student';
+        var teacherName = localStorage.getItem('dlc_teacher_name') || 'Teacher';
+        var comments = JSON.parse(localStorage.getItem('dlc_teacher_comments') || '{}');
+
+        // Display names
+        document.getElementById('teacherNameDisplay').textContent = 'Teacher: ' + teacherName;
+        document.getElementById('studentNameDisplay').textContent = 'Student: ' + studentName;
+
+        var allLessons = (typeof getAllLessons === 'function') ? getAllLessons() : LESSONS;
+        var quizContainer = document.getElementById('quizAnswersContainer');
+        var commentTarget = document.getElementById('commentTarget');
+        var commentOptions = [];
+
+        // Render quiz answers
+        if (quizContainer) {
+            var hasQuiz = false;
+            allLessons.forEach(function(lesson) {
+                var qa = progress.quizAnswers && progress.quizAnswers[lesson.id];
+                var score = progress.quizScores && progress.quizScores[lesson.id];
+                if (!qa) return;
+                hasQuiz = true;
+                var passed = score >= 70;
+                var submittedDate = qa.submittedAt ? new Date(qa.submittedAt).toLocaleString() : 'Unknown';
+                var commentKey = 'quiz_' + lesson.id;
+                var existingComment = comments[commentKey] || '';
+
+                var answersHtml = '';
+                if (lesson.quiz && lesson.quiz.questions) {
+                    answersHtml = lesson.quiz.questions.map(function(q, qi) {
+                        var selected = qa.selectedAnswers ? qa.selectedAnswers[qi] : -1;
+                        var isCorrect = selected === q.answer;
+                        var selectedText = (selected >= 0 && q.options[selected]) ? q.options[selected] : 'No answer';
+                        return '<div style="padding:8px 0;border-bottom:1px solid var(--border-color);">' +
+                            '<p style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">Q' + (qi+1) + ': ' + q.question + '</p>' +
+                            '<p style="font-size:0.88rem;color:' + (isCorrect ? 'var(--success-color)' : 'var(--danger-color)') + ';">' +
+                                (isCorrect ? '✓ ' : '✗ ') + selectedText +
+                            '</p>' +
+                            (q.options[q.answer] && !isCorrect ? '<p style="font-size:0.82rem;color:var(--text-secondary);">Correct: ' + q.options[q.answer] + '</p>' : '') +
+                        '</div>';
+                    }).join('');
+                }
+
+                // Typing question answer
+                var typingQA = qa.typingAnswers;
+                if (typingQA) {
+                    Object.keys(typingQA).forEach(function(tqId) {
+                        var ta = typingQA[tqId];
+                        answersHtml += '<div style="padding:8px 0;border-bottom:1px solid var(--border-color);">' +
+                            '<p style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">Typing Q: ' + (ta.question || 'Typed response') + '</p>' +
+                            '<p style="font-size:0.88rem;color:var(--text-primary);background:var(--bg-tertiary);padding:8px 12px;border-radius:var(--radius-sm);margin-top:4px;">' +
+                                (ta.answer || 'No answer') +
+                            '</p>' +
+                            '<p style="font-size:0.82rem;color:var(--text-secondary);margin-top:4px;">Score: ' + (ta.score !== undefined ? ta.score + '%' : 'Not scored') + '</p>' +
+                        '</div>';
+                    });
+                }
+
+                var commentHtml = existingComment
+                    ? '<div style="margin-top:12px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);">' +
+                        '<p style="font-size:0.82rem;font-weight:600;color:var(--accent-color);margin-bottom:4px;">💬 Teacher Comment:</p>' +
+                        '<p style="font-size:0.9rem;color:var(--text-primary);">' + escapeHtmlLocal(existingComment) + '</p>' +
+                      '</div>'
+                    : '';
+
+                quizContainer.innerHTML += '<div class="card" style="padding:var(--spacing-lg);">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">' +
+                        '<h3 style="font-size:1rem;">Quiz ' + lesson.id + ' — ' + lesson.title + '</h3>' +
+                        '<div style="display:flex;gap:6px;">' +
+                            '<span class="badge ' + (passed ? 'badge-success' : 'badge-danger') + '">' + score + '%</span>' +
+                            '<span class="badge ' + (passed ? 'badge-green' : 'badge-orange') + '">' + (passed ? '✓ Passed' : '✗ Failed') + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Submitted: ' + submittedDate + '</p>' +
+                    answersHtml +
+                    commentHtml +
+                '</div>';
+
+                commentOptions.push({ value: commentKey, label: 'Quiz ' + lesson.id + ' — ' + lesson.title });
+            });
+            if (!hasQuiz) {
+                quizContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No quiz answers yet.</p>';
+            }
+        }
+
+        // Render typing results
+        var typingContainer = document.getElementById('typingAnswersContainer');
+        if (typingContainer) {
+            var sessions = progress.typingStats && progress.typingStats.sessions;
+            if (sessions && sessions.length > 0) {
+                sessions.slice().reverse().forEach(function(s, i) {
+                    var sessionDate = s.date ? new Date(s.date).toLocaleString() : 'Unknown';
+                    var commentKey = 'typing_' + (sessions.length - 1 - i);
+                    var existingComment = comments[commentKey] || '';
+                    var commentHtml = existingComment
+                        ? '<div style="margin-top:10px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);">' +
+                            '<p style="font-size:0.82rem;font-weight:600;color:var(--accent-color);margin-bottom:4px;">💬 Teacher Comment:</p>' +
+                            '<p style="font-size:0.9rem;color:var(--text-primary);">' + escapeHtmlLocal(existingComment) + '</p>' +
+                          '</div>'
+                        : '';
+
+                    typingContainer.innerHTML += '<div class="card" style="padding:var(--spacing-lg);">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">' +
+                            '<h3 style="font-size:1rem;">Typing Session ' + (sessions.length - i) + '</h3>' +
+                            '<span style="font-size:0.85rem;color:var(--text-secondary);">' + sessionDate + '</span>' +
+                        '</div>' +
+                        '<div style="display:flex;gap:var(--spacing-lg);flex-wrap:wrap;">' +
+                            '<div><span style="font-weight:600;color:var(--accent-color);">' + s.wpm + '</span> WPM</div>' +
+                            '<div><span style="font-weight:600;color:var(--success-color);">' + s.accuracy + '%</span> Accuracy</div>' +
+                        '</div>' +
+                        commentHtml +
+                    '</div>';
+
+                    commentOptions.push({ value: commentKey, label: 'Typing Session ' + (sessions.length - i) });
+                });
+            } else {
+                typingContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No typing sessions yet.</p>';
+            }
+        }
+
+        // Populate comment target dropdown
+        if (commentTarget) {
+            commentOptions.forEach(function(opt) {
+                var optEl = document.createElement('option');
+                optEl.value = opt.value;
+                optEl.textContent = opt.label;
+                commentTarget.appendChild(optEl);
+            });
+        }
+
+        // Save comment handler
+        var saveBtn = document.getElementById('saveCommentBtn');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function() {
+                var target = commentTarget.value;
+                var text = document.getElementById('commentInput').value.trim();
+                if (!target) { alert('Please select a quiz or typing session.'); return; }
+                if (!text) { alert('Please enter a comment.'); return; }
+                comments[target] = text;
+                localStorage.setItem('dlc_teacher_comments', JSON.stringify(comments));
+                document.getElementById('commentInput').value = '';
+                alert('Comment saved! Refresh to see it.');
+                location.reload();
+            });
+        }
+    });
+
+    function escapeHtmlLocal(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+    </script>
+</body>
+</html>

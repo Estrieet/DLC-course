@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeNavigation();
     initializeRipple();
     initializeTooltips();
+    applyNavTooltips();
 });
 
 /* ========================================
@@ -15,31 +16,153 @@ document.addEventListener("DOMContentLoaded", function () {
    ======================================== */
 
 function initializeTooltips() {
+    // For .info-icon tooltips (hover on desktop)
     document.addEventListener("mouseover", function (e) {
         var icon = e.target.closest(".info-icon");
         if (!icon) return;
         var tooltip = icon.querySelector(".tooltip");
         if (!tooltip) return;
-        var rect = icon.getBoundingClientRect();
-        var tooltipWidth = 280;
-        var gap = 10;
-        var left = rect.left + rect.width / 2 - tooltipWidth / 2;
-        var top = rect.top - gap;
-        if (left < 8) left = 8;
-        if (left + tooltipWidth > window.innerWidth - 8) left = window.innerWidth - tooltipWidth - 8;
-        tooltip.style.left = left + "px";
-        tooltip.style.top = "0px";
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-        var tooltipHeight = tooltip.offsetHeight || 60;
-        top = rect.top - tooltipHeight - gap;
-        if (top < 8) {
-            top = rect.bottom + gap;
+        positionTooltip(icon, tooltip);
+    });
+
+    // For nav-link tooltips (data-tooltip attr)
+    document.addEventListener("mouseover", function (e) {
+        var link = e.target.closest("[data-tooltip]");
+        if (!link) return;
+        showNavTooltip(link);
+    });
+    document.addEventListener("mouseout", function (e) {
+        var link = e.target.closest("[data-tooltip]");
+        if (!link) return;
+        hideNavTooltip();
+    });
+
+    // Mobile tap support for info-icon tooltips
+    document.addEventListener("click", function (e) {
+        var icon = e.target.closest(".info-icon");
+        if (!icon) return;
+        e.preventDefault();
+        e.stopPropagation();
+        // Close others
+        document.querySelectorAll(".info-icon .tooltip.tooltip-visible").forEach(function(t) {
+            if (t.parentElement !== icon) t.classList.remove("tooltip-visible");
+        });
+        var tooltip = icon.querySelector(".tooltip");
+        if (!tooltip) return;
+        positionTooltip(icon, tooltip);
+        tooltip.classList.toggle("tooltip-visible");
+    });
+
+    // Mobile tap for nav tooltips
+    var touchTimer = null;
+    document.addEventListener("touchstart", function (e) {
+        var link = e.target.closest("[data-tooltip]");
+        if (!link) return;
+        touchTimer = setTimeout(function() {
+            showNavTooltip(link);
+        }, 400);
+    });
+    document.addEventListener("touchend", function () {
+        clearTimeout(touchTimer);
+        setTimeout(hideNavTooltip, 2000);
+    });
+
+    // Close tooltips on outside click
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".info-icon") && !e.target.closest("[data-tooltip]")) {
+            document.querySelectorAll(".tooltip.tooltip-visible").forEach(function(t) {
+                t.classList.remove("tooltip-visible");
+            });
+            hideNavTooltip();
         }
-        tooltip.style.top = top + "px";
-        tooltip.style.left = left + "px";
-        tooltip.style.visibility = "";
-        tooltip.style.opacity = "";
+    });
+}
+
+function positionTooltip(anchor, tooltip) {
+    var rect = anchor.getBoundingClientRect();
+    var tooltipWidth = 280;
+    var gap = 10;
+    var left = rect.left + rect.width / 2 - tooltipWidth / 2;
+
+    if (left < 8) left = 8;
+    if (left + tooltipWidth > window.innerWidth - 8) left = window.innerWidth - tooltipWidth - 8;
+
+    tooltip.style.left = left + "px";
+    tooltip.style.top = "0px";
+    tooltip.style.visibility = "hidden";
+    tooltip.style.opacity = "0";
+
+    var tooltipHeight = tooltip.offsetHeight || 60;
+    var top = rect.top - tooltipHeight - gap;
+
+    if (top < 8) {
+        top = rect.bottom + gap;
+        tooltip.classList.add("tooltip-below");
+    } else {
+        tooltip.classList.remove("tooltip-below");
+    }
+
+    tooltip.style.top = top + "px";
+    tooltip.style.left = left + "px";
+    tooltip.style.visibility = "";
+    tooltip.style.opacity = "";
+}
+
+var navTooltipEl = null;
+function showNavTooltip(link) {
+    hideNavTooltip();
+    var text = link.getAttribute("data-tooltip");
+    if (!text) return;
+    navTooltipEl = document.createElement("div");
+    navTooltipEl.className = "nav-tooltip";
+    navTooltipEl.textContent = text;
+    document.body.appendChild(navTooltipEl);
+
+    var rect = link.getBoundingClientRect();
+    var ttWidth = navTooltipEl.offsetWidth || 180;
+    var ttHeight = navTooltipEl.offsetHeight || 32;
+    var left = rect.left + rect.width / 2 - ttWidth / 2;
+    var top = rect.bottom + 8;
+
+    if (left < 8) left = 8;
+    if (left + ttWidth > window.innerWidth - 8) left = window.innerWidth - ttWidth - 8;
+    if (top + ttHeight > window.innerHeight - 8) top = rect.top - ttHeight - 8;
+
+    navTooltipEl.style.left = left + "px";
+    navTooltipEl.style.top = top + "px";
+}
+
+function hideNavTooltip() {
+    if (navTooltipEl) {
+        navTooltipEl.remove();
+        navTooltipEl = null;
+    }
+}
+
+/* ========================================
+   AUTO-APPLY NAV TOOLTIPS
+   ======================================== */
+
+function applyNavTooltips() {
+    var tooltipMap = {
+        "index.html": "Back to the home page",
+        "lessons.html": "Browse all 12 lessons — learn at your own pace with clear step-by-step guides",
+        "typing.html": "Practice your typing speed",
+        "quizzes.html": "Test what you learned",
+        "progress.html": "See your course progress",
+        "messages.html": "View and post messages",
+        "teacher.html": "Teacher dashboard",
+        "answers.html": "View student answers",
+        "admin.html": "Admin tools and settings",
+        "help.html": "Get help and guidance",
+        "settings.html": "Change your preferences",
+        "privacy.html": "Privacy information"
+    };
+    document.querySelectorAll(".nav-link:not(.dropdown-btn), .dropdown-item").forEach(function(link) {
+        var href = link.getAttribute("href");
+        if (href && tooltipMap[href] && !link.hasAttribute("data-tooltip")) {
+            link.setAttribute("data-tooltip", tooltipMap[href]);
+        }
     });
 }
 
