@@ -656,9 +656,17 @@ p { line-height: 1.7; }
     content: '';
     position: absolute;
     top: 100%;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     border: 6px solid transparent;
     border-top-color: var(--text-primary);
+}
+
+.info-icon .tooltip.tooltip-below::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--text-primary);
 }
 
 /* ========================================
@@ -693,7 +701,8 @@ p { line-height: 1.7; }
     content: '';
     position: absolute;
     bottom: 100%;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     border: 6px solid transparent;
     border-bottom-color: var(--text-primary);
 }
@@ -1540,6 +1549,203 @@ tr:hover td {
 .stagger-6 { animation-delay: 0.30s; }
 .stagger-7 { animation-delay: 0.35s; }
 .stagger-8 { animation-delay: 0.40s; }
+
+/* ========================================
+   SCORE MODAL OVERLAY
+   ======================================== */
+
+.score-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 99000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.score-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.score-modal-box {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    max-width: 660px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
+}
+
+.score-modal-overlay.active .score-modal-box {
+    transform: scale(1);
+}
+
+.score-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    gap: var(--spacing-md);
+}
+
+.score-modal-close {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.score-modal-close:hover {
+    background: var(--danger-light);
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+/* ========================================
+   SCORE DASHBOARD WIDGET
+   ======================================== */
+
+.scores-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.scores-panel::-webkit-scrollbar { width: 5px; }
+.scores-panel::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+.score-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: 6px;
+}
+
+.score-item:last-child { margin-bottom: 0; }
+
+.score-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-sm);
+    transform: translateX(3px);
+}
+
+.score-item-label {
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.score-item-value {
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.score-pass   { background: var(--success-light); color: var(--success-color); }
+.score-warn   { background: var(--warning-light); color: var(--warning-color); }
+.score-fail   { background: var(--danger-light);  color: var(--danger-color);  }
+.score-none   { background: var(--bg-tertiary);   color: var(--text-secondary); }
+
+.score-teacher-badge {
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--violet-bg);
+    color: var(--violet);
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   HOMEPAGE DUAL PANEL (Scores + Notice Board)
+   ======================================== */
+
+.home-dual-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-2xl) 0;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .home-dual-panel {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   GRADING CARD (Teacher Page)
+   ======================================== */
+
+.grade-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-primary);
+    margin-bottom: var(--spacing-md);
+    transition: box-shadow var(--transition-fast);
+}
+
+.grade-card:hover { box-shadow: var(--shadow-sm); }
+.grade-card:last-child { margin-bottom: 0; }
+
+.grade-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.grade-answer-row {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+.grade-answer-row:last-child { border-bottom: none; }
+
+.grade-correct { color: var(--success-color); }
+.grade-wrong   { color: var(--danger-color); }
 
 /* ========================================
    LESSON CONTENT FORMATTING

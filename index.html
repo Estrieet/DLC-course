@@ -48,6 +48,8 @@
     </nav>
 
     <main class="main-container">
+
+        <!-- HERO SECTION -->
         <section class="hero-section">
             <div class="hero-content fade-in-up">
                 <h1 class="hero-title">Learn Computers at<br>Your Own Pace</h1>
@@ -62,6 +64,36 @@
             </div>
         </section>
 
+        <!-- MY SCORES + NOTICE BOARD (dual panel at top) -->
+        <section class="home-dual-panel">
+
+            <!-- LEFT: My Scores Dashboard -->
+            <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--spacing-md);flex-wrap:wrap;gap:8px;">
+                    <h2 style="font-size:1.25rem;font-weight:700;margin:0;">📊 My Scores</h2>
+                    <a href="progress.html" class="btn btn-secondary btn-sm">Full Progress</a>
+                </div>
+                <p id="scoreStudentName" style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:var(--spacing-sm);"></p>
+                <div class="scores-panel" id="scoresDashboard">
+                    <p style="text-align:center;color:var(--text-secondary);padding:var(--spacing-lg);font-size:0.9rem;">Loading scores…</p>
+                </div>
+                <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:var(--spacing-sm);">Click any score to see full details and teacher feedback.</p>
+            </div>
+
+            <!-- RIGHT: Notice Board -->
+            <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--spacing-md);flex-wrap:wrap;gap:8px;">
+                    <h2 style="font-size:1.25rem;font-weight:700;margin:0;">📬 Notice Board</h2>
+                    <a href="messages.html" class="btn btn-secondary btn-sm">View All &amp; Post</a>
+                </div>
+                <div class="notice-board" id="homeNoticeBoard" style="margin:0;">
+                    <p style="text-align:center;color:var(--text-secondary);padding:var(--spacing-lg);font-size:0.95rem;">Loading messages…</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FEATURES SECTION -->
         <section class="features-section">
             <h2 class="section-title fade-in">What You Will Learn</h2>
             <div class="features-grid">
@@ -69,108 +101,64 @@
                     <div class="feature-icon">📖</div>
                     <h3>Step-by-Step Lessons</h3>
                     <p>12 clear and simple lessons. Learn at your own pace. Take as long as you need. No rush!</p>
-                    <div class="info-icon" title="About lessons">ⓘ
-                        <span class="tooltip">12 lessons covering everything from turning on a computer to sending emails. Each lesson takes about 15–20 minutes.</span>
+                    <div class="info-icon">ⓘ
+                        <span class="tooltip">12 lessons covering everything from turning on a computer to sending emails. Each lesson takes about 15–20 minutes. Click to browse all lessons.</span>
                     </div>
                 </a>
                 <a href="typing.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">⌨️</div>
                     <h3>Typing Practice</h3>
                     <p>Improve your typing speed and accuracy with interactive exercises. Start slowly and build up!</p>
-                    <div class="info-icon" title="About typing">ⓘ
-                        <span class="tooltip">Practice typing with real text. See your speed (WPM) and accuracy improve over time.</span>
+                    <div class="info-icon">ⓘ
+                        <span class="tooltip">Practice typing with real text passages. See your words-per-minute (WPM) speed and accuracy improve over time. Start slow — accuracy matters more than speed!</span>
                     </div>
                 </a>
                 <a href="quizzes.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">📝</div>
                     <h3>Quiz &amp; Test</h3>
                     <p>Test what you have learned after each lesson. Get instant feedback to help you remember.</p>
-                    <div class="info-icon" title="About quizzes">ⓘ
-                        <span class="tooltip">Short 3-question quizzes after each lesson. Score 70% or more to unlock the next lesson!</span>
+                    <div class="info-icon">ⓘ
+                        <span class="tooltip">Short multiple-choice quizzes after each lesson. Score 70% or more to pass and unlock the next lesson. You can retake quizzes as many times as you like!</span>
                     </div>
                 </a>
                 <a href="progress.html" class="feature-card fade-in-up" style="text-decoration:none;color:inherit;">
                     <div class="feature-icon">📊</div>
                     <h3>Track Progress</h3>
                     <p>See how far you have come! Track your lessons, quiz scores, and earn achievement badges.</p>
-                    <div class="info-icon" title="About progress">ⓘ
-                        <span class="tooltip">All your progress is saved on your device. No account needed. Your data stays private.</span>
+                    <div class="info-icon">ⓘ
+                        <span class="tooltip">All your progress is saved automatically on your device. See your lesson completions, quiz scores, typing improvements, and achievements — all in one place.</span>
                     </div>
                 </a>
             </div>
         </section>
 
+        <!-- 12 LESSONS GRID -->
         <section style="padding: var(--spacing-3xl) 0;">
             <h2 class="section-title fade-in">Your 12 Lessons</h2>
             <p style="text-align:center;color:var(--text-secondary);margin-bottom:var(--spacing-2xl);font-size:1.05rem;" class="fade-in">Start with Lesson 1 and work through each lesson at your own comfortable pace.</p>
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--spacing-md);">
-                <a href="lesson.html?id=1" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">What is a Computer?</div>
-                </a>
-                <a href="lesson.html?id=2" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">2️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Computer Hardware</div>
-                </a>
-                <a href="lesson.html?id=3" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">3️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Computer Software</div>
-                </a>
-                <a href="lesson.html?id=4" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">4️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Turning On &amp; Off</div>
-                </a>
-                <a href="lesson.html?id=5" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">5️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Using the Mouse</div>
-                </a>
-                <a href="lesson.html?id=6" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">6️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Using the Keyboard</div>
-                </a>
-                <a href="lesson.html?id=7" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">7️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Files &amp; Folders</div>
-                </a>
-                <a href="lesson.html?id=8" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">8️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Desktop &amp; Icons</div>
-                </a>
-                <a href="lesson.html?id=9" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">9️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">What is the Internet?</div>
-                </a>
-                <a href="lesson.html?id=10" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">🔟</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Web Browser</div>
-                </a>
-                <a href="lesson.html?id=11" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣1️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Searching Online</div>
-                </a>
-                <a href="lesson.html?id=12" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);">
-                    <div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣2️⃣</div>
-                    <div style="font-weight:600;font-size:0.9rem;">Email Basics</div>
-                </a>
+                <a href="lesson.html?id=1"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣</div><div style="font-weight:600;font-size:0.9rem;">What is a Computer?</div></a>
+                <a href="lesson.html?id=2"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">2️⃣</div><div style="font-weight:600;font-size:0.9rem;">Computer Hardware</div></a>
+                <a href="lesson.html?id=3"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">3️⃣</div><div style="font-weight:600;font-size:0.9rem;">Computer Software</div></a>
+                <a href="lesson.html?id=4"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">4️⃣</div><div style="font-weight:600;font-size:0.9rem;">Turning On &amp; Off</div></a>
+                <a href="lesson.html?id=5"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">5️⃣</div><div style="font-weight:600;font-size:0.9rem;">Using the Mouse</div></a>
+                <a href="lesson.html?id=6"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">6️⃣</div><div style="font-weight:600;font-size:0.9rem;">Using the Keyboard</div></a>
+                <a href="lesson.html?id=7"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">7️⃣</div><div style="font-weight:600;font-size:0.9rem;">Files &amp; Folders</div></a>
+                <a href="lesson.html?id=8"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">8️⃣</div><div style="font-weight:600;font-size:0.9rem;">Desktop &amp; Icons</div></a>
+                <a href="lesson.html?id=9"  class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">9️⃣</div><div style="font-weight:600;font-size:0.9rem;">What is the Internet?</div></a>
+                <a href="lesson.html?id=10" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">🔟</div><div style="font-weight:600;font-size:0.9rem;">Web Browser</div></a>
+                <a href="lesson.html?id=11" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣1️⃣</div><div style="font-weight:600;font-size:0.9rem;">Searching Online</div></a>
+                <a href="lesson.html?id=12" class="card fade-in-up" style="text-decoration:none;text-align:center;padding:var(--spacing-lg);"><div style="font-size:2rem;margin-bottom:var(--spacing-sm);">1️⃣2️⃣</div><div style="font-weight:600;font-size:0.9rem;">Email Basics</div></a>
             </div>
         </section>
 
-        <!-- Notice Board -->
-        <section style="padding: var(--spacing-2xl) 0;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--spacing-lg);flex-wrap:wrap;gap:var(--spacing-sm);">
-                <h2 class="section-title fade-in" style="margin-bottom:0;">📬 Notice Board</h2>
-                <a href="messages.html" class="btn btn-secondary btn-sm fade-in">View All &amp; Post</a>
-            </div>
-            <div class="notice-board fade-in" id="homeNoticeBoard">
-                <p style="text-align:center;color:var(--text-secondary);padding:var(--spacing-lg);font-size:0.95rem;">Loading messages…</p>
-            </div>
-        </section>
-
+        <!-- CTA -->
         <section class="cta-section fade-in">
             <h2>Ready to Begin?</h2>
             <p>You can do this! Take one lesson at a time. There is no pressure and no time limit.</p>
             <a href="lessons.html" class="btn btn-primary btn-lg">Start Lesson 1</a>
         </section>
+
     </main>
 
     <footer class="footer">
@@ -184,15 +172,221 @@
         </div>
     </footer>
 
+    <!-- SCORE DETAIL MODAL -->
+    <div class="score-modal-overlay" id="scoreModal" role="dialog" aria-modal="true" aria-labelledby="scoreModalTitle">
+        <div class="score-modal-box">
+            <div class="score-modal-header">
+                <h3 id="scoreModalTitle" style="margin:0;font-size:1.1rem;"></h3>
+                <button class="score-modal-close" onclick="closeScoreModal()" aria-label="Close">✕</button>
+            </div>
+            <div id="scoreModalBody"></div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/db.js"></script>
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/messages.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            renderNoticeBoard('homeNoticeBoard', 5);
+    /* ===== Home page scores dashboard + modal ===== */
+
+    function safeHtml(str) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(str || ''));
+        return d.innerHTML;
+    }
+
+    function loadTeacherScores() {
+        try { return JSON.parse(localStorage.getItem('dlc_teacher_scores') || '{}'); } catch(e) { return {}; }
+    }
+
+    function loadTeacherComments() {
+        try { return JSON.parse(localStorage.getItem('dlc_teacher_comments') || '{}'); } catch(e) { return {}; }
+    }
+
+    function renderScoresDashboard() {
+        var p = loadProgress();
+        var teacherScores  = loadTeacherScores();
+        var allLessons     = (typeof getAllLessons === 'function') ? getAllLessons() : (typeof LESSONS !== 'undefined' ? LESSONS : []);
+        var dashboard      = document.getElementById('scoresDashboard');
+        var nameEl         = document.getElementById('scoreStudentName');
+        var studentName    = (p.profile && p.profile.name) ? p.profile.name : '';
+
+        if (nameEl && studentName) {
+            nameEl.textContent = 'Viewing scores for: ' + studentName;
+        }
+
+        if (!dashboard) return;
+
+        var html = '';
+        var hasAny = false;
+
+        /* Quiz scores */
+        allLessons.forEach(function(lesson) {
+            var autoScore    = (p.quizScores && p.quizScores[lesson.id] !== undefined) ? p.quizScores[lesson.id] : null;
+            var teachScore   = (teacherScores['quiz_' + lesson.id] !== undefined) ? teacherScores['quiz_' + lesson.id] : null;
+            var displayScore = teachScore !== null ? teachScore : autoScore;
+
+            if (displayScore === null) return; /* not taken */
+            hasAny = true;
+
+            var cls = displayScore >= 70 ? 'score-pass' : displayScore >= 50 ? 'score-warn' : 'score-fail';
+            var teachBadge = (teachScore !== null && teachScore !== autoScore)
+                ? '<span class="score-teacher-badge">Teacher: ' + teachScore + '%</span>' : '';
+
+            html += '<div class="score-item" onclick="openScoreModal(\'quiz\',' + lesson.id + ')" role="button" tabindex="0">' +
+                '<span class="score-item-label">L' + lesson.id + ' ' + safeHtml(lesson.title) + '</span>' +
+                teachBadge +
+                '<span class="score-item-value ' + cls + '">' + displayScore + '%</span>' +
+            '</div>';
         });
+
+        /* Typing best */
+        var bestWPM = (p.typingStats && p.typingStats.bestWPM) ? p.typingStats.bestWPM : 0;
+        var typingSessions = (p.typingStats && p.typingStats.sessions) ? p.typingStats.sessions.length : 0;
+        if (typingSessions > 0) {
+            hasAny = true;
+            html += '<div class="score-item" onclick="openScoreModal(\'typing\',-1)" role="button" tabindex="0">' +
+                '<span class="score-item-label">⌨️ Typing (' + typingSessions + ' session' + (typingSessions !== 1 ? 's' : '') + ')</span>' +
+                '<span class="score-item-value score-pass">' + bestWPM + ' WPM</span>' +
+            '</div>';
+        }
+
+        if (!hasAny) {
+            dashboard.innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:var(--spacing-xl);font-size:0.9rem;">No scores yet. Complete a lesson quiz or typing session to see your scores here!</p>';
+            return;
+        }
+
+        dashboard.innerHTML = html;
+
+        /* keyboard support */
+        dashboard.querySelectorAll('.score-item').forEach(function(item) {
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+            });
+        });
+    }
+
+    function openScoreModal(type, id) {
+        var p               = loadProgress();
+        var teacherScores   = loadTeacherScores();
+        var teacherComments = loadTeacherComments();
+        var overlay         = document.getElementById('scoreModal');
+        var titleEl         = document.getElementById('scoreModalTitle');
+        var bodyEl          = document.getElementById('scoreModalBody');
+        var allLessons      = (typeof getAllLessons === 'function') ? getAllLessons() : (typeof LESSONS !== 'undefined' ? LESSONS : []);
+
+        if (type === 'quiz') {
+            var lesson    = null;
+            for (var i = 0; i < allLessons.length; i++) { if (allLessons[i].id === id) { lesson = allLessons[i]; break; } }
+            if (!lesson) return;
+
+            var qa         = (p.quizAnswers && p.quizAnswers[id]) || null;
+            var autoScore  = (p.quizScores  && p.quizScores[id]  !== undefined) ? p.quizScores[id] : null;
+            var teachScore = (teacherScores['quiz_' + id] !== undefined) ? teacherScores['quiz_' + id] : null;
+            var comment    = teacherComments['quiz_' + id] || '';
+            var passed     = (teachScore !== null ? teachScore : autoScore) >= 70;
+            var submitted  = (qa && qa.submittedAt) ? new Date(qa.submittedAt).toLocaleString() : 'Unknown';
+
+            titleEl.textContent = 'Quiz ' + id + ' — ' + lesson.title;
+
+            var scoreHtml =
+                '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:var(--spacing-lg);">' +
+                    (autoScore !== null ? '<span class="badge ' + (autoScore >= 70 ? 'badge-success' : 'badge-danger') + '">Auto score: ' + autoScore + '%</span>' : '') +
+                    (teachScore !== null ? '<span class="score-teacher-badge" style="padding:4px 12px;font-size:0.82rem;">Teacher score: ' + teachScore + '%</span>' : '') +
+                    '<span class="badge ' + (passed ? 'badge-green' : 'badge-orange') + '">' + (passed ? '✓ Passed' : '✗ Not passed') + '</span>' +
+                '</div>' +
+                '<p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:var(--spacing-md);">Submitted: ' + submitted + '</p>';
+
+            var answersHtml = '';
+            if (qa && lesson.quiz && lesson.quiz.questions && lesson.quiz.questions.length) {
+                answersHtml = '<h4 style="font-size:0.95rem;margin-bottom:8px;">Your Answers</h4>';
+                lesson.quiz.questions.forEach(function(q, qi) {
+                    var selected   = (qa.selectedAnswers !== undefined) ? qa.selectedAnswers[qi] : -1;
+                    var isCorrect  = selected === q.answer;
+                    var selText    = (selected >= 0 && q.options && q.options[selected]) ? q.options[selected] : 'No answer';
+                    var corrText   = (q.options && q.options[q.answer]) ? q.options[q.answer] : '';
+                    answersHtml +=
+                        '<div class="grade-answer-row">' +
+                            '<strong>Q' + (qi + 1) + ':</strong> ' + safeHtml(q.question) + '<br>' +
+                            '<span class="' + (isCorrect ? 'grade-correct' : 'grade-wrong') + '">' +
+                                (isCorrect ? '✓ ' : '✗ ') + safeHtml(selText) +
+                            '</span>' +
+                            (!isCorrect && corrText ? ' <span style="font-size:0.82rem;color:var(--text-secondary);">(Correct: ' + safeHtml(corrText) + ')</span>' : '') +
+                        '</div>';
+                });
+            } else {
+                answersHtml = '<p style="color:var(--text-secondary);font-size:0.9rem;">No answers recorded yet.</p>';
+            }
+
+            var commentHtml = comment
+                ? '<div style="margin-top:var(--spacing-lg);padding:12px 16px;background:var(--accent-light);border-radius:var(--radius-md);border-left:3px solid var(--accent-color);">' +
+                    '<p style="font-size:0.8rem;font-weight:600;color:var(--accent-color);margin-bottom:4px;">💬 Teacher Comment</p>' +
+                    '<p style="font-size:0.92rem;color:var(--text-primary);margin:0;">' + safeHtml(comment) + '</p>' +
+                  '</div>'
+                : '<p style="margin-top:var(--spacing-md);font-size:0.85rem;color:var(--text-secondary);">No teacher comment yet.</p>';
+
+            bodyEl.innerHTML = scoreHtml + answersHtml + commentHtml;
+
+        } else if (type === 'typing') {
+            var sessions = (p.typingStats && p.typingStats.sessions) || [];
+            titleEl.textContent = '⌨️ Typing Sessions (' + sessions.length + ')';
+
+            if (!sessions.length) {
+                bodyEl.innerHTML = '<p style="color:var(--text-secondary);">No typing sessions yet.</p>';
+            } else {
+                var html = '';
+                sessions.slice().reverse().forEach(function(s, i) {
+                    var realIdx    = sessions.length - 1 - i;
+                    var key        = 'typing_' + realIdx;
+                    var teachScore = (teacherScores[key] !== undefined) ? teacherScores[key] : null;
+                    var comment    = teacherComments[key] || '';
+                    var date       = s.date ? new Date(s.date).toLocaleString() : 'Unknown';
+
+                    html += '<div class="grade-card">' +
+                        '<div class="grade-card-header">' +
+                            '<strong>Session ' + (sessions.length - i) + '</strong>' +
+                            '<span style="font-size:0.82rem;color:var(--text-secondary);">' + date + '</span>' +
+                        '</div>' +
+                        '<div style="display:flex;gap:var(--spacing-lg);flex-wrap:wrap;margin-bottom:8px;">' +
+                            '<span><strong style="color:var(--accent-color);">' + s.wpm + '</strong> WPM</span>' +
+                            '<span><strong style="color:var(--success-color);">' + s.accuracy + '%</strong> Accuracy</span>' +
+                            (teachScore !== null ? '<span class="score-teacher-badge">Teacher: ' + teachScore + '%</span>' : '') +
+                        '</div>' +
+                        (comment ? '<div style="padding:8px 12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);font-size:0.88rem;">' +
+                            '<span style="font-weight:600;color:var(--accent-color);">💬 Teacher: </span>' + safeHtml(comment) + '</div>' : '') +
+                    '</div>';
+                });
+                bodyEl.innerHTML = html;
+            }
+        }
+
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeScoreModal() {
+        document.getElementById('scoreModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderNoticeBoard('homeNoticeBoard', 5);
+        renderScoresDashboard();
+    });
+
+    /* Close modal on overlay click */
+    document.getElementById('scoreModal').addEventListener('click', function(e) {
+        if (e.target === this) closeScoreModal();
+    });
+
+    /* Close modal on Escape */
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeScoreModal();
+    });
     </script>
 </body>
 </html>

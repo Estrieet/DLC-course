@@ -47,31 +47,17 @@
     </nav>
 
     <main class="main-container">
-        <section style="padding: var(--spacing-3xl) 0; max-width: 900px; margin: 0 auto;">
+        <section style="padding: var(--spacing-3xl) 0; max-width: 920px; margin: 0 auto;">
             <h1 class="section-title fade-in">📋 Student Answers</h1>
             <div id="namesBanner" class="fade-in" style="text-align:center;margin-bottom:var(--spacing-2xl);"></div>
 
-            <!-- Quiz Answers Section -->
-            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">📝 Quiz Answers</h2>
+            <!-- Quiz Answers & Grading -->
+            <h2 class="fade-in" style="font-size:1.15rem;margin-bottom:var(--spacing-lg);">📝 Quiz Answers &amp; Teacher Grading</h2>
             <div id="quizAnswersContainer" class="fade-in" style="display:flex;flex-direction:column;gap:var(--spacing-md);margin-bottom:var(--spacing-3xl);"></div>
 
-            <!-- Typing Results Section -->
-            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">⌨️ Typing Results</h2>
-            <div id="typingAnswersContainer" class="fade-in" style="display:flex;flex-direction:column;gap:var(--spacing-md);margin-bottom:var(--spacing-3xl);"></div>
-
-            <!-- Add Comment Section -->
-            <h2 class="fade-in" style="font-size:1.2rem;margin-bottom:var(--spacing-lg);">💬 Add Teacher Comment</h2>
-            <div class="card fade-in" style="padding:var(--spacing-lg);">
-                <div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;margin-bottom:var(--spacing-md);">
-                    <select id="commentTarget" style="flex:1;min-width:200px;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-secondary);color:var(--text-primary);font-size:0.95rem;">
-                        <option value="">Select quiz or typing session...</option>
-                    </select>
-                </div>
-                <textarea id="commentInput" rows="3" placeholder="Write your comment here..." style="width:100%;padding:12px 14px;border:1px solid var(--border-color);border-radius:var(--radius-md);font-size:1rem;background:var(--bg-primary);color:var(--text-primary);resize:vertical;font-family:inherit;margin-bottom:var(--spacing-sm);"></textarea>
-                <div style="display:flex;justify-content:flex-end;">
-                    <button class="btn btn-primary" id="saveCommentBtn">Save Comment</button>
-                </div>
-            </div>
+            <!-- Typing Results & Grading -->
+            <h2 class="fade-in" style="font-size:1.15rem;margin-bottom:var(--spacing-lg);">⌨️ Typing Results &amp; Teacher Grading</h2>
+            <div id="typingAnswersContainer" class="fade-in" style="display:flex;flex-direction:column;gap:var(--spacing-md);"></div>
         </section>
     </main>
 
@@ -93,21 +79,9 @@
     <script src="js/data.js"></script>
     <script src="js/storage.js"></script>
     <script>
-    /* ---- Answers page controller ---- */
-    var _comments = {};
-    var _commentOptions = [];
-
-    function loadComments() {
-        try { return JSON.parse(localStorage.getItem('dlc_teacher_comments') || '{}'); } catch(e) { return {}; }
-    }
-    function saveComments(obj) {
-        localStorage.setItem('dlc_teacher_comments', JSON.stringify(obj));
-        if (typeof dbSaveComment === 'function') {
-            Object.entries(obj).forEach(function(entry) {
-                dbSaveComment({ id: entry[0], targetKey: entry[0], text: entry[1], teacherName: localStorage.getItem('dlc_teacher_name') || 'Teacher', createdAt: new Date().toISOString() }).catch(function() {});
-            });
-        }
-    }
+    /* ============================================================
+       Answers page — full student work view with teacher grading
+    ============================================================ */
 
     function safeHtml(str) {
         var d = document.createElement('div');
@@ -115,242 +89,328 @@
         return d.innerHTML;
     }
 
-    function buildCommentBlock(commentKey, label) {
-        var text = _comments[commentKey] || '';
-        var html = '';
-        if (text) {
-            html += '<div class="comment-block" id="cmtblock-' + safeId(commentKey) + '" style="margin-top:12px;padding:10px 14px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);">' +
-                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
-                    '<p style="font-size:0.82rem;font-weight:600;color:var(--accent-color);margin:0;">💬 Teacher Comment:</p>' +
-                    '<div style="display:flex;gap:6px;">' +
-                        '<button class="btn btn-secondary" style="padding:3px 10px;font-size:0.78rem;" onclick="editComment(\'' + esc(commentKey) + '\')">Edit</button>' +
-                        '<button class="btn btn-danger"    style="padding:3px 10px;font-size:0.78rem;" onclick="deleteComment(\'' + esc(commentKey) + '\')">Remove</button>' +
-                    '</div>' +
-                '</div>' +
-                '<p style="font-size:0.9rem;color:var(--text-primary);margin:0;" id="cmttext-' + safeId(commentKey) + '">' + safeHtml(text) + '</p>' +
-            '</div>';
-        }
-        return html;
+    function loadTeacherScoresA() {
+        try { return JSON.parse(localStorage.getItem('dlc_teacher_scores') || '{}'); } catch(e) { return {}; }
     }
-
-    function safeId(key) { return key.replace(/[^a-zA-Z0-9_-]/g, '_'); }
-    function esc(str) { return String(str).replace(/'/g, "\\'"); }
-
-    function editComment(commentKey) {
-        var current = _comments[commentKey] || '';
-        var newText = prompt('Edit comment:', current);
-        if (newText === null) return;
-        newText = newText.trim();
-        if (!newText) { deleteComment(commentKey); return; }
-        _comments[commentKey] = newText;
-        saveComments(_comments);
-        refreshCommentBlock(commentKey);
+    function saveTeacherScoresA(obj) {
+        localStorage.setItem('dlc_teacher_scores', JSON.stringify(obj));
     }
-
-    function deleteComment(commentKey) {
-        if (!confirm('Remove this comment?')) return;
-        delete _comments[commentKey];
-        saveComments(_comments);
-        var block = document.getElementById('cmtblock-' + safeId(commentKey));
-        if (block) block.remove();
+    function loadCommentsA() {
+        try { return JSON.parse(localStorage.getItem('dlc_teacher_comments') || '{}'); } catch(e) { return {}; }
     }
-
-    function refreshCommentBlock(commentKey) {
-        var block = document.getElementById('cmtblock-' + safeId(commentKey));
-        var text = _comments[commentKey] || '';
-        if (block) {
-            var textEl = document.getElementById('cmttext-' + safeId(commentKey));
-            if (textEl) textEl.textContent = text;
+    function saveCommentsA(obj) {
+        localStorage.setItem('dlc_teacher_comments', JSON.stringify(obj));
+        if (typeof dbSaveComment === 'function') {
+            Object.keys(obj).forEach(function(k) {
+                dbSaveComment({ id: k, targetKey: k, text: obj[k], teacherName: localStorage.getItem('dlc_teacher_name') || 'Teacher', createdAt: new Date().toISOString() }).catch(function(){});
+            });
         }
     }
 
-    function saveTypingScore(sessionIdx) {
-        var input = document.getElementById('typingscore-' + sessionIdx);
-        if (!input) return;
-        var score = parseInt(input.value, 10);
-        if (isNaN(score) || score < 0 || score > 100) { showAnswersToast('Enter a score between 0 and 100.', 'info'); return; }
-        var progress = loadProgress();
-        if (!progress.typingStats || !progress.typingStats.sessions) return;
-        var sessions = progress.typingStats.sessions;
-        var realIdx = sessions.length - 1 - sessionIdx;
-        if (!sessions[realIdx]) return;
-        sessions[realIdx].teacherScore = score;
-        saveProgress(progress);
-        var displayEl = document.getElementById('typingscoredisplay-' + sessionIdx);
-        if (displayEl) {
-            displayEl.innerHTML = '<span class="badge badge-success">Teacher Score: ' + score + '%</span>';
-        }
-        showAnswersToast('Score saved ✓', 'success');
-    }
-
-    function showAnswersToast(msg, type) {
+    function answersToast(msg, type) {
         var t = document.createElement('div');
         t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:' +
-            (type === 'success' ? 'var(--success-color)' : 'var(--accent-color)') +
+            (type === 'success' ? 'var(--success-color)' : type === 'danger' ? 'var(--danger-color)' : 'var(--accent-color)') +
             ';color:white;padding:12px 24px;border-radius:8px;box-shadow:var(--shadow-lg);z-index:9999;font-weight:500;font-size:0.95rem;';
         t.textContent = msg;
         document.body.appendChild(t);
         setTimeout(function() { if (t.parentNode) t.remove(); }, 2500);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        _comments = loadComments();
-        var progress = loadProgress();
-        var studentName = (progress.profile && progress.profile.name) ? progress.profile.name : 'Student';
-        var teacherName = localStorage.getItem('dlc_teacher_name') || 'Teacher';
+    /* Save quiz grade + comment */
+    function saveQuizGradeA(lessonId) {
+        var scoreInput   = document.getElementById('ascore-' + lessonId);
+        var commentInput = document.getElementById('acomment-' + lessonId);
+        var scoreVal     = scoreInput   ? scoreInput.value.trim()   : '';
+        var commentVal   = commentInput ? commentInput.value.trim() : '';
+        var key          = 'quiz_' + lessonId;
 
+        var scores   = loadTeacherScoresA();
+        var comments = loadCommentsA();
+
+        if (scoreVal !== '') {
+            var n = parseInt(scoreVal, 10);
+            if (isNaN(n) || n < 0 || n > 100) { answersToast('Score must be between 0 and 100.', 'danger'); return; }
+            scores[key] = n;
+            /* Update the badge on the card */
+            var badge = document.getElementById('abadge-' + lessonId);
+            if (badge) badge.textContent = 'Teacher: ' + n + '%';
+        } else {
+            delete scores[key];
+        }
+
+        if (commentVal) {
+            comments[key] = commentVal;
+        } else {
+            delete comments[key];
+        }
+
+        saveTeacherScoresA(scores);
+        saveCommentsA(comments);
+
+        /* Refresh comment display inline */
+        var cblk = document.getElementById('acmtblk-' + lessonId);
+        if (cblk) {
+            if (commentVal) {
+                cblk.style.display = '';
+                var ct = document.getElementById('acmttext-' + lessonId);
+                if (ct) ct.textContent = commentVal;
+            } else {
+                cblk.style.display = 'none';
+            }
+        }
+
+        answersToast('Quiz ' + lessonId + ' saved ✓', 'success');
+    }
+
+    /* Save typing grade + comment */
+    function saveTypingGradeA(sessionIdx) {
+        var scoreInput   = document.getElementById('atscore-' + sessionIdx);
+        var commentInput = document.getElementById('atcomment-' + sessionIdx);
+        var scoreVal     = scoreInput   ? scoreInput.value.trim()   : '';
+        var commentVal   = commentInput ? commentInput.value.trim() : '';
+        var key          = 'typing_' + sessionIdx;
+
+        var scores   = loadTeacherScoresA();
+        var comments = loadCommentsA();
+
+        if (scoreVal !== '') {
+            var n = parseInt(scoreVal, 10);
+            if (isNaN(n) || n < 0 || n > 100) { answersToast('Score must be between 0 and 100.', 'danger'); return; }
+            scores[key] = n;
+
+            var p = loadProgress();
+            if (p.typingStats && p.typingStats.sessions && p.typingStats.sessions[sessionIdx]) {
+                p.typingStats.sessions[sessionIdx].teacherScore = n;
+                saveProgress(p);
+            }
+
+            var badge = document.getElementById('atbadge-' + sessionIdx);
+            if (badge) { badge.textContent = 'Teacher: ' + n + '%'; badge.style.display = ''; }
+        } else {
+            delete scores[key];
+        }
+
+        if (commentVal) {
+            comments[key] = commentVal;
+        } else {
+            delete comments[key];
+        }
+
+        saveTeacherScoresA(scores);
+        saveCommentsA(comments);
+
+        var cblk = document.getElementById('atcmtblk-' + sessionIdx);
+        if (cblk) {
+            if (commentVal) {
+                cblk.style.display = '';
+                var ct = document.getElementById('atcmttext-' + sessionIdx);
+                if (ct) ct.textContent = commentVal;
+            } else {
+                cblk.style.display = 'none';
+            }
+        }
+
+        answersToast('Typing session saved ✓', 'success');
+    }
+
+    /* Edit comment via prompt */
+    function editCommentA(key, displayId) {
+        var comments = loadCommentsA();
+        var newText  = prompt('Edit comment:', comments[key] || '');
+        if (newText === null) return;
+        newText = newText.trim();
+        if (!newText) { deleteCommentA(key, displayId); return; }
+        comments[key] = newText;
+        saveCommentsA(comments);
+        var el = document.getElementById(displayId);
+        if (el) el.textContent = newText;
+        answersToast('Comment updated ✓', 'success');
+    }
+
+    /* Delete comment */
+    function deleteCommentA(key, blockId) {
+        if (!confirm('Remove this comment?')) return;
+        var comments = loadCommentsA();
+        delete comments[key];
+        saveCommentsA(comments);
+        var blk = document.getElementById(blockId);
+        if (blk) blk.style.display = 'none';
+        answersToast('Comment removed ✓', 'success');
+    }
+
+    /* ============================================================
+       RENDER
+    ============================================================ */
+    document.addEventListener('DOMContentLoaded', function() {
+        var progress        = loadProgress();
+        var teacherScores   = loadTeacherScoresA();
+        var comments        = loadCommentsA();
+        var studentName     = (progress.profile && progress.profile.name) ? progress.profile.name : 'Student';
+        var teacherName     = localStorage.getItem('dlc_teacher_name') || 'Teacher';
+        var allLessons      = (typeof getAllLessons === 'function') ? getAllLessons() : (typeof LESSONS !== 'undefined' ? LESSONS : []);
+
+        /* Names banner */
         var namesBanner = document.getElementById('namesBanner');
         if (namesBanner) {
             namesBanner.innerHTML =
-                '<p style="font-size:0.95rem;color:var(--text-secondary);margin-bottom:4px;">Teacher: <strong style="color:var(--text-primary);">' + safeHtml(teacherName) + '</strong></p>' +
-                '<p style="font-size:1.25rem;font-weight:700;color:var(--text-primary);">Student: ' + safeHtml(studentName) + '</p>';
+                '<p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:4px;">Teacher: <strong style="color:var(--text-primary);">' + safeHtml(teacherName) + '</strong></p>' +
+                '<p style="font-size:1.2rem;font-weight:700;color:var(--text-primary);">Student: ' + safeHtml(studentName) + '</p>';
         }
 
-        var allLessons = (typeof getAllLessons === 'function') ? getAllLessons() : (typeof LESSONS !== 'undefined' ? LESSONS : []);
+        /* ---- Quiz answers ---- */
         var quizContainer = document.getElementById('quizAnswersContainer');
-        var commentTarget = document.getElementById('commentTarget');
+        var hasQuiz = false;
 
-        /* --- Quiz Answers --- */
-        if (quizContainer) {
-            var hasQuiz = false;
-            allLessons.forEach(function(lesson) {
-                var qa = progress.quizAnswers && progress.quizAnswers[lesson.id];
-                var score = progress.quizScores && progress.quizScores[lesson.id];
-                if (score === undefined || score === null) return;
-                hasQuiz = true;
-                var passed = score >= 70;
-                var submittedDate = (qa && qa.submittedAt) ? new Date(qa.submittedAt).toLocaleString() : 'Unknown';
-                var commentKey = 'quiz_' + lesson.id;
+        allLessons.forEach(function(lesson) {
+            var qa        = (progress.quizAnswers && progress.quizAnswers[lesson.id]) || null;
+            var autoScore = (progress.quizScores  && progress.quizScores[lesson.id]  !== undefined) ? progress.quizScores[lesson.id] : null;
+            if (autoScore === null) return;
+            hasQuiz = true;
 
-                var answersHtml = '';
-                if (qa && lesson.quiz && lesson.quiz.questions) {
-                    answersHtml = lesson.quiz.questions.map(function(q, qi) {
-                        var selected = (qa.selectedAnswers !== undefined) ? qa.selectedAnswers[qi] : -1;
-                        var isCorrect = selected === q.answer;
-                        var selectedText = (selected >= 0 && q.options && q.options[selected]) ? q.options[selected] : 'No answer';
-                        var correctText = (q.options && q.options[q.answer]) ? q.options[q.answer] : '';
-                        return '<div style="padding:8px 0;border-bottom:1px solid var(--border-color);">' +
-                            '<p style="font-weight:600;font-size:0.9rem;margin-bottom:4px;">Q' + (qi+1) + ': ' + safeHtml(q.question) + '</p>' +
-                            '<p style="font-size:0.88rem;color:' + (isCorrect ? 'var(--success-color)' : 'var(--danger-color)') + ';">' +
-                                (isCorrect ? '✓ ' : '✗ ') + safeHtml(selectedText) +
-                            '</p>' +
-                            (correctText && !isCorrect ? '<p style="font-size:0.82rem;color:var(--text-secondary);">Correct: ' + safeHtml(correctText) + '</p>' : '') +
-                        '</div>';
-                    }).join('');
-                }
+            var key         = 'quiz_' + lesson.id;
+            var teachScore  = (teacherScores[key] !== undefined) ? teacherScores[key] : '';
+            var comment     = comments[key] || '';
+            var submitted   = (qa && qa.submittedAt) ? new Date(qa.submittedAt).toLocaleString() : 'Unknown';
+            var displayScore = (teachScore !== '') ? parseInt(teachScore, 10) : autoScore;
+            var passed       = displayScore >= 70;
 
-                var commentHtml = buildCommentBlock(commentKey, 'Quiz ' + lesson.id);
-                var cardId = 'quizcard-' + lesson.id;
+            /* Question/answer breakdown */
+            var qaDetail = '';
+            if (qa && lesson.quiz && lesson.quiz.questions && lesson.quiz.questions.length) {
+                lesson.quiz.questions.forEach(function(q, qi) {
+                    var selected  = (qa.selectedAnswers !== undefined) ? qa.selectedAnswers[qi] : -1;
+                    var isCorrect = selected === q.answer;
+                    var selText   = (selected >= 0 && q.options && q.options[selected]) ? q.options[selected] : 'No answer';
+                    var corrText  = (q.options && q.options[q.answer]) ? q.options[q.answer] : '';
+                    qaDetail += '<div class="grade-answer-row">' +
+                        '<strong style="font-size:0.88rem;">Q' + (qi+1) + ':</strong> ' + safeHtml(q.question) + '<br>' +
+                        '<span class="' + (isCorrect ? 'grade-correct' : 'grade-wrong') + '">' +
+                            (isCorrect ? '✓ ' : '✗ ') + safeHtml(selText) +
+                        '</span>' +
+                        (!isCorrect && corrText ? ' <em style="font-size:0.8rem;color:var(--text-secondary);">(Correct answer: ' + safeHtml(corrText) + ')</em>' : '') +
+                    '</div>';
+                });
+            }
 
-                quizContainer.innerHTML +=
-                    '<div class="card" id="' + cardId + '" style="padding:var(--spacing-lg);">' +
-                        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">' +
-                            '<h3 style="font-size:1rem;">Quiz ' + lesson.id + ' — ' + safeHtml(lesson.title) + '</h3>' +
+            quizContainer.innerHTML +=
+                '<div class="card" style="padding:var(--spacing-lg);">' +
+
+                /* Header row */
+                '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">' +
+                    '<h3 style="font-size:1rem;margin:0;">Quiz ' + lesson.id + ' — ' + safeHtml(lesson.title) + '</h3>' +
+                    '<div style="display:flex;gap:6px;align-items:center;">' +
+                        '<span class="badge ' + (autoScore >= 70 ? 'badge-success' : 'badge-danger') + '">Auto: ' + autoScore + '%</span>' +
+                        '<span id="abadge-' + lesson.id + '" class="score-teacher-badge" style="' + (teachScore !== '' ? '' : 'display:none;') + '">' +
+                            (teachScore !== '' ? 'Teacher: ' + teachScore + '%' : '') +
+                        '</span>' +
+                        '<span class="badge ' + (passed ? 'badge-green' : 'badge-orange') + '">' + (passed ? '✓ Passed' : '✗ Not passed') + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:12px;">Submitted: ' + submitted + '</p>' +
+
+                /* Q&A breakdown */
+                (qaDetail ? '<div style="margin-bottom:14px;">' + qaDetail + '</div>' : '') +
+
+                /* Teacher grading row */
+                '<div style="background:var(--bg-secondary);border-radius:var(--radius-md);padding:var(--spacing-md);margin-bottom:10px;">' +
+                    '<p style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">Teacher Grading</p>' +
+                    '<div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;align-items:flex-end;">' +
+                        '<div>' +
+                            '<label style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">Grade (0–100)</label>' +
+                            '<input type="number" id="ascore-' + lesson.id + '" min="0" max="100" value="' + teachScore + '" placeholder="e.g. 85" ' +
+                                'style="width:110px;padding:7px 10px;margin:0;border:1.5px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.9rem;">' +
+                        '</div>' +
+                        '<div style="flex:1;min-width:180px;">' +
+                            '<label style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">Comment</label>' +
+                            '<input type="text" id="acomment-' + lesson.id + '" value="' + safeHtml(comment).replace(/"/g,'&quot;') + '" placeholder="Add feedback for this quiz…" ' +
+                                'style="width:100%;padding:7px 10px;margin:0;border:1.5px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.9rem;">' +
+                        '</div>' +
+                        '<button class="btn btn-primary btn-sm" onclick="saveQuizGradeA(' + lesson.id + ')">Save Grade</button>' +
+                    '</div>' +
+                '</div>' +
+
+                /* Comment display block */
+                '<div id="acmtblk-' + lesson.id + '" style="' + (comment ? '' : 'display:none;') + 'padding:10px 14px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+                        '<p style="font-size:0.8rem;font-weight:600;color:var(--accent-color);margin:0;">💬 Teacher Comment</p>' +
+                        '<div style="display:flex;gap:6px;">' +
+                            '<button class="btn btn-secondary" style="padding:2px 10px;font-size:0.76rem;" onclick="editCommentA(\'quiz_' + lesson.id + '\',\'acmttext-' + lesson.id + '\')">Edit</button>' +
+                            '<button class="btn btn-danger"    style="padding:2px 10px;font-size:0.76rem;" onclick="deleteCommentA(\'quiz_' + lesson.id + '\',\'acmtblk-' + lesson.id + '\')">Remove</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<p id="acmttext-' + lesson.id + '" style="font-size:0.9rem;color:var(--text-primary);margin:0;">' + safeHtml(comment) + '</p>' +
+                '</div>' +
+
+                '</div>';
+        });
+
+        if (!hasQuiz) {
+            quizContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No quiz answers yet. Complete a lesson quiz to see results here.</p>';
+        }
+
+        /* ---- Typing results ---- */
+        var typingContainer = document.getElementById('typingAnswersContainer');
+        var sessions = (progress.typingStats && progress.typingStats.sessions) || [];
+
+        if (sessions.length > 0) {
+            sessions.slice().reverse().forEach(function(s, i) {
+                var realIdx    = sessions.length - 1 - i;
+                var key        = 'typing_' + realIdx;
+                var teachScore = (teacherScores[key] !== undefined) ? teacherScores[key] : '';
+                var comment    = comments[key] || '';
+                var date       = s.date ? new Date(s.date).toLocaleString() : 'Unknown';
+
+                typingContainer.innerHTML +=
+                    '<div class="card" style="padding:var(--spacing-lg);">' +
+
+                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">' +
+                        '<h3 style="font-size:1rem;margin:0;">Typing Session ' + (sessions.length - i) + '</h3>' +
+                        '<span style="font-size:0.85rem;color:var(--text-secondary);">' + date + '</span>' +
+                    '</div>' +
+
+                    '<div style="display:flex;gap:var(--spacing-xl);flex-wrap:wrap;margin-bottom:10px;">' +
+                        '<div><span style="font-size:1.3rem;font-weight:700;color:var(--accent-color);">' + s.wpm + '</span><span style="font-size:0.85rem;color:var(--text-secondary);"> WPM</span></div>' +
+                        '<div><span style="font-size:1.3rem;font-weight:700;color:var(--success-color);">' + s.accuracy + '%</span><span style="font-size:0.85rem;color:var(--text-secondary);"> Accuracy</span></div>' +
+                        '<span id="atbadge-' + realIdx + '" class="score-teacher-badge" style="align-self:center;' + (teachScore !== '' ? '' : 'display:none;') + '">' +
+                            (teachScore !== '' ? 'Teacher: ' + teachScore + '%' : '') +
+                        '</span>' +
+                    '</div>' +
+
+                    /* Teacher grading */
+                    '<div style="background:var(--bg-secondary);border-radius:var(--radius-md);padding:var(--spacing-md);margin-bottom:10px;">' +
+                        '<p style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:10px;">Teacher Grading</p>' +
+                        '<div style="display:flex;gap:var(--spacing-sm);flex-wrap:wrap;align-items:flex-end;">' +
+                            '<div>' +
+                                '<label style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">Grade (0–100)</label>' +
+                                '<input type="number" id="atscore-' + realIdx + '" min="0" max="100" value="' + teachScore + '" placeholder="e.g. 80" ' +
+                                    'style="width:110px;padding:7px 10px;margin:0;border:1.5px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.9rem;">' +
+                            '</div>' +
+                            '<div style="flex:1;min-width:180px;">' +
+                                '<label style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:4px;">Comment</label>' +
+                                '<input type="text" id="atcomment-' + realIdx + '" value="' + safeHtml(comment).replace(/"/g,'&quot;') + '" placeholder="Add feedback for this session…" ' +
+                                    'style="width:100%;padding:7px 10px;margin:0;border:1.5px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.9rem;">' +
+                            '</div>' +
+                            '<button class="btn btn-primary btn-sm" onclick="saveTypingGradeA(' + realIdx + ')">Save Grade</button>' +
+                        '</div>' +
+                    '</div>' +
+
+                    /* Comment display */
+                    '<div id="atcmtblk-' + realIdx + '" style="' + (comment ? '' : 'display:none;') + 'padding:10px 14px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent-color);">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+                            '<p style="font-size:0.8rem;font-weight:600;color:var(--accent-color);margin:0;">💬 Teacher Comment</p>' +
                             '<div style="display:flex;gap:6px;">' +
-                                '<span class="badge ' + (passed ? 'badge-success' : 'badge-danger') + '">' + score + '%</span>' +
-                                '<span class="badge ' + (passed ? 'badge-green' : 'badge-orange') + '">' + (passed ? '✓ Passed' : '✗ Failed') + '</span>' +
+                                '<button class="btn btn-secondary" style="padding:2px 10px;font-size:0.76rem;" onclick="editCommentA(\'typing_' + realIdx + '\',\'atcmttext-' + realIdx + '\')">Edit</button>' +
+                                '<button class="btn btn-danger"    style="padding:2px 10px;font-size:0.76rem;" onclick="deleteCommentA(\'typing_' + realIdx + '\',\'atcmtblk-' + realIdx + '\')">Remove</button>' +
                             '</div>' +
                         '</div>' +
-                        '<p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">Submitted: ' + submittedDate + '</p>' +
-                        answersHtml +
-                        commentHtml +
+                        '<p id="atcmttext-' + realIdx + '" style="font-size:0.9rem;color:var(--text-primary);margin:0;">' + safeHtml(comment) + '</p>' +
+                    '</div>' +
+
                     '</div>';
-
-                _commentOptions.push({ value: commentKey, label: 'Quiz ' + lesson.id + ' — ' + lesson.title });
             });
-            if (!hasQuiz) {
-                quizContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No quiz answers yet.</p>';
-            }
-        }
-
-        /* --- Typing Results --- */
-        var typingContainer = document.getElementById('typingAnswersContainer');
-        if (typingContainer) {
-            var sessions = progress.typingStats && progress.typingStats.sessions;
-            if (sessions && sessions.length > 0) {
-                sessions.slice().reverse().forEach(function(s, i) {
-                    var sessionDate = s.date ? new Date(s.date).toLocaleString() : 'Unknown';
-                    var commentKey = 'typing_' + (sessions.length - 1 - i);
-                    var commentHtml = buildCommentBlock(commentKey, 'Typing Session ' + (sessions.length - i));
-                    var teacherScore = s.teacherScore !== undefined ? s.teacherScore : null;
-
-                    typingContainer.innerHTML +=
-                        '<div class="card" style="padding:var(--spacing-lg);">' +
-                            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">' +
-                                '<h3 style="font-size:1rem;">Typing Session ' + (sessions.length - i) + '</h3>' +
-                                '<span style="font-size:0.85rem;color:var(--text-secondary);">' + sessionDate + '</span>' +
-                            '</div>' +
-                            '<div style="display:flex;gap:var(--spacing-lg);flex-wrap:wrap;margin-bottom:10px;">' +
-                                '<div><span style="font-weight:600;color:var(--accent-color);">' + s.wpm + '</span> WPM</div>' +
-                                '<div><span style="font-weight:600;color:var(--success-color);">' + s.accuracy + '%</span> Accuracy</div>' +
-                            '</div>' +
-                            '<div id="typingscoredisplay-' + i + '" style="margin-bottom:10px;">' +
-                                (teacherScore !== null
-                                    ? '<span class="badge badge-success">Teacher Score: ' + teacherScore + '%</span>'
-                                    : '<span style="font-size:0.82rem;color:var(--text-secondary);">No teacher score yet</span>'
-                                ) +
-                            '</div>' +
-                            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                                '<label style="font-size:0.85rem;font-weight:600;color:var(--text-secondary);">Score (0–100):</label>' +
-                                '<input type="number" id="typingscore-' + i + '" min="0" max="100" value="' + (teacherScore !== null ? teacherScore : '') + '" placeholder="e.g. 85" style="width:90px;padding:5px 10px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.9rem;background:var(--bg-primary);color:var(--text-primary);">' +
-                                '<button class="btn btn-primary" style="padding:5px 14px;font-size:0.85rem;" onclick="saveTypingScore(' + i + ')">Save Score</button>' +
-                            '</div>' +
-                            commentHtml +
-                        '</div>';
-
-                    _commentOptions.push({ value: commentKey, label: 'Typing Session ' + (sessions.length - i) });
-                });
-            } else {
-                typingContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No typing sessions yet.</p>';
-            }
-        }
-
-        /* --- Populate comment target dropdown --- */
-        if (commentTarget) {
-            _commentOptions.forEach(function(opt) {
-                var el = document.createElement('option');
-                el.value = opt.value;
-                el.textContent = opt.label;
-                commentTarget.appendChild(el);
-            });
-        }
-
-        /* --- Save comment handler --- */
-        var saveBtn = document.getElementById('saveCommentBtn');
-        if (saveBtn) {
-            saveBtn.addEventListener('click', function() {
-                var target = commentTarget ? commentTarget.value : '';
-                var text = document.getElementById('commentInput') ? document.getElementById('commentInput').value.trim() : '';
-                if (!target) { showAnswersToast('Please select a quiz or typing session.', 'info'); return; }
-                if (!text)   { showAnswersToast('Please enter a comment.', 'info'); return; }
-
-                _comments[target] = text;
-                saveComments(_comments);
-                document.getElementById('commentInput').value = '';
-                commentTarget.value = '';
-
-                /* Inject or refresh the comment block directly in the relevant card */
-                var blockId = 'cmtblock-' + safeId(target);
-                var existing = document.getElementById(blockId);
-                if (existing) {
-                    var textEl = document.getElementById('cmttext-' + safeId(target));
-                    if (textEl) textEl.textContent = text;
-                } else {
-                    /* Find the card that contains this target and append the block */
-                    var newHtml = buildCommentBlock(target, target);
-                    if (target.startsWith('quiz_')) {
-                        var lessonId = target.replace('quiz_', '');
-                        var card = document.getElementById('quizcard-' + lessonId);
-                        if (card) card.insertAdjacentHTML('beforeend', newHtml);
-                    } else if (target.startsWith('typing_')) {
-                        var cards = document.querySelectorAll('#typingAnswersContainer .card');
-                        var sessionIdx = parseInt(target.replace('typing_', ''), 10);
-                        var reversedIdx = (sessions ? sessions.length - 1 - sessionIdx : 0);
-                        if (cards[reversedIdx]) cards[reversedIdx].insertAdjacentHTML('beforeend', newHtml);
-                    }
-                }
-                showAnswersToast('Comment saved ✓', 'success');
-            });
+        } else {
+            typingContainer.innerHTML = '<p style="color:var(--text-secondary);font-size:0.95rem;">No typing sessions yet.</p>';
         }
     });
     </script>
