@@ -130,6 +130,7 @@ function showNavTooltip(link) {
 
     navTooltipEl.style.left = left + "px";
     navTooltipEl.style.top = top + "px";
+    navTooltipEl.classList.add("tooltip-visible");
 }
 
 function hideNavTooltip() {

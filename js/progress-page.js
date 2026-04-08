@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Calculate statistics
     const completedCount = progress.completedLessons.length;
-    const totalLessons = 12;
+    const totalLessons = (typeof getAllLessons === 'function') ? getAllLessons().length : 12;
     const courseProgress = Math.round((completedCount / totalLessons) * 100);
     const quizCount = Object.keys(progress.quizScores).length;
     const quizzesPassedCount = Object.values(progress.quizScores).filter(score => score >= 70).length;
@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update progress bar
     document.getElementById('progressBarFill').style.width = courseProgress + '%';
-    document.getElementById('progressText').textContent = completedCount + ' of ' + totalLessons + ' lessons completed';
+    const progressText = document.getElementById('progressText');
+    if (progressText) progressText.textContent = completedCount + ' of ' + totalLessons + ' lessons completed';
     
     // Update achievements
     updateAchievements(progress);

@@ -31,6 +31,7 @@ function addMessage(text, senderRole) {
     };
     messages.unshift(msg);
     saveMessages(messages);
+    if (typeof dbSaveMessage === 'function') dbSaveMessage(msg).catch(() => {});
     return msg;
 }
 
@@ -44,11 +45,13 @@ function removeMessage(msgId, requesterRole) {
     if (requesterRole === 'teacher') {
         messages.splice(idx, 1);
         saveMessages(messages);
+        if (typeof dbDeleteMessage === 'function') dbDeleteMessage(msgId).catch(() => {});
         return true;
     }
     if (msg.sender === studentName && msg.senderRole === 'student') {
         messages.splice(idx, 1);
         saveMessages(messages);
+        if (typeof dbDeleteMessage === 'function') dbDeleteMessage(msgId).catch(() => {});
         return true;
     }
     return false;
