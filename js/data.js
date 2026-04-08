@@ -1164,10 +1164,24 @@ const ACHIEVEMENTS = [
   { id: 6, title: "Accuracy Star",   description: "Achieve 95% accuracy in typing.",           icon: "⭐" }
 ];
 
+function getBuiltinOverrides() {
+  try { return JSON.parse(localStorage.getItem('dlc_builtin_overrides') || '{}'); } catch(e) { return {}; }
+}
+
+function saveBuiltinOverride(id, lessonData) {
+  var overrides = getBuiltinOverrides();
+  overrides[id] = lessonData;
+  localStorage.setItem('dlc_builtin_overrides', JSON.stringify(overrides));
+}
+
 function getAllLessons() {
+  var overrides = getBuiltinOverrides();
   var custom = [];
   try { custom = JSON.parse(localStorage.getItem('dlc_custom_lessons') || '[]'); } catch(e) {}
-  return LESSONS.concat(custom);
+  var builtinMerged = LESSONS.map(function(l) {
+    return overrides[l.id] ? Object.assign({}, l, overrides[l.id]) : l;
+  });
+  return builtinMerged.concat(custom);
 }
 
 function getLessonById(id) {

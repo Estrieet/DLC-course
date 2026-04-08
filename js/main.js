@@ -7,7 +7,41 @@ document.addEventListener("DOMContentLoaded", function () {
     initializeDropdowns();
     initializeNavigation();
     initializeRipple();
+    initializeTooltips();
 });
+
+/* ========================================
+   TOOLTIP POSITIONING
+   ======================================== */
+
+function initializeTooltips() {
+    document.addEventListener("mouseover", function (e) {
+        var icon = e.target.closest(".info-icon");
+        if (!icon) return;
+        var tooltip = icon.querySelector(".tooltip");
+        if (!tooltip) return;
+        var rect = icon.getBoundingClientRect();
+        var tooltipWidth = 280;
+        var gap = 10;
+        var left = rect.left + rect.width / 2 - tooltipWidth / 2;
+        var top = rect.top - gap;
+        if (left < 8) left = 8;
+        if (left + tooltipWidth > window.innerWidth - 8) left = window.innerWidth - tooltipWidth - 8;
+        tooltip.style.left = left + "px";
+        tooltip.style.top = "0px";
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = "0";
+        var tooltipHeight = tooltip.offsetHeight || 60;
+        top = rect.top - tooltipHeight - gap;
+        if (top < 8) {
+            top = rect.bottom + gap;
+        }
+        tooltip.style.top = top + "px";
+        tooltip.style.left = left + "px";
+        tooltip.style.visibility = "";
+        tooltip.style.opacity = "";
+    });
+}
 
 /* ========================================
    MOBILE MENU TOGGLE
