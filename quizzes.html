@@ -80,7 +80,8 @@
             var grid = document.getElementById('quizzesGrid');
             if (!grid) return;
 
-            grid.innerHTML = LESSONS.map(function(lesson) {
+            var allLessons = (typeof getAllLessons === 'function') ? getAllLessons() : LESSONS;
+            grid.innerHTML = allLessons.map(function(lesson) {
                 var icon = moduleIcons[lesson.module] || '📝';
                 var score = progress.quizScores && progress.quizScores[lesson.id];
                 var passed = score !== undefined && score >= 70;

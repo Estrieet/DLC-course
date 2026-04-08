@@ -1,11 +1,11 @@
-﻿/* js/quiz.js - Quiz page controller */
+/* js/quiz.js - Quiz page controller */
 let quizLesson = null;
 let selectedAnswers = [];
 let submitted = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   const id = parseInt(getPageParam('id') || '1', 10);
-  quizLesson = LESSONS.find(l => l.id === id);
+  quizLesson = getLessonById(id);
   const p = loadProgress();
 
   if (!quizLesson) {
@@ -17,12 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   buildTopBar('Quiz: ' + quizLesson.title);
   document.title = 'Quiz: ' + quizLesson.title + ' | Digital Literacy';
 
-  const previous = p.quizAnswers[id];
   selectedAnswers = new Array(quizLesson.quiz.questions.length).fill(-1);
   renderQuiz();
 
-  document.getElementById('submitBtn').addEventListener('click', handleSubmit);
-  document.getElementById('retryBtn').addEventListener('click', handleRetry);
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) submitBtn.addEventListener('click', handleSubmit);
 });
 
 function renderQuiz() {
@@ -51,6 +50,7 @@ function selectOption(qi, oi) {
   selectedAnswers[qi] = oi;
   quizLesson.quiz.questions[qi].options.forEach((_, idx) => {
     const btn = document.getElementById(`opt-${qi}-${idx}`);
+    if (!btn) return;
     btn.classList.toggle('selected', idx === oi);
     btn.setAttribute('aria-pressed', String(idx === oi));
   });
@@ -79,11 +79,15 @@ function handleSubmit() {
       } else if (oi === chosen && !isCorrect) {
         btn.classList.add('wrong');
         btn.querySelector('.option-dot').textContent = '✗';
-        btn.closest('.card').classList.add('wrong-shake');
+        const card = btn.closest('.card');
+        if (card) card.classList.add('wrong-shake');
       }
       btn.style.pointerEvents = 'none';
     });
-    if (isCorrect) document.getElementById(`q-block-${qi}`).classList.add('correct-flash');
+    if (isCorrect) {
+      const block = document.getElementById(`q-block-${qi}`);
+      if (block) block.classList.add('correct-flash');
+    }
   });
 
   const score = Math.round((correct / quizLesson.quiz.questions.length) * 100);
@@ -94,7 +98,8 @@ function handleSubmit() {
 function showResult(score, correct, p) {
   const total = quizLesson.quiz.questions.length;
   const passed = score >= 70;
-  const nextLesson = LESSONS.find(l => l.id === quizLesson.id + 1);
+  const allLessons = getAllLessons();
+  const nextLesson = allLessons.find(l => l.id === quizLesson.id + 1);
   const result = document.getElementById('quizResult');
   if (!result) return;
   result.innerHTML = `
@@ -110,16 +115,18 @@ function showResult(score, correct, p) {
     </div>
   `;
   result.classList.remove('hidden');
-  document.getElementById('submitBtn').classList.add('hidden');
-  document.getElementById('retryBtn').addEventListener('click', handleRetry);
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) submitBtn.classList.add('hidden');
+  const retryBtn = document.getElementById('retryBtn');
+  if (retryBtn) retryBtn.addEventListener('click', handleRetry);
 }
 
 function handleRetry() {
   submitted = false;
   selectedAnswers = new Array(quizLesson.quiz.questions.length).fill(-1);
-  document.getElementById('quizResult').classList.add('hidden');
-  document.getElementById('quizResult').innerHTML = '';
-  document.getElementById('submitBtn').classList.remove('hidden');
-  document.getElementById('submitBtn').disabled = true;
+  const result = document.getElementById('quizResult');
+  if (result) { result.classList.add('hidden'); result.innerHTML = ''; }
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) { submitBtn.classList.remove('hidden'); submitBtn.disabled = true; }
   renderQuiz();
 }

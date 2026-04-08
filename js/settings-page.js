@@ -38,20 +38,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Handle theme radio buttons
-    const themeRadios = document.querySelectorAll('.theme-radio');
-    themeRadios.forEach(radio => {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const themeRadios = document.querySelectorAll('input[name="theme"]');
+    themeRadios.forEach(function(radio) {
         if (radio.value === currentTheme) {
             radio.checked = true;
         }
-        
         radio.addEventListener('change', function(e) {
             if (e.target.checked) {
                 const newTheme = e.target.value;
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
                 if (typeof dbSaveSetting === 'function') dbSaveSetting('theme', newTheme);
-                showToast(`Switched to ${newTheme} mode ✓`, 2000, 'success');
+                showToast('Switched to ' + newTheme + ' mode ✓', 2000, 'success');
             }
         });
     });

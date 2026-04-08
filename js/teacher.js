@@ -38,7 +38,7 @@ function renderTeacher() {
 
   const list = document.getElementById('tLessonList');
   if (list) {
-    list.innerHTML = LESSONS.map(l => {
+    list.innerHTML = getAllLessons().map(l => {
       const done = p.completedLessons.includes(l.id);
       const score = p.quizScores[l.id] || null;
       return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
@@ -63,7 +63,7 @@ function teacherUnlock(id) {
 
 function unlockAll() {
   const p = loadProgress();
-  LESSONS.forEach(l => { if (!p.unlockedLessons.includes(l.id)) p.unlockedLessons.push(l.id); });
+  getAllLessons().forEach(l => { if (!p.unlockedLessons.includes(l.id)) p.unlockedLessons.push(l.id); });
   saveProgress(p);
   toast('All lessons unlocked!', 'success');
   renderTeacher();

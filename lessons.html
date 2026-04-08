@@ -98,7 +98,8 @@
             var progress = (typeof loadProgress === 'function') ? loadProgress() : { completedLessons: [], quizScores: {}, unlockedLessons: [1] };
             var grid = document.getElementById('lessonsGrid');
             if (!grid) return;
-            var filtered = filter === 'all' ? LESSONS : LESSONS.filter(function(l){ return l.module === filter; });
+            var allLessons = (typeof getAllLessons === 'function') ? getAllLessons() : LESSONS;
+            var filtered = filter === 'all' ? allLessons : allLessons.filter(function(l){ return l.module === filter; });
             grid.innerHTML = filtered.map(function(lesson, i) {
                 var isCompleted = progress.completedLessons && progress.completedLessons.includes(lesson.id);
                 var isUnlocked = !progress.unlockedLessons || progress.unlockedLessons.includes(lesson.id);

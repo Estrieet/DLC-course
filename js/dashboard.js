@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   buildTopBar('Dashboard');
   const p = loadProgress();
-  const total = LESSONS.length;
+  const total = getAllLessons().length;
   const completed = p.completedLessons.length;
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderLessonGrid(p) {
   const grid = document.getElementById('lessonGrid');
   if (!grid) return;
-  grid.innerHTML = LESSONS.slice(0, 6).map((lesson, i) => {
+  grid.innerHTML = getAllLessons().slice(0, 6).map((lesson, i) => {
     const isCompleted = p.completedLessons.includes(lesson.id);
     const isUnlocked = p.unlockedLessons.includes(lesson.id);
     const isLocked = !isUnlocked;

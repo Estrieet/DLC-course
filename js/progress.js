@@ -9,7 +9,7 @@ function renderProgress() {
   const root = document.getElementById('progressRoot');
   if (!root) return;
 
-  const total = LESSONS.length;
+  const total = getAllLessons().length;
   const done = p.completedLessons.length;
   const pct = Math.round((done / total) * 100);
 
@@ -99,7 +99,7 @@ function renderProgress() {
 function renderLessonRows(p) {
   const el = document.getElementById('lessonRows');
   if (!el) return;
-  el.innerHTML = LESSONS.map(l => {
+  el.innerHTML = getAllLessons().map(l => {
     const done = p.completedLessons.includes(l.id);
     const unlocked = p.unlockedLessons.includes(l.id);
     const icon = done ? '✅' : unlocked ? '🔓' : '🔒';

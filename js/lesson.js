@@ -1,7 +1,7 @@
-﻿/* js/lesson.js - Individual lesson viewer */
+/* js/lesson.js - Individual lesson viewer */
 document.addEventListener('DOMContentLoaded', () => {
   const id = parseInt(getPageParam('id') || '1', 10);
-  const lesson = LESSONS.find(l => l.id === id);
+  const lesson = getLessonById(id);
   const p = loadProgress();
 
   if (!lesson) {
@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   buildTopBar(lesson.title);
   document.title = lesson.title + ' | Digital Literacy';
 
-  const prevLesson = LESSONS.find(l => l.id === id - 1);
-  const nextLesson = LESSONS.find(l => l.id === id + 1);
+  const allLessons = getAllLessons();
+  const prevLesson = allLessons.find(l => l.id === id - 1);
+  const nextLesson = allLessons.find(l => l.id === id + 1);
   const isCompleted = p.completedLessons.includes(lesson.id);
 
   document.getElementById('lessonContent').innerHTML = `

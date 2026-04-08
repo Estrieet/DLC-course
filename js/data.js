@@ -1164,4 +1164,18 @@ const ACHIEVEMENTS = [
   { id: 6, title: "Accuracy Star",   description: "Achieve 95% accuracy in typing.",           icon: "⭐" }
 ];
 
+function getAllLessons() {
+  var custom = [];
+  try { custom = JSON.parse(localStorage.getItem('dlc_custom_lessons') || '[]'); } catch(e) {}
+  return LESSONS.concat(custom);
+}
+
+function getLessonById(id) {
+  var all = getAllLessons();
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) return all[i];
+  }
+  return null;
+}
+
 const MODULES = [...new Set(LESSONS.map(l => l.module))];
